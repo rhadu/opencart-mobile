@@ -1,0 +1,64 @@
+-app
+	-common
+		-directives
+			googleMap.js
+			ngAutoComplete.js
+			ngImgCache.js
+		-filters
+			filterModifiers.js
+	-services
+		-restaurantService.js
+		-CartService.js
+		-DeliveryInfoService.js
+		-Geocoder.js
+		-LocationServices.js
+	-home
+		-delivery
+			delivery.tpl.html
+			delivery.js
+		-pickUp
+			pickUp.tpl.html
+			pickUp.js
+		home.tpl.html
+		home.js
+	-menu
+		-products
+			-productDetails
+				productDetails.tpl.html
+				productDetails.js
+			products.tpl.html
+			products.js
+		categories.tpl.html
+		categories.js
+	-cart
+		cart.tpl.html
+		cart.js
+	-user
+		personalInfo.tpl.js
+		personalInfo.html
+	-delivery
+		-addressList
+			addressList.tpl.html
+			addressList.js
+		-deliveryInfo
+			deliveryInfo.tpl.html
+			deliveryInfo.js
+			location.tpl.html
+			location.js
+		-orderHistory
+			orderHistory.tpl.html
+			orderHistory.js
+	app.js
+	config.js
+	goodbye.tpl.html
+-assets
+	-img
+-css
+	-style.css
+-lib
+	-css	
+		ionic.min.css
+	-fonts
+	-js	
+		ionic.bundle.js
+		

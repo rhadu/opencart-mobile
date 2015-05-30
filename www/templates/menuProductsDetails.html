@@ -1,0 +1,40 @@
+<ion-view title='<h1 class=" appLogo"></h1>'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="leftdrawer.categories({restaurantName : restaurantName})"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-ios-cart header-position-fix" ui-sref="cart" ></button>
+		<span ng-hide="badgeTest === 0" class="badge badge-calm header-position-fix">{{badgeTest}}$</span>
+	</ion-nav-buttons>
+
+	<ion-content class="calm-bg">
+		<div class="header-space" style="  padding: 10px;"></div>
+
+		<div class="panel"  ng-repeat="product in menuProducts|filter: filterStatus" >
+			<div class="panel-body"
+				 ng-click="goToDetails(product)"
+				 ui-sref="productInfo({restaurantName : restaurantName, categoryId: product.categoryId, productId: product.productId})">
+				<div class="product-picture">
+					<img class="item-photo " ng-click="goToDetails(product)" ng-src="{{url + product.resizedPic}}"  >
+					<h4 class="productPrice"> {{product.productPrice}} lei</h4>
+				</div>
+				<div class="product-details">
+					<h2 class="item-title" >{{ product.productName}}</h2>
+					<p class="item-info">{{ product.productDescription}}</p>
+				</div>
+				<div class="productControllers">
+					<div translate="menu.add_to_order" class="add-to-order-btn">Add to order</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="footer-space"></div>
+	</ion-content>
+	<ion-footer-bar ng-hide="badgeTest === 0" class="bar-stable custom-footer fade-in-up" >
+		<div class="row">
+			<div class="col col-20"></div>
+			<div class="col"><button translate="menu.go_to_cart" class="button button-calm footer-button"  ui-sref="cart">Go to Cart</button></div>
+			<div class="col col-20"></div>
+		</div>
+	</ion-footer-bar>
+</ion-view>

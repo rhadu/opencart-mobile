@@ -1,0 +1,24 @@
+<ion-view title='{{"userinfo.personal_info" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="leftdrawer.categories({restaurantName : restaurantName})"></button>
+	</ion-nav-buttons>
+
+	<ion-content class="calm-bg">
+		<div class="header-space"></div>
+		<ion-list>
+			<div class="list-inset container " >
+				<span class="central-align"><i class="ion-person"></i> {{"userinfo.account_info" | translate}}:</span>
+				<a class="base-button green-button" ui-sref="personalInfoEdit"><i class="icon-left "></i>{{"userinfo.change" | translate}}</a>
+				<br/><br/><hr/>
+
+					<table class="userInfoTable" ng-model="user">
+						<tr ><td>{{"userinfo.first_name" | translate}}:  </td>   <td class="bold">{{user.first_name}}</td></tr>
+						<tr ><td>{{"userinfo.last_name" | translate}}:   </td>   <td class="bold">{{user.last_name}}</td></tr>
+						<tr ><td>{{"userinfo.phone_number" | translate}}:</td>   <td class="bold">{{user.phone}}</td></tr>
+						<tr ><td>{{"userinfo.email" | translate}}:      </td>   <td class="bold">{{user.email}}</td></tr>
+					</table>
+
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,98 @@
+<ion-view title='<h1 class=" appLogo"></h1>'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="products({restaurantName : restaurantName, categoryId: productInfo.categoryId})"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-ios-cart header-position-fix" ui-sref="cart" ></button>
+		<span ng-hide="badgeTest === 0" class="badge badge-calm header-position-fix">{{badgeTest}}$</span>
+	</ion-nav-buttons>
+
+	<div class="container fade-down" ng-hide="addedToCart" id="productConfirm"><span translate="menu.added_to_cart">Product added to cart!</span></div>
+
+	<ion-content  class="calm-bg">
+
+		<div class="header-space"></div>
+		<div class="hero" style="background-image: url('{{url + productInfo.normalPic}}')">
+			<div class="has-mask">
+				<span class="hero-content">{{productInfo.productName}}</span>
+			</div>
+
+		</div>
+		<p class="hero-container">{{productInfo.productDescription}}</p>
+
+		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'required'} | filter :  {type :'single'}">
+			<div class="item item-divider">
+				{{modifier.name}}<!--: {{elementName}}-->
+			</div>
+
+			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
+				<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
+				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
+					<span>{{element.name}}</span>
+					<span class="modifier-price">{{element.price}} lei</span>
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+
+		</div>
+
+		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'required'} | filter :  {type :'multiple'}">
+			<div class="item item-divider">
+				{{modifier.name}}<!--: {{elementName}}-->
+			</div>
+			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
+				<input type="checkbox" ng-model="elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
+				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
+					<span>{{element.name}}</span>
+					<span class="modifier-price">{{element.price}} lei</span>
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+		</div>
+
+
+
+		<p translate="menu.optional_settings" class="optional-settings">Setari Optionale</p>
+
+
+		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'optional'} | filter :  {type :'single'}">
+			<div class="item item-divider">
+				{{modifier.name}}<!--: {{elementName}}-->
+			</div>
+			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
+				<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
+				<div class="item-content item-modifier"  ng-click="addModifier(modifier, element)">
+					<span>{{element.name}}</span>
+					<span class="modifier-price">{{element.price}} lei</span>
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+		</div>
+
+		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'optional'} | filter :  {type :'multiple'}">
+			<div class="item item-divider">
+				{{modifier.name}}
+			</div>
+			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
+				<input type="checkbox" ng-model="selected[element.name]" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
+				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)" >
+					<span>{{element.name}}</span>
+					<span class="modifier-price">{{element.price}} lei</span>
+				</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+		</div>
+
+		<div class="footer-space"></div>
+	</ion-content>
+	<ion-footer-bar class="bar-stable custom-footer cart-footer" >
+		<div class="row">
+			<div class="col col-20"></div>
+			<div class="col">
+				<span class="footer-total" >{{"menu.total" | translate}}: {{productTotal|currency}} </span>
+				<button translate="menu.add_to_cart" class="button button-calm footer-button place-order-button"  ng-click="addToCart(productInfo)">Add to cart</button>
+			</div>
+			<div class="col col-20"></div>
+		</div>
+	</ion-footer-bar>
+</ion-view>

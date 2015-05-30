@@ -1,0 +1,22 @@
+
+<ion-view title='{{"homeview.delivery" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix button-back" ui-sref="leftdrawer.welcome"></button>
+	</ion-nav-buttons>
+	<div class="header-space"></div><br/>
+	<ion-content scroll="false" class="calm-bg">
+		<div class="">
+			<div id="gList"></div>
+
+			<div class="wLogo"></div>
+			<div class="wPosition">
+				<ion-google-place class="wAddress"  ng-model="location" my-address="myAddress">
+				</ion-google-place>
+				<button translate="homeview.order_now" class="button button-outline button-light button-search " ng-click='getRestaurant()'>
+					Order now!
+				</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+

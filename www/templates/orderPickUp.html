@@ -1,0 +1,35 @@
+
+<ion-view title='{{"homeview.pickup" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix button-back" ui-sref="leftdrawer.welcome"></button>
+	</ion-nav-buttons>
+	<div class="header-space"></div><br/>
+	<ion-content scroll="false" class="calm-bg">
+		<div class="">
+			<div id="gList"></div>
+			<button translate="homeview.find_locations" class="button button-outline button-light button-search nearby-pickup" ng-click='findNearby()'>
+					Find location nearby
+			</button>
+
+			<div class="row nearby-separator" >
+				<div class="col-33">
+					<hr/>
+				</div>
+				<div class="col-33">
+					<span translate="homeview.or" class="font-united">OR</span>
+				</div>
+				<div class="col-33">
+					<hr/>
+				</div>
+			</div>
+			<div class="wPosition">
+				<ion-google-place class="wAddress"  ng-model="location" my-address="myAddress">
+				</ion-google-place>
+
+				<button translate="homeview.search_locations" class="button button-outline button-light button-search " ng-click='getAllLocations()'>
+					Search locations
+				</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

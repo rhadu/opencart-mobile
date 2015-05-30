@@ -1,0 +1,46 @@
+<ion-view title='{{"userinfo.personal_info" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="personalInfo"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button translate="userinfo.save" class="button button-balanced header-position-fix" ng-click="saveInfo(user)">Save</button>
+	</ion-nav-buttons>
+
+	<ion-content class="calm-bg">
+		<div class="header-space"></div>
+		<ion-list>
+			<div class="list-inset container " >
+				<span class="central-align"><i class="ion-person"></i> {{"userinfo.personal_info" | translate}}</span>
+				<a class="base-button facebook" ng-click="facebookLogin()" > {{"userinfo.login" | translate}} </a>
+				<br/><br/><hr/>
+
+				<form name="userForm" class="personalInfo" ng-submit="submitForm(userForm.$valid)" novalidate>
+					<div class="row">
+						<div class="col col-67 input">
+							<input type="text" name="userFirst" ng-model="user.first_name" placeholder="{{'userinfo.first_name' | translate}}" required>
+						</div>
+						<div class="col col-33"><span ng-show="userForm.userFirst.$invalid && !userForm.userFirst.$pristine" class="require-span">{{'userinfo.required' | translate}}</span></div>
+					</div>
+					<div class="row">
+						<div class="col col-67 input">
+							<input type="text" name="userLast"  ng-model="user.last_name" placeholder="{{'userinfo.last_name' | translate}}" required>
+						</div>
+						<div class="col col-33"><span ng-show="userForm.userLast.$invalid && !userForm.userLast.$pristine" class="require-span"> {{'userinfo.required' | translate}}</span></div>
+					</div>
+					<div class="row">
+						<div class="col col-67 input">
+							<input type="tel" name="userPhone" ng-model="user.phone" ng-minlength="10" placeholder="{{'userinfo.phone_number' | translate}}" required>
+						</div>
+						<div class="col col-33"><span ng-show="userForm.userPhone.$invalid && !userForm.userPhone.$pristine" class="require-span"> {{'userinfo.digits_required' | translate}}</span></div>
+					</div>
+					<div class="row">
+						<div class="col col-67 input">
+							<input type="email" name="userEmail" ng-model="user.email"  placeholder="{{'userinfo.email' | translate}}" required>
+						</div>
+						<div class="col col-33"><span  ng-show="userForm.userEmail.$invalid && !userForm.userEmail.$pristine" class="require-span">{{'userinfo.valid_email' | translate}}</span></div>
+					</div>
+				</form>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

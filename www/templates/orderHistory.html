@@ -1,0 +1,25 @@
+<ion-view title='{{"order.order_history" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="leftdrawer.categories({restaurantName : restaurantName})"></button>
+	</ion-nav-buttons>
+
+	<ion-content class="calm-bg">
+		<div class="header-space"></div>
+		<ion-list>
+			<div ng-hide="orders !== false" class="list-inset container " >
+				<h2 class="no-addresses-title " > {{"order.no_orders" | translate}}</h2>
+			</div>
+			<div class="card container" ng-click="orderToCart(order)" ng-repeat="order in orders">
+				<div class="item item-divider">
+					{{order.restaurantName}}
+				</div>
+				<table class="orderHistoryTable" ng-model="user">
+					<tr ><td>{{"order.info" | translate}}:   </td>   <td class="bold">${{order.total}} / {{order.products.length}} products</td></tr>
+					<tr ><td>{{"order.order_date" | translate}}:  </td>   <td class="bold">{{order.date| date:'MM.dd.yyyy / h:mma'}}</td></tr>
+				</table>
+
+			</div>
+		</ion-list>
+		<div class="footer-space"></div>
+	</ion-content>
+</ion-view>

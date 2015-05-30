@@ -1,0 +1,19 @@
+<!--  <div class="google-map"  location-map=""  data-tap-disabled="true"></div> -->
+<ion-view  title="{{'delivery.my_location'|translate}}">
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="deliveryinfo"></button>
+	</ion-nav-buttons>
+	<ion-content>
+		<google-map style="height:98%" center="loc" zoom="16">
+		</google-map>
+	</ion-content>
+	<ion-footer-bar class="bar-stable custom-footer">
+		<div class="row">
+			<div class="col col-20"><button ng-click="centerOnLocation()" class="button button-clear  button-icon icon ion-navigate footer-button button-navigate"></button></div>
+			<div class="col"><button translate="delivery.ok" ui-sref="deliveryinfo" class="button button-calm footer-button">OK</button></div>
+			<div class="col col-20"></div>
+		</div>
+
+	</ion-footer-bar>
+
+</ion-view>

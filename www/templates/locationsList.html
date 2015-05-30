@@ -1,0 +1,18 @@
+
+<ion-view title='{{"homeview.locations" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix button-back" ui-sref="orderPickUp"></button>
+	</ion-nav-buttons>
+	<div class="header-space"></div><br/>
+	<ion-content scroll="false" class="calm-bg">
+		<div class="">
+
+			<div class="list list-inset container locations-list"  >
+				<div class="item item-inset" ng-repeat="location in restaurant.locations | orderBy: 'distance'" ng-click="goToLocation(location)">
+					{{location.name}} <p class="restaurantStatus">{{ location.distance | number: 2}} km</p>
+				</div>
+			</div>
+			
+		</div>
+	</ion-content>
+</ion-view>

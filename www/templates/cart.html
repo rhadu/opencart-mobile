@@ -1,0 +1,61 @@
+<ion-view title='<h1 class=" appLogo"></h1>'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="leftdrawer.categories({restaurantName : restaurantName})"></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg">
+		<div class="header-space"></div>
+		<ion-list>
+			<div class="list-inset container " >
+				<span class="central-align"><i class="ion-location"></i> {{"cart.deliver_at" | translate}}</span>
+				<a class="base-button green-button" ui-sref="addresses"><i class="icon-left "></i>{{"cart.change" | translate}}</a>
+				<br/><br/><hr/>
+				<div ng-hide="address.street" class="address-container">
+					<h2 translate="cart.address_not_set" class="address-street" >You didn't set your address</h2>
+				</div>
+				<div ng-show="address.street" class="address-container">
+					<h2 class="address-street" >{{address.street}}</h2>
+					<p class="address-details">{{"cart.number" | translate}} {{address.number}}, {{"cart.city" | translate}} {{address.locality}}</p>
+				</div>
+			</div>
+		</ion-list>
+
+		<ion-list >
+			<div class="list-inset container"  >
+				<span class="central-align"><i class="ion-ios-cart"></i> {{"cart.order_products" | translate}} </span>
+				<br/><br/><hr/>
+				<div class="item" ng-hide="cartItems.length > 0">
+					<p translate="cart.no_producst" class="no-products" >No products in your cart</p>
+				</div>
+				<div style="margin:10px">
+					<ion-item id="deleteAnimation" class="custom-item" ng-repeat="item in cartItems track by $index" class="item-height" >
+						<h2 class="item-title " >{{ item.productName}} (x{{item.quantity}})</h2>
+						<p class="item-info">{{"cart.sub_total" | translate}}: {{ item.productPrice * item.quantity | currency:$}}</p>
+						<table class="cart-right" border="0" style="margin-bottom:6px">
+							<tr>
+								<td><button ng-click="incrementQuantity(item)" class="ion-plus-round custom-style cart-plus"></button></td>
+								<td><button ng-click="decrementQuantity(item)"  class=" ion-minus-round custom-style cart-minus"></button></td>
+								<td><button ng-click="deleteItem(item)" class="ion-android-trash cart-trash"></button></td>
+							</tr>
+						</table>
+						<hr style="width: 100%; margin-top: 5px">
+					</ion-item>
+				</div>
+			</div>
+			<div ng-hide="deliveryFee === 0" class="list-inset container delivery-fee" >
+				<span class="central-align"><i class="ion-model-s"></i> {{"cart.delivery_fee" | translate}}: ${{deliveryFee}}</span>
+			</div>
+			<div class="footer-space"></div>
+		</ion-list>
+	</ion-content>
+
+	<ion-footer-bar class="bar-stable custom-footer cart-footer" >
+		<div class="row">
+			<div class="col col-20"></div>
+			<div class="col">
+				<span   class="footer-total" >{{"cart.total" | translate}}: {{totalOrder|currency}} </span>
+				<button translate="cart.place_order" class="button button-calm footer-button place-order-button"  ng-click="placeOrder()">Place Order</button>
+			</div>
+			<div class="col col-20"></div>
+		</div>
+	</ion-footer-bar>
+</ion-view>

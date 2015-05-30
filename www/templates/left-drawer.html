@@ -1,0 +1,21 @@
+<ion-side-menus enable-menu-with-back-views="false">
+
+    <ion-side-menu-content>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu width="200" side="left">
+        <ion-content scroll="false">
+            <ul class="list inset drawer-left" style="margin-top:20px; margin-bottom: 0px">
+                <a  ng-click="checkTest()" class="item item-icon-left custom-style" menu-close><i class=" icon ion-location"></i>{{'drawer.my_addresses'| translate}}</a>
+                <a ui-sref="personalInfo" class="item item-icon-left custom-style" menu-close><i class="icon ion-person"></i>{{'drawer.personal_info'| translate}}</a>
+                <a ui-sref="orderHistory" class="item item-icon-left custom-style" menu-close><i class="icon ion-android-book"></i>{{'drawer.order_history'| translate}}</a>
+            </ul>
+            <button translate="drawer.start_over" class="button button-outline button-light button-search "  menu-close ui-sref="leftdrawer.welcome">
+                Start Over
+            </button>
+            <div class="drawer-fix"></div>
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>
