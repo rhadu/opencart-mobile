@@ -30,17 +30,21 @@
 		service.modifiers = [{"id": "1", "name": " Marime", "type": "single", "validation": "required", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mica (25cm)", "price": "15"}, {"id": " 3", "isActuallyProduct": "false", "name": "medie (30cm)", "price": "20"}, {"id": "4", "isActuallyProduct": "false", "name": "mare (40cm)", "price": "30"}]}, {"id": "5", "name": " Blat", "type": "single", "validation": "required", "modifierElement": [{"id": "1", "isActuallyProduct": "false", "name": " traditional", "price": "0"}, {"id": " 2", "isActuallyProduct": "false", "name": "italian", "price": "0"}]}, {"id": "1", "name": " Sos pe blat", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "true", "name": "pizza", "price": "2 "}, {"id": " 3", "isActuallyProduct": "true", "name": "bbq dulce", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "bbq iute", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "salsa", "price": "2"}]}, {"id": "1", "name": " Ingrediente", "type": "multiple", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "Ciuperci", "price": "1.5"}, {"id": " 3", "isActuallyProduct": "false", "name": "Ardei", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "rosii", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "porumb", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "sunca", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "pui", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "vita", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "porc", "price": "2"}]}, {"id": "1", "name": " Instructiuni speciale", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mai bine coapta", "price": "0"}, {"id": " 3", "isActuallyProduct": "false", "name": "mai putin coapta", "price": "0"}]}];
 
 		service.getAllCategories = function () {
+			console.log(OC_CONFIG.CATEGORIES);
+			console.log(OC_CONFIG.TOKEN);
 			$http({
 				url: OC_CONFIG.CATEGORIES,
 				method: "GET",
-				headers: {'Authorization': OC_CONFIG.TOKEN}
+				withCredentials: true,
+				headers: {'Authorization': '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD'}
 			})
 				.then(function (response) {
 				console.log(response);
 			});
 		};
 
-		service.getAllProducts = function (id) {
+		service.getCategoryProducts = function (id) {
+			console.log(id);
 			$http({
 				url: OC_CONFIG.CATEGORIES + id,
 				method: "GET",
@@ -61,6 +65,31 @@
 				console.log(response);
 			});
 		};
+
+		service.getSpecialOffers = function () {
+			$http({
+				url: OC_CONFIG.SPECIAL + id,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+				.then(function (response) {
+				console.log(response);
+			});
+		};
+
+		/**
+		 * @name $ionicModal#fromTemplateUrl
+		 * @param {string} search The url to load the template from.
+		 * @param {object} options Options to be passed {@link ionic.controller:ionicModal#initialize ionicModal#initialize} method.
+		 * options object.
+		 * @returns {promise} A promise that will be resolved with an instance of
+		 * an {@link ionic.controller:ionicModal} controller.
+		 */
+		service.searchProducts = function (search, tag, description, category_id, sub_category, sort, order    ) {
+			//search?limit=3&page=1&order=ASC&sort=price&search=Apple&description=true
+
+		}
+
 
 
 		// compose url for all restaurants http GET

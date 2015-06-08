@@ -36,7 +36,7 @@
 	});
 
 
-	app.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
+	app.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
 		//routes fallback
 		$urlRouterProvider.otherwise("/drawer/home");
 
@@ -50,6 +50,10 @@
 		});
 		// load 'en' table on startup
 		$translateProvider.preferredLanguage('en');
+
+		$httpProvider.defaults.withCredentials = true;
+		$httpProvider.defaults.useXDomain = true
+		$httpProvider.defaults.headers.common = {};
 	});
 
 	app.controller('AppInitController', function ($scope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
