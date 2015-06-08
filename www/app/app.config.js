@@ -9,15 +9,13 @@
 	});
 
 	app.constant('OC_CONFIG', (function() {
-		// Define backend url
 		var backend = 'http://apitoo.gungoos.com/opencart-2.0.0.0/upload/api/v1';
-		// Use the variable backend to build constants
 		return {
 			TOKEN: '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD',
 			BACKEND : backend,
 			CATEGORIES: backend + '/product/category/',
 			PRODUCT: backend + '/product/product/'
 		}
-	}));
+	})());
 
 })();
