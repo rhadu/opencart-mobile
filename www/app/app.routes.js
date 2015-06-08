@@ -30,6 +30,16 @@
 				}
 			}
 		})
+			.state('leftdrawer.home', {
+			url: '/home',
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/home.html',
+					controller: 'HomeViewController'
+				}
+			}
+		})
 			.state('orderDelivery', {
 			url: '/orderDelivery',
 			cache: false,

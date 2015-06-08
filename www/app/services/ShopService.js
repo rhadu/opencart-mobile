@@ -1,15 +1,15 @@
 'use strict';
 (function () {
-	var app = angular.module('Tapitoo.RestaurantServices', ['ui.router']);
+	var app = angular.module('Tapitoo.ShopService', ['ui.router']);
 
 	//factory for HTTP requests
-	app.factory('RestaurantService', function ($http, $rootScope, $ionicLoading, $ionicPopup, $translate, $state, $cordovaGeolocation, DeliveryInfoService, CartService, push, $ImageCacheFactory) {
+	app.factory('ShopService', function (TAPITOO_CONFIG, OC_CONFIG, $http, $rootScope, $ionicLoading, $ionicPopup, $translate, $state, $cordovaGeolocation, DeliveryInfoService, CartService, push, $ImageCacheFactory) {
 		var service = {};
 		//var baseUrl = 'http://nodejs-geek12.rhcloud.com';
 		// server Url
-		var baseUrl = 'http://185.16.40.144';
+		var baseUrl = TAPITOO_CONFIG.backend;
+		var _restaurantID = TAPITOO_CONFIG.restaurantID;
 
-		var _restaurantID = '9016e8c1-0c3d-4da2-9823-4a64d8dc5b43';
 		var _locationID = '';
 		var _finalUrl = '';
 		var androidID = 0;
@@ -28,6 +28,20 @@
 		service.url = baseUrl;
 
 		service.modifiers = [{"id": "1", "name": " Marime", "type": "single", "validation": "required", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mica (25cm)", "price": "15"}, {"id": " 3", "isActuallyProduct": "false", "name": "medie (30cm)", "price": "20"}, {"id": "4", "isActuallyProduct": "false", "name": "mare (40cm)", "price": "30"}]}, {"id": "5", "name": " Blat", "type": "single", "validation": "required", "modifierElement": [{"id": "1", "isActuallyProduct": "false", "name": " traditional", "price": "0"}, {"id": " 2", "isActuallyProduct": "false", "name": "italian", "price": "0"}]}, {"id": "1", "name": " Sos pe blat", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "true", "name": "pizza", "price": "2 "}, {"id": " 3", "isActuallyProduct": "true", "name": "bbq dulce", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "bbq iute", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "salsa", "price": "2"}]}, {"id": "1", "name": " Ingrediente", "type": "multiple", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "Ciuperci", "price": "1.5"}, {"id": " 3", "isActuallyProduct": "false", "name": "Ardei", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "rosii", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "porumb", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "sunca", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "pui", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "vita", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "porc", "price": "2"}]}, {"id": "1", "name": " Instructiuni speciale", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mai bine coapta", "price": "0"}, {"id": " 3", "isActuallyProduct": "false", "name": "mai putin coapta", "price": "0"}]}];
+
+		service.getAllCategories = function () {
+			console.log(TAPITOO_CONFIG.backend);
+			console.log(OC_CONFIG);
+			$http({
+				url: 'http://apitoo.gungoos.com/opencart-2.0.0.0/upload/api/v1/product/categories',
+				method: "GET",
+				headers: {'Authorization': '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD',
+						  'Content-Type': 'application/json; charset=utf-8'}
+			})
+				.then(function (response) {
+				console.log(response);
+			});
+		}
 
 
 		// compose url for all restaurants http GET
@@ -251,7 +265,7 @@
 		service.cacheImages = function () {
 			var images = [];
 			var data = service.menu;
-			console.log(data);
+			//console.log(data);
 
 			//preload and cache images after menu has loaded
 			for (var i = 0; i < data.length; i++)
@@ -262,7 +276,7 @@
 				}
 			//console.log(images);
 			$ImageCacheFactory.Cache(images).then(function () {
-				console.log("done preloading!");
+				//console.log("done preloading!");
 			});
 		};
 

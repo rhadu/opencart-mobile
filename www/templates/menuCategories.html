@@ -26,7 +26,8 @@
 			<div class="col-50 category-col" ng-repeat="category in rows" >
 				<button class="button button-outline button-light category-button"
 						ui-sref="products({restaurantName : restaurantName, categoryId: category.categoryId})"
-						ng-click="selectCategory(category)">
+						ng-click="selectCategory(category)"
+						nav-direction="forward">
 					{{category.categoryName}}
 				</button>
 			</div>

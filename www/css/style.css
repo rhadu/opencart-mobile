@@ -237,7 +237,7 @@ ion-content.calm-bg.scroll-content.ionic-scroll.has-header{
 .nearby-separator{
 	position:fixed;
 	top:210px;
-	
+
 }
 
 .col-33{
@@ -548,10 +548,6 @@ ion-content.calm-bg.scroll-content.ionic-scroll.has-header{
 	color: #fff !important;
 	height: 25px;
 	margin-top: 22px !important;
-
-	//margin: 10px 0 13px;
-	//padding-left: 10px;
-	//padding-top: 12px;
 	text-align: center;
 }
 
@@ -1097,7 +1093,7 @@ hr{
 ****************************************
 */
 
-.popup-title{
+.popup-title {
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -1252,4 +1248,19 @@ input.ion-google-place[readonly]{
 }
 
 
+.productContainer{
+	border: 1px solid red;
+	height: 250px;
+}
 
+.productPhoto {
+	width: 100%;
+	height: 200px;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center
+}
+
+.productName {
+	color: #fff;
+}

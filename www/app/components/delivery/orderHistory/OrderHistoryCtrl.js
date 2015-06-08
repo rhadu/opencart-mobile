@@ -2,9 +2,9 @@
 (function () {
 	var app = angular.module('OrderHistoryCtrl', ['ui.router']);
 
-	app.controller('OrderHistoryController', function ($scope, $timeout, $state, DeliveryInfoService, CartService, RestaurantService, $rootScope) {
+	app.controller('OrderHistoryController', function ($scope, $timeout, $state, DeliveryInfoService, CartService, ShopService, $rootScope) {
 		//get orders saved in local storage
-		$scope.restaurantName = RestaurantService.restaurantName
+		$scope.restaurantName = ShopService.restaurantName
 		$scope.orders = DeliveryInfoService.getOrders();
 		console.log($scope.orders);
 
@@ -12,9 +12,9 @@
 		$scope.orderToCart = function (order) {
 
 			CartService.products = order.products;
-			if (order.restaurantName !== RestaurantService.restaurantName) {
-				RestaurantService.restaurantName = order.restaurantName;
-				RestaurantService.setRestaurantIDs(order.restaurantId, order.locationId, order.restaurantName, order.info);
+			if (order.restaurantName !== ShopService.restaurantName) {
+				ShopService.restaurantName = order.restaurantName;
+				ShopService.setRestaurantIDs(order.restaurantId, order.locationId, order.restaurantName, order.info);
 				$scope.$on('restaurantLoaded', function () {
 					$timeout(function () {
 						$rootScope.deliveryType = order.type;

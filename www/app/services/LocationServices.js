@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 	var app = angular.module('Tapitoo.LocationServices', ['ui.router']);
-	app.factory('LocationServices', function (Geocoder, RestaurantService, $rootScope) {
+	app.factory('LocationServices', function (Geocoder, ShopService, $rootScope) {
 		var service = {};
 		service.geoStreet = '';
 		service.geoNumber = '';
@@ -18,15 +18,15 @@
 					var obj = results[0].geometry.location
 					var latitude = obj[Object.keys(obj)[0]];
 					var longitude = obj[Object.keys(obj)[1]];
-					RestaurantService.loc = {lat: latitude, lon: longitude};
-					console.log(RestaurantService.loc);
+					ShopService.loc = {lat: latitude, lon: longitude};
+					console.log(ShopService.loc);
 					$rootScope.$broadcast('geocodedAddress');
 				}
 			});
 		};
 
 		service.geocodePosition = function () {
-			Geocoder.addressForLatLng(RestaurantService.loc.lat, RestaurantService.loc.lon).then(function (data) {
+			Geocoder.addressForLatLng(ShopService.loc.lat, ShopService.loc.lon).then(function (data) {
 				var responses = data.address;
 				var geoNumber = '';
 				var geoStreet = '';

@@ -7,7 +7,7 @@
 		-filters
 			filterModifiers.js
 	-services
-		-restaurantService.js
+		-ShopService.js
 		-CartService.js
 		-DeliveryInfoService.js
 		-Geocoder.js
@@ -56,9 +56,8 @@
 -css
 	-style.css
 -lib
-	-css	
+	-css
 		ionic.min.css
 	-fonts
-	-js	
+	-js
 		ionic.bundle.js
-		

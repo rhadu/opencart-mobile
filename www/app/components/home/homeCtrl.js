@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 	var app = angular.module('HomeCtrl', ['ui.router']);
-	app.controller('WelcomeController', function ($scope, DeliveryInfoService, CartService, RestaurantService, $state, $timeout, $translate, $ionicPopup, $rootScope, $http) {
+	app.controller('WelcomeController', function ($scope, DeliveryInfoService, CartService, ShopService, $state, $timeout, $translate, $ionicPopup, $rootScope, $http) {
 		//get orders saved in local storage
 		$scope.orders = DeliveryInfoService.getOrders();
 
@@ -10,9 +10,9 @@
 			if ($scope.orders !== false) {
 				var order = $scope.orders[0];
 				CartService.products = order.products;
-				if (order.restaurantName !== RestaurantService.restaurantName) {
-					RestaurantService.restaurantName = order.restaurantName;
-					RestaurantService.setRestaurantIDs(order.restaurantId, order.locationId, order.restaurantName, order.info);
+				if (order.restaurantName !== ShopService.restaurantName) {
+					ShopService.restaurantName = order.restaurantName;
+					ShopService.setRestaurantIDs(order.restaurantId, order.locationId, order.restaurantName, order.info);
 					$scope.$on('restaurantLoaded', function () {
 						$timeout(function () {
 							$rootScope.deliveryType = order.type;

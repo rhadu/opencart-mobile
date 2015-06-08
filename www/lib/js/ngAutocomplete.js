@@ -4,11 +4,11 @@ angular.module('ion-google-place', [])
 	'$ionicBackdrop',
 	'$timeout',
 	'$ionicPopup',
-	'RestaurantService',
+	'ShopService',
 	'LocationServices',
 	'$document',
 	'$translate',
-	function ($ionicTemplateLoader, $ionicBackdrop, $timeout, $ionicPopup, RestaurantService, LocationServices, $document, $translate) {
+	function ($ionicTemplateLoader, $ionicBackdrop, $timeout, $ionicPopup, ShopService, LocationServices, $document, $translate) {
 		return {
 			require: '?ngModel',
 			restrict: 'E',
@@ -42,7 +42,7 @@ angular.module('ion-google-place', [])
 			scope.myAddress = lastAddress.address;
 			var locality = lastAddress.city;
 			var countryCode = "RO";
-			RestaurantService.loc = {lat: lastAddress.lat, lon: lastAddress.lng};
+			ShopService.loc = {lat: lastAddress.lat, lon: lastAddress.lng};
 		}
 		else {
 			$translate(['autocomplete.select_country', 'autocomplete.select_city', 'autocomplete.choose_address']).then(function (translations) {
@@ -63,7 +63,7 @@ angular.module('ion-google-place', [])
 		scope.locateMe = function () {
 			locateButton = true;
 			//get device current position
-			RestaurantService.getCurrentLocation();
+			ShopService.getCurrentLocation();
 			scope.$on('locationLoaded', function (event, loc) {
 				$timeout(function () {
 					//geocode position
@@ -79,7 +79,7 @@ angular.module('ion-google-place', [])
 						locality = LocationServices.geoLocality;
 						locateButton = false;
 						//save address in local storage
-						var address = {country: scope.myCountry, countryCode: countryCode, city: locality, address: scope.myAddress, lat: RestaurantService.loc.lat, lng: RestaurantService.loc.lon};
+						var address = {country: scope.myCountry, countryCode: countryCode, city: locality, address: scope.myAddress, lat: ShopService.loc.lat, lng: ShopService.loc.lon};
 						window.localStorage.setItem('lastAddress', JSON.stringify(address));
 					});
 				}, 0, false);
@@ -268,14 +268,14 @@ angular.module('ion-google-place', [])
 						var obj = place.geometry.location;
 						var latitude = obj[Object.keys(obj)[0]];
 						var longitude = obj[Object.keys(obj)[1]];
-						RestaurantService.loc = {lat: latitude, lon: longitude};
+						ShopService.loc = {lat: latitude, lon: longitude};
 						LocationServices.geocodePosition();
 
 						scope.myAddress = location.terms[0].value;
 						// console.log(place);
-						console.log(RestaurantService.loc);
+						console.log(ShopService.loc);
 						//save current address in local storage
-						var address = {country: scope.myCountry, countryCode: countryCode, city: locality, address: scope.myAddress, lat: RestaurantService.loc.lat, lng: RestaurantService.loc.lon};
+						var address = {country: scope.myCountry, countryCode: countryCode, city: locality, address: scope.myAddress, lat: ShopService.loc.lat, lng: ShopService.loc.lon};
 						window.localStorage.setItem('lastAddress', JSON.stringify(address));
 					}
 				}

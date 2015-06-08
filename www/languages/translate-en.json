@@ -18,7 +18,15 @@
 		"my_addresses" : "My Addresses",
 		"personal_info" : "Personal Info",
 		"order_history" : "Order History",
-		"start_over" : "Start Over"
+		"start_over" : "Start Over",
+		"login" : "Log in",
+		"hello" : "Hello",
+		"home" : "Home",
+		"products" : "Products",
+		"favourites" : "Favourites",
+		"cart" : "Cart",
+		"settings" : "Settings",
+		"messages" : "Messages"
 	},
 	"autocomplete" : {
 		"select_country" : "Select country",

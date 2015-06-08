@@ -2,13 +2,13 @@
 (function () {
 	var app = angular.module('ProductsDetailsCtrl', ['ui.router']);
 
-	app.controller('ProductDetailsController', function ($scope, $timeout, $state, RestaurantService, CartService) {
-		$scope.restaurantName = RestaurantService.restaurantName;
-		//$scope.menuProducts = RestaurantService.products;
-		$scope.productInfo = RestaurantService.productInfo;
+	app.controller('ProductDetailsController', function ($scope, $timeout, $state, ShopService, CartService) {
+		$scope.restaurantName = ShopService.restaurantName;
+		//$scope.menuProducts = ShopService.products;
+		$scope.productInfo = ShopService.productInfo;
 		console.log($scope.productInfo.categoryId);
 		$scope.productTotal = CartService.productPrice($scope.productInfo);
-		$scope.url = RestaurantService.url;
+		$scope.url = ShopService.url;
 		$scope.badgeTest = CartService.showTotal();
 		$scope.addedToCart = true;
 

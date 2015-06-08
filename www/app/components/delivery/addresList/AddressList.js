@@ -2,8 +2,8 @@
 (function () {
 	var app = angular.module('AddressListCtrl', ['ui.router']);
 
-	app.controller('AddressesController', function ($scope, $state, DeliveryInfoService, CartService, RestaurantService) {
-		$scope.restaurantName = RestaurantService.restaurantName;
+	app.controller('AddressesController', function ($scope, $state, DeliveryInfoService, CartService, ShopService) {
+		$scope.restaurantName = ShopService.restaurantName;
 		$scope.addressList = DeliveryInfoService.getAddresses();
 				console.log('reload times');
 		//select address

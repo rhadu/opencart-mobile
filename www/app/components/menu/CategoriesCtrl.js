@@ -2,30 +2,30 @@
 (function () {
 	var app = angular.module('CategoriesCtrl', ['ui.router']);
 
-	app.controller('CategoriesController', function ($scope, $timeout, $translate, $ionicPopup, $state, RestaurantService, CartService, $ImageCacheFactory, $rootScope) {
+	app.controller('CategoriesController', function ($scope, $timeout, $translate, $ionicPopup, $state, ShopService, CartService, $ImageCacheFactory, $rootScope) {
 		$scope.$on('locationLoaded', function (event, loc) {
 			$timeout(function () {
-				RestaurantService.getRestaurants(loc, 'delivery');
+				ShopService.getRestaurants(loc, 'delivery');
 			}, 0, false);
 		});
 
 
 		$scope.$on('restaurantLoaded', function () {
 			$timeout(function () {
-				RestaurantService.cacheImages();
-				$scope.menuCategories = chunk(RestaurantService.menu, 2);
-				//$scope.menuCategories = RestaurantService.menu;
-				$scope.restaurantName = RestaurantService.restaurantName;
+				ShopService.cacheImages();
+				$scope.menuCategories = chunk(ShopService.menu, 2);
+				//$scope.menuCategories = ShopService.menu;
+				$scope.restaurantName = ShopService.restaurantName;
 				console.log($scope.menuCategories);
 				$scope.$apply();
 			}, 0, false);
 		});
 
-		RestaurantService.cacheImages();
+		ShopService.cacheImages();
 
-		$scope.menuCategories = chunk(RestaurantService.menu, 2);
-		//$scope.menuCategories = RestaurantService.menu;
-		$scope.restaurantName = RestaurantService.restaurantName;
+		$scope.menuCategories = chunk(ShopService.menu, 2);
+		//$scope.menuCategories = ShopService.menu;
+		$scope.restaurantName = ShopService.restaurantName;
 		//$scope.badgeTest = 0;
 		$scope.badgeTest = CartService.showTotal();
 
@@ -44,8 +44,8 @@
 
 		//filter products by category
 		$scope.selectCategory = function (categ) {
-			RestaurantService.updateProducts(categ);
-			RestaurantService.cacheImages();
+			ShopService.updateProducts(categ);
+			ShopService.cacheImages();
 		};
 
 		//check if cart has products before returning to restaurants list
@@ -62,7 +62,7 @@
 							text: 'OK',
 							type: 'button-search',
 							onTap: function () {
-								$state.go('leftdrawer.categories', {restaurantName: RestaurantService.restaurantName});
+								$state.go('leftdrawer.categories', {restaurantName: ShopService.restaurantName});
 								CartService.products = [];
 							}
 						}]
@@ -70,7 +70,7 @@
 				});
 			}
 			else
-				$state.go('leftdrawer.categories', {restaurantName: RestaurantService.restaurantName});
+				$state.go('leftdrawer.categories', {restaurantName: ShopService.restaurantName});
 		};
 	});
 })();

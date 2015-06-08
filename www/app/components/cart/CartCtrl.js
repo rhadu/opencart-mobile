@@ -2,13 +2,13 @@
 (function () {
 	var app = angular.module('CartCtrl', ['ui.router']);
 
-	app.controller('CartController', function ($scope, $ionicPopup, $state, $translate, RestaurantService, CartService, DeliveryInfoService) {
-		$scope.restaurantName = RestaurantService.restaurantName;
-		$scope.categoryName = RestaurantService.categoryName;
+	app.controller('CartController', function ($scope, $ionicPopup, $state, $translate, ShopService, CartService, DeliveryInfoService) {
+		$scope.restaurantName = ShopService.restaurantName;
+		$scope.categoryName = ShopService.categoryName;
 		$scope.cartItems = CartService.products;
 		$scope.address = DeliveryInfoService.address;
 		$scope.user = DeliveryInfoService.getUserInfo();
-		$scope.deliveryFee = RestaurantService.info.deliveryFee;
+		$scope.deliveryFee = ShopService.info.deliveryFee;
 
 		var total = function () {
 			return parseFloat(CartService.showTotal()) + parseFloat($scope.deliveryFee);
@@ -50,11 +50,11 @@
 				});
 			}
 			//check if total order price is bigger than the minimum delivery fee
-			if ($scope.totalOrder < RestaurantService.info.minDeliveryFee) {
+			if ($scope.totalOrder < ShopService.info.minDeliveryFee) {
 				$translate(['popup.cart', 'popup.min_order',  'popup.add_prod']).then(function (translate) {
 					$ionicPopup.alert({
 						title: translate['popup.cart'],
-						template: translate['popup.min_order'] +' '+ RestaurantService.info.minDeliveryFee + '. ' + translate['popup.add_prod'],
+						template: translate['popup.min_order'] +' '+ ShopService.info.minDeliveryFee + '. ' + translate['popup.add_prod'],
 						buttons: [{
 							text: 'OK',
 							type: 'button-search'
@@ -97,7 +97,7 @@
 				});
 			}
 			//send order through factory
-			RestaurantService.sendOrder();
+			ShopService.sendOrder();
 		};
 	});
 })();

@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('DeliveryInformationCtrl', ['ui.router']);
 
-	app.controller('DeliveryInformationController', function ($scope, $state, $ionicPopup, $translate, DeliveryInfoService, LocationServices, CartService, RestaurantService) {
+	app.controller('DeliveryInformationController', function ($scope, $state, $ionicPopup, $translate, DeliveryInfoService, LocationServices, CartService, ShopService) {
 		$scope.user = DeliveryInfoService.user;
 		DeliveryInfoService.user = $scope.user;
 		$scope.address = DeliveryInfoService.address;
@@ -12,7 +12,7 @@
 		$scope.address.locality = LocationServices.geoLocality;
 
 		$scope.getLocation = function () {
-			RestaurantService.getCurrentLocation();
+			ShopService.getCurrentLocation();
 			$scope.$on('locationLoaded', function (event, loc) {
 				$state.go('location');
 			});
@@ -63,10 +63,10 @@
 			});
 
 			function setAddress() {
-				console.log(RestaurantService.loc);
+				console.log(ShopService.loc);
 				if ($scope.address.street && $scope.address.number && $scope.address.locality) {
 					$scope.$apply();
-					DeliveryInfoService.address = {street: $scope.address.street, number: $scope.address.number, locality: $scope.address.locality, coordinates: {lat: RestaurantService.loc.lat, lon: RestaurantService.loc.lon}};
+					DeliveryInfoService.address = {street: $scope.address.street, number: $scope.address.number, locality: $scope.address.locality, coordinates: {lat: ShopService.loc.lat, lon: ShopService.loc.lon}};
 					DeliveryInfoService.saveAddress(DeliveryInfoService.address);
 					if (!window.localStorage.getItem("userInfo")) {
 						$state.go("personalInfoEdit");
@@ -75,7 +75,7 @@
 					if (CartService.products.length > 0)
 						$state.go('cart');
 					else
-						$state.go('leftdrawer.categories', {restaurantName: RestaurantService.restaurantName});
+						$state.go('leftdrawer.categories', {restaurantName: ShopService.restaurantName});
 				}
 				else {
 					$translate(['popup.delivery_info', 'popup.req_fields']).then(function (translate) {

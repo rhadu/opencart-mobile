@@ -2,9 +2,9 @@
 (function () {
 	var app = angular.module('PersonalInfoCtrl', ['ui.router']);
 
-	app.controller('PersonalInfoController', function ($scope, $state, $translate, $ionicPopup, DeliveryInfoService, CartService, RestaurantService) {
+	app.controller('PersonalInfoController', function ($scope, $state, $translate, $ionicPopup, DeliveryInfoService, CartService, ShopService) {
 		$scope.user = DeliveryInfoService.getUserInfo() || {};
-		$scope.restaurantName = RestaurantService.restaurantName;
+		$scope.restaurantName = ShopService.restaurantName;
 		//save user info
 		$scope.saveInfo = function (user) {
 			if ($scope.user.first_name && $scope.user.last_name && $scope.user.phone && $scope.user.email) {
