@@ -1,0 +1,137 @@
+<ion-view title='test'>
+	<ion-nav-buttons side="left">
+		<button class="button button-icon button-clear ion-navicon" ng-click="toggleDrawer()">
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right"  class="customAnim">
+		<button class=" button button-icon ion-ios-cart" ui-sref="cart" ></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg" scroll="false" >
+		<tab-slide-box tab="0">
+			<div class="tsb-icons header-color">
+				<div class="tsb-ic-wrp">
+					<ion-scroll direction="x" class="tsb-hscroll" delegate-handle="subHeaderSlideBox">
+						<a href="javascript:;" class="ion-home1">Product</a>
+						<a href="javascript:;" class="ion-ios-game-controller-b1">Specifications</a>
+						<a href="javascript:;" class="ion-email1">Description</a>
+						<a href="javascript:;" class="ion-model-s1">Review</a>
+						<a href="javascript:;" class="ion-person1">Profile</a>
+						<a href="javascript:;" class="ion-heart1">Favourites</a>
+						<a href="javascript:;" class="ion-chatbubbles1">Chats</a>
+						<a href="javascript:;" class="ion-gear-b1">Settings</a>
+						<a href="javascript:;" class="ion-camera1">Photos</a>
+						<a href="javascript:;" class="ion-ios-paw1">Pets</a>
+					</ion-scroll>
+				</div>
+			</div>
+			<ion-slide-box show-pager="false"
+						   on-slide-changed="slideHasChanged($index)"
+						   delegate-handle="subHeaderSlideBox">
+				<ion-slide>
+					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >
+						<ion-slide-box id="producPhotoSlideBox" class="photo-slider"
+									   show-pager="true"
+									   slide-interval="3000"
+									   disable-scroll="false"
+									   delegate-handle="productSlideBox"
+									   on-slide-changed="photoSlideDelegate()">
+							<ion-slide>
+								<img class="slide-photo" src="./img/deals/deals1.jpg">
+							</ion-slide>
+							<ion-slide>
+								<img class="slide-photo" src="./img/deals/deals2.jpg">
+							</ion-slide>
+							<ion-slide>
+								<img class="slide-photo" src="./img/deals/deals3.jpg">
+							</ion-slide>
+						</ion-slide-box>
+						<button class="button" ng-click="disableSliding()">disable</button>
+						<button class="button" ng-click="enableSliding()">enable</button>
+						<div class="row" ng-repeat="product in products" ng-if="$index % 2 === 0" ng-class="{'last': $index === products.length-2}">
+							<div class="col productContainer" ng-if="$index < products.length">
+								<img class="productPhoto" ng-src="{{products[$index].productUrl}}" width="100%" />
+								<span class="productName">{{products[$index].productName}}</span>
+								<span class="productPrice">{{products[$index].productPrice}}</span>
+							</div>
+
+							<div class="col productContainer" ng-if="$index + 1 < products.length" >
+								<img class="productPhoto" ng-src="{{products[$index + 1].productUrl}}" width="100%" />
+								<span class="productName">{{products[$index+1].productName}}</span>
+								<span class="productPrice">{{products[$index+1].productPrice}}</span>
+							</div>
+						</div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide>
+					<ion-scroll style="height:100%" delegate-handle="slide2Scroll" direction="y">
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+						<h3>Specifications content</h3>
+
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide>
+					<h3>Mail content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Car content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Profile content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Favourites content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Chats content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Settings content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Photos content</h3>
+				</ion-slide>
+				<ion-slide>
+					<h3>Pets content</h3>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
+
+
+	</ion-content>
+	<div class="footer-space"></div>
+
+</ion-view>

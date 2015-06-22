@@ -29,65 +29,125 @@
 
 		service.modifiers = [{"id": "1", "name": " Marime", "type": "single", "validation": "required", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mica (25cm)", "price": "15"}, {"id": " 3", "isActuallyProduct": "false", "name": "medie (30cm)", "price": "20"}, {"id": "4", "isActuallyProduct": "false", "name": "mare (40cm)", "price": "30"}]}, {"id": "5", "name": " Blat", "type": "single", "validation": "required", "modifierElement": [{"id": "1", "isActuallyProduct": "false", "name": " traditional", "price": "0"}, {"id": " 2", "isActuallyProduct": "false", "name": "italian", "price": "0"}]}, {"id": "1", "name": " Sos pe blat", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "true", "name": "pizza", "price": "2 "}, {"id": " 3", "isActuallyProduct": "true", "name": "bbq dulce", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "bbq iute", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "salsa", "price": "2"}]}, {"id": "1", "name": " Ingrediente", "type": "multiple", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "Ciuperci", "price": "1.5"}, {"id": " 3", "isActuallyProduct": "false", "name": "Ardei", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "rosii", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "porumb", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "sunca", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "pui", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "vita", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "porc", "price": "2"}]}, {"id": "1", "name": " Instructiuni speciale", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mai bine coapta", "price": "0"}, {"id": " 3", "isActuallyProduct": "false", "name": "mai putin coapta", "price": "0"}]}];
 
+		service.testProducts = [{"product_id":42,"name":"Apple Cinema 30\" bla ultra hd many cats, workings bla sla bnak safala asjfas asfjas asfjasa asja","description":"\r\n\tThe 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed sp..","price":"$122.00","special":"$110.00","tax":"$90.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/apple_cinema_30-228x228.jpg"},{"product_id":30,"name":"Canon EOS 5D","description":"\r\n\tCanon's press material for the EOS 5D states that it 'defines (a) new D-SLR category', while we'r..","price":"$122.00","special":"$98.00","tax":"$80.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/canon_eos_5d_1-228x228.jpg"},{"product_id":47,"name":"HP LP3065","description":"\r\n\tStop your co-workers in their tracks with the stunning new 30-inch diagonal HP LP3065 Flat Panel ..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/hp_1-228x228.jpg"},{"product_id":28,"name":"HTC Touch HD","description":"\r\n\tHTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high de..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/htc_touch_hd_1-228x228.jpg"},{"product_id":40,"name":"iPhone 5s, 32GB, Silver","description":"\r\n\tiPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a nam..","price":"$123.20","special":null,"tax":"$101.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/iphone_1-228x228.jpg"},{"product_id":48,"name":"iPod Classic","description":"\r\n\t\r\n\t\t\r\n\t\t\tMore room to move.\r\n\t\t\r\n\t\t\tWith 80GB or 160GB of storage and up to 40 hours of battery l..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/ipod_classic_1-228x228.jpg"},{"product_id":43,"name":"MacBook","description":"\r\n\t\r\n\t\tIntel Core 2 Duo processor\r\n\t\r\n\t\tPowered by an Intel Core 2 Duo processor at speeds up to 2.1..","price":"$602.00","special":null,"tax":"$500.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/macbook_1-228x228.jpg"},{"product_id":44,"name":"MacBook Air","description":"\r\n\tMacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don’t lose..","price":"$1,202.00","special":null,"tax":"$1,000.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/macbook_air_1-228x228.jpg"},{"product_id":29,"name":"Palm Treo Pro","description":"\r\n\tRedefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to b..","price":"$337.99","special":null,"tax":"$279.99","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/palm_treo_pro_1-228x228.jpg"},{"product_id":35,"name":"Product 8","description":"\r\n\tProduct 8\r\n..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/placeholder-228x228.png"},{"product_id":33,"name":"Samsung SyncMaster 941BW","description":"\r\n\tImagine the advantages of going big without slowing down. The big 19\" 941BW monitor combines..","price":"$242.00","special":null,"tax":"$200.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/samsung_syncmaster_941bw-228x228.jpg"},{"product_id":46,"name":"Sony VAIO","description":"\r\n\tUnprecedented power. The next generation of processing technology has arrived. Built into the new..","price":"$1,202.00","special":null,"tax":"$1,000.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/sony_vaio_1-228x228.jpg"}];
 		service.getAllCategories = function () {
-			console.log(OC_CONFIG.CATEGORIES);
-			console.log(OC_CONFIG.TOKEN);
-			$http({
+			var promise = $http({
 				url: OC_CONFIG.CATEGORIES,
 				method: "GET",
 				withCredentials: true,
 				headers: {'Authorization': '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD'}
 			})
-				.then(function (response) {
-				console.log(response);
+			.then(function (response) {
+				console.log('toate categoriile');
+				console.log(response.data);
+				return response.data;
 			});
+			return promise;
 		};
 
 		service.getCategoryProducts = function (id) {
-			console.log(id);
-			$http({
+			var promise = $http({
 				url: OC_CONFIG.CATEGORIES + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-				.then(function (response) {
-				console.log(response);
+			.then(function (response) {
+				console.log('categorie');
+				console.log(response.data);
+				return response.data;
+
 			});
+			return promise;
 		};
 
 		service.getProduct = function (id) {
-			$http({
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
 				url: OC_CONFIG.PRODUCT + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-				.then(function (response) {
-				console.log(response);
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log('produs: ' +response.data.product.title);
+				console.log(response.data.product);
+				return response.data.product;
 			});
+			return promise;
 		};
 
-		service.getSpecialOffers = function () {
-			$http({
-				url: OC_CONFIG.SPECIAL + id,
+		service.getProductReviews = function (id) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.REVIEWS + id +'/review',
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-				.then(function (response) {
-				console.log(response);
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log('reviews');
+				console.log(response.data);
+				return response.data;
 			});
+			return promise;
 		};
+
+		service.getSpecialOffers = function () {
+			var promise = $http({
+				url: OC_CONFIG.SPECIAL,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("SPECIAL OFFERS");
+				return response.data;
+			});
+			return promise;
+		};
+
+		service.getManufacturers = function () {
+			var promise = $http({
+				url: OC_CONFIG.MANUFACTURER,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("SPECIAL OFFERS");
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
 
 		/**
 		 * @name $ionicModal#fromTemplateUrl
-		 * @param {string} search The url to load the template from.
-		 * @param {object} options Options to be passed {@link ionic.controller:ionicModal#initialize ionicModal#initialize} method.
-		 * options object.
+		 * @param {string} search : Searches products containing this string in their name.
+		 * @param {string} tag : Search products with this tag.
+		 * @param {boolean} description : true if also needs to be searched in product description, false if not.
+		 * @param {integer} category_id : The category id to search in.
+		 * @param {boolean} sub_category : true if also needs to be searched in sub categories of the given category, false if not.
+		 * @param {string} sort : String ('price', 'name', 'rating', 'model', 'sort_order', 'quantity', 'date_added') Sort order of the returned products.
+		 * @param {string} order : String ('ASC', 'DESC') Order of the returned products.
+		 * @param {integer} page : Product page.
+		 * @param {integer} limit : Product limit per page.
 		 * @returns {promise} A promise that will be resolved with an instance of
 		 * an {@link ionic.controller:ionicModal} controller.
 		 */
-		service.searchProducts = function (search, tag, description, category_id, sub_category, sort, order    ) {
-			//search?limit=3&page=1&order=ASC&sort=price&search=Apple&description=true
-
+		service.searchProducts = function (search, tag, description, category_id, sub_category, sort, order, page, limit) {
+			$http.get(OC_CONFIG.SEARCH, {params:{"search": search,
+												 "tag" : tag,
+												 "description" : description,
+												 "category_id" : category_id,
+												 "sub_category" : sub_category,
+												 "sort" : sort,
+												 "order" : order,
+												 "page" : page,
+												 "limit" : limit
+												}})
+				.then(function (response) {
+				console.log('search products');
+				console.log(response.data);
+			})
 		}
 
 

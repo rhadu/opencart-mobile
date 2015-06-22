@@ -3,26 +3,29 @@
 	var app = angular.module('Tapitoo.StartUpService', ['ui.router']);
 
 	//factory for HTTP requests
-	app.factory('StartUpService', function (TAPITOO_CONFIG, $ionicPlatform, ShopService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory) {
+	app.factory('StartUpService', function (TAPITOO_CONFIG, OC_CONFIG, $http, $ionicPlatform, ShopService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory) {
 		var service = {};
 
 		service.initialization = function  () {
+
+			console.log('aaaaa');
+
 			//cache background image
 			$ImageCacheFactory.Cache(["../img/bg.jpg"]).then(function () {
 				console.log("done preloading!");
 			});
 
-			/* hide splashscreen*/
-			$timeout(function () {
-				navigator.splashscreen.hide();
-			}, 2500, false);
-
-			//check for internet connection
-			var isOffline = $cordovaNetwork.isOffline();
-			if (isOffline === true) {
-				$state.go("noInternet");
-				return false;
-			}
+//			/* hide splashscreen*/
+//			$timeout(function () {
+//				//navigator.splashscreen.hide();
+//			}, 2500, false);
+//
+//			//check for internet connection
+//			var isOffline = $cordovaNetwork.isOffline();
+//			if (isOffline === true) {
+//				$state.go("noInternet");
+//				return false;
+//			}
 
 			//facebook initialization
 			var appID = "271360646354244";
@@ -36,6 +39,9 @@
 			} catch (e) {
 				console.log("fb init error" + e);
 			}
+
+			$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
+
 		}
 		return service;
 	});

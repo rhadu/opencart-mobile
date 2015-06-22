@@ -1,0 +1,148 @@
+<ion-view title='test'>
+	<ion-nav-buttons side="left">
+		<button class="button button-icon button-clear ion-navicon" ng-click="toggleDrawer()">
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right"  class="customAnim">
+		<button class=" button button-icon ion-ios-cart" ui-sref="cart" ></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg product-page" scroll="false" >
+		<tab-slide-box tab="0">
+			<div class="tsb-icons header-color">
+				<div class="tsb-ic-wrp">
+					<ion-scroll direction="x" class="tsb-hscroll" delegate-handle="subHeaderSlideBox">
+						<a href="javascript:;" class="ion-home1">Product</a>
+						<a href="javascript:;" class="ion-ios-game-controller-b1">Specifications</a>
+						<a href="javascript:;" class="ion-email1">Description</a>
+						<a href="javascript:;" class="ion-model-s1">Review</a>
+					</ion-scroll>
+				</div>
+			</div>
+			<ion-slide-box show-pager="false"
+						   on-slide-changed="slideHasChanged($index)"
+						   delegate-handle="subHeaderSlideBox">
+				<ion-slide class="product-slide">
+					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >
+						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
+									   show-pager="true"
+									   slide-interval="3000"
+									   disable-scroll="false"
+									   delegate-handle="productSlideBox"
+									   on-slide-changed="photoSlideDelegate()"
+									   ng-show="productDetails.images.length!==0">
+							<ion-slide ng-repeat="image in productDetails.images" >
+								<img class="slide-photo" ng-src="{{image.image}}">
+							</ion-slide>
+						</ion-slide-box>
+						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
+									   show-pager="true"
+									   slide-interval="3000"
+									   disable-scroll="false"
+									   delegate-handle="productSlideBoxOne"
+									   on-slide-changed="photoSlideDelegate()"
+									   ng-show="productDetails.images.length===0">
+							<ion-slide >
+								<img class="slide-photo" ng-src="{{productDetails.image}}">
+							</ion-slide>
+						</ion-slide-box>
+
+						<div class="panel">
+							<div class="panel-body product-info">
+								<div class="top-row">
+									<span class="product-title">{{productDetails.title}}</span>
+								</div>
+								<div class="middle-row">
+									<stars-rating ng-model="rating" readonly="isReadonly"></star-rating>
+								</div>
+								<div class="bottom-row">
+									<div class="row">
+										<div class="col col-40 col-offset-60">
+											<div ng-show="{{productDetails.special!==null}}" class="product-old-price-right"><span>{{productDetails.price}}</span></div>
+											<div ng-show="{{productDetails.special===null}}" style="height:20px"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col col-20">
+											<span class="stock-status">{{productDetails.stock_status}}</span>
+										</div>
+										<div class="col col-40">
+											<div ng-show="{{productDetails.special!==null}}" class="product-price-right"><span>{{productDetails.special}}</span></div>
+											<div ng-show="{{productDetails.special===null}}" class="product-price-right"><span>{{productDetails.price}}</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel" ng-repeat="option in productDetails.options">
+							<div class="panel-body product-options">
+								<div class="product-option-name">{{option.name}}</div>
+								<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)">Choose</div>
+								<hr/>
+								<div class="selected-option" ng-show="{{!option.selectedOption}}"> Please choose an option </div>
+								<div class="selected-option" ng-show="{{option.selectedOption}}"> {{option.selectedOption}} </div>
+							</div>
+						</div>
+						<div style="margin:5px;">
+							<ion-scroll class="product-scroll" id="productsScroll" direction="x" has-bouncing="false" zooming="false" style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;" scrollbar-x="false" delegate-handle="prodScrollDelegate" horizontal-scroll-fix="mainScroll">
+								<div style="width:{{(130 * productDetails.related_products.length)}}px; height:200px;">
+									<div class="container product-scroll-container" ng-repeat="product in productDetails.related_products" ng-click="goToProduct(product.product_id)">
+										<div class="row-photo" >
+											<img class="product-photo" ng-src="{{product.thumb_image}}"/>
+											<!--					<div class="product-discount">{{product.name}}</div>-->
+											<!--					<div class="product-favourites">{{product.productPrice}}</div>-->
+										</div>
+										<div class="row-text">
+											<div class="product-title">{{product.name}}</div>
+										</div>
+										<div class="row-text" ng-show="{{product.special!==null}}">
+											<div class="product-old-price"><span>{{product.price}}</span></div>
+											<div class="product-price"><span>{{product.special}}</span></div>
+										</div>
+										<div class="row-text" ng-show="{{product.special===null}}">
+											<div class="product-old-price"><span></span></div>
+											<div class="product-price"><span>{{product.price}}</span></div>
+										</div>
+
+									</div>
+								</div>
+							</ion-scroll>
+						</div>
+						<div style="padding-top:80px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="specification-slide">
+					<ion-scroll style="height:100%" delegate-handle="slide2Scroll" direction="y">
+						<div style="padding-bottom:20px"></div>
+						<div ng-repeat="group in productDetails.attribute_groups">
+							<p class="group-name">{{group.name}}</p>
+							<div class="panel">
+								<div class="panel-body panel-attributes">
+									<div ng-repeat="attribute in group.attribute">
+										<div class="attribute-name">{{attribute.name}}</div>
+										<div class="attribute-text">{{attribute.text}}</div>
+										<hr ng-if="!$last"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="padding-top:80px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="description-slide">
+					<ion-scroll style="height:100%" direction="y">
+						<div  ng-bind-html="productDetails.description" style="color:#fff; text-align:justify; padding: 15px"></div>
+						<div style="padding-top:90px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="review-slide">
+					<h3>Reviews content</h3>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
+
+
+	</ion-content>
+	<div class="footer-space"></div>
+
+</ion-view>

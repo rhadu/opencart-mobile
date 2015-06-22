@@ -12,7 +12,10 @@
 		"search_locations" : "Search locations",
 		"locations" : "Locations",
 		"delivery_fee" : "Delivery fee",
-		"minimum" : "Minimum order"
+		"minimum" : "Minimum order",
+		"discounts" : "Discounts",
+		"brands" : "Brands",
+		"browse_categories" : "Browse by categories"
 	},
 	"drawer" : {
 		"my_addresses" : "My Addresses",

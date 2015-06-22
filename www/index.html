@@ -7,15 +7,23 @@
 
 		<link href="css/animate.css" rel="stylesheet">
 		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="lib/tabSlideBox/tabSlideBox.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/fonts/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/fonts/font-awesome.css">
+
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-		<!-- ionic/angularjs js -->
+		 <!-- ionic/angularjs js -->
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 		<script src="lib/js/ng-cordova.js" type="text/javascript"></script>
 		<script src="lib/js/ngStorage.min.js"></script>
 		<script src="lib/js/ngAutocomplete.js"></script>
+
+		<!-- translation -->
 		<script src="lib/js/angular-translate.min.js" type="text/javascript"></script>
 		<script src="lib/js/angular-translate-loader-static-files.min.js" type="text/javascript"></script>
+		<!-- slide box-->
+		<script src="lib/tabSlideBox/tabSlideBox.js" type="text/javascript"></script>
 
 		<!-- google maps api
 <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript" ></script>-->
@@ -40,6 +48,8 @@
 		<script src="app/services/GeocoderService.js" type="text/javascript"></script>
 		<script src="app/services/LocationServices.js" type="text/javascript"></script>
 		<script src="app/directives/googleMap.js" type="text/javascript"></script>
+		<script src="app/directives/horizontallScroll.js" type="text/javascript"></script>
+		<script src="app/directives/starRating.js" type="text/javascript"></script>
 		<script src="app/filters/filterModifiers.js" type="text/javascript"></script>
 		<script src="app/components/home/homeCtrl.js" type="text/javascript"></script>
 		<script src="app/components/home/delivery/DeliveryCtrl.js" type="text/javascript"></script>
@@ -80,7 +90,7 @@
 
 		<div id="fb-root"></div>
 
-		<ion-nav-bar class="nav-title-slide-ios7 bar-stable header-color custom-header-height" ></ion-nav-bar>
+		<ion-nav-bar class="nav-title-slide-ios7 bar-stable header-color" ng-class="noShadow"></ion-nav-bar>
 
 		<ion-nav-view animation=""> </ion-nav-view>
 

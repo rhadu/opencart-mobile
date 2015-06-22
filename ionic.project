@@ -3,7 +3,7 @@
 	"app_id": "",
 	"proxies": [
 		{
-			"path": "/api",
+			"path": "/v1",
 			"proxyUrl": "http://apitoo.gungoos.com/opencart-2.0.0.0/upload/api/v1"
 		}
 	]

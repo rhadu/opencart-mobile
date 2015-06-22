@@ -36,7 +36,13 @@
 			views: {
 				'menuContent': {
 					templateUrl: 'templates/home.html',
-					controller: 'HomeViewController'
+					controller: 'HomeViewController',
+					resolve: {
+						featuredProducts: function(ShopService){
+							return ShopService.testProducts;
+							//return ShopService.getSpecialOffers();
+						}
+					}
 				}
 			}
 		})
@@ -69,6 +75,21 @@
 			cache: false,
 			templateUrl: 'templates/menuProductInfo.html',
 			controller: 'ProductDetailsController'
+		})
+			.state('leftdrawer.productInfo', {
+			url: '/product/:productId',
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/productInfo.html',
+					controller: 'ProductDetailsController',
+					resolve: {
+						product: function($stateParams, ShopService) {
+							return ShopService.getProduct($stateParams.productId);
+						}
+					}
+				}
+			}
 		})
 			.state('cart', {
 			url: '/cart',

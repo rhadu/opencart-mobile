@@ -26,13 +26,18 @@
 											   'ngStorage',
 											   'ngCordova',
 											   'ion-google-place',
+											   'horizontalScroll',
+											   'starRating',
 											   'cordova',
+											   'tabSlideBox',
 											   'ionic.ion.imageCacheFactory',
 											   'ionic.ion.headerShrink',
 											   'pascalprecht.translate']);
 
-	app.run(function (StartUpService) {
-		StartUpService.initialization;
+	app.run(function (StartUpService, $http, OC_CONFIG ) {
+
+		StartUpService.initialization();
+		//$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
 	});
 
 
@@ -51,12 +56,10 @@
 		// load 'en' table on startup
 		$translateProvider.preferredLanguage('en');
 
-		$httpProvider.defaults.withCredentials = true;
-		$httpProvider.defaults.useXDomain = true
-		$httpProvider.defaults.headers.common = {};
+
 	});
 
-	app.controller('AppInitController', function ($scope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
+	app.controller('AppInitController', function ($scope, $rootScope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
 
 		$scope.$on('locationLoaded', function (event, loc) {
 			$timeout(function () {
@@ -66,6 +69,7 @@
 		$scope.toggleDrawer = function () {
 			$ionicSideMenuDelegate.toggleLeft();
 		};
+		$rootScope.noShadow = "header-shadow";
 	});
 })();
 
