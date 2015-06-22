@@ -28,8 +28,10 @@
 									   show-pager="true"
 									   slide-interval="3000"
 									   disable-scroll="false"
+									   on-touch="disableTabSlide()"
+									   on-release="enableTabSlide()"
+									   on-drag-left="dragLastSlide()"
 									   delegate-handle="productSlideBox"
-									   on-slide-changed="photoSlideDelegate()"
 									   ng-show="productDetails.images.length!==0">
 							<ion-slide ng-repeat="image in productDetails.images" >
 								<img class="slide-photo" ng-src="{{image.image}}">
@@ -39,6 +41,9 @@
 									   show-pager="true"
 									   slide-interval="3000"
 									   disable-scroll="false"
+									   on-touch="disableTabSlide()"
+									   on-release="enableTabSlide()"
+									   on-drag-left="goNextTabSlide()"
 									   delegate-handle="productSlideBoxOne"
 									   on-slide-changed="photoSlideDelegate()"
 									   ng-show="productDetails.images.length===0">
@@ -83,8 +88,17 @@
 								<div class="selected-option" ng-show="{{option.selectedOption}}"> {{option.selectedOption}} </div>
 							</div>
 						</div>
-						<div style="margin:5px;">
-							<ion-scroll class="product-scroll" id="productsScroll" direction="x" has-bouncing="false" zooming="false" style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;" scrollbar-x="false" delegate-handle="prodScrollDelegate" horizontal-scroll-fix="mainScroll">
+						<div style="margin:5px;" ng-if="productDetails.related_products.length !==0">
+							<ion-scroll class="product-scroll"
+										 id="productsScroll"
+										 on-touch="disableTabSlide()"
+										 on-release="enableTabSlide()"
+										 direction="x"
+										 has-bouncing="false"
+										 zooming="false"
+										 style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;"
+										 scrollbar-x="false" delegate-handle="prodScrollDelegate"
+										 horizontal-scroll-fix="slide1Scroll">
 								<div style="width:{{(130 * productDetails.related_products.length)}}px; height:200px;">
 									<div class="container product-scroll-container" ng-repeat="product in productDetails.related_products" ng-click="goToProduct(product.product_id)">
 										<div class="row-photo" >

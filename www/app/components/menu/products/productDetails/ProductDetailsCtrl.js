@@ -6,7 +6,7 @@
 		//$scope.restaurantName = ShopService.restaurantName;
 		//$scope.menuProducts = ShopService.products;
 		//$scope.productInfo = ShopService.productInfo;
-
+		console.log("init slider");
 		$scope.productDetails = product;
 
 		//$scope.productTotal = CartService.productPrice($scope.productInfo);
@@ -79,42 +79,46 @@
 			$state.go("products", {restaurantName: $scope.restaurantName, categoryId:item.categoryId})
 		};
 
-		var element;
-		$scope.photoSlideDelegate = function () {
+		$scope.goToProduct = function(id) {
+			$state.go("leftdrawer.productInfo", {productId: id})
+		}
+
+
+		$scope.dragLastSlide = function () {
 			var tabSlides = $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox');
 			var photoSlides = $ionicSlideBoxDelegate.$getByHandle('productSlideBox');
-			console.log(photoSlides.slidesCount());
 			console.log(photoSlides.currentIndex());
-			$ionicGesture.on('dragleft', function (event) {
-				if(photoSlides.currentIndex() === photoSlides.slidesCount()-1){
-					tabSlides.slide(1);
-				}
-			}, element);
+			console.log(photoSlides.slidesCount());
+			if(photoSlides.currentIndex() === photoSlides.slidesCount()-1){
+				tabSlides.slide(1);
+			}
+		}
+
+		$scope.goNextTabSlide = function () {
+			var tabSlides = $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox');
+			tabSlides.slide(1);
 		}
 
 		//get photo slider element
 		$timeout( function(){
-			element = angular.element(document.querySelector('#producPhotoSlideBox'))
 			$ionicSlideBoxDelegate.$getByHandle('productSlideBoxOne').enableSlide(false);
 		},5);
 
 		//disable tab slide box when user slides photos
-		$timeout( function(){
-			$ionicGesture.on('touch', function (event) {
-				$scope.$apply(function () {
-					$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
-				});
-			}, element);
-		}, 10);
+
+
 
 		//enable tab slide box
-		$timeout( function(){
-			$ionicGesture.on('release', function (event) {
-				$scope.$apply(function () {
-					$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(true);
-				});
-			}, element);
-		}, 10);
+
+
+		$scope.disableTabSlide = function () {
+			console.log("on touch");
+				$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
+		}
+
+		$scope.enableTabSlide = function () {
+				$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(true);
+		}
 
 	});
 })();
