@@ -2,66 +2,25 @@
 (function () {
 	var app = angular.module('PersonalInfoCtrl', ['ui.router']);
 
-	app.controller('PersonalInfoController', function ($scope, $state, $translate, $ionicPopup, DeliveryInfoService, CartService, ShopService) {
-		$scope.user = DeliveryInfoService.getUserInfo() || {};
-		$scope.restaurantName = ShopService.restaurantName;
+	app.controller('PersonalInfoController', function ($scope, $state, $translate, $ionicPopup, ShopService) {
 		//save user info
-		$scope.saveInfo = function (user) {
-			if ($scope.user.first_name && $scope.user.last_name && $scope.user.phone && $scope.user.email) {
-				DeliveryInfoService.saveUserInfo(user);
-				if (CartService.products.length > 0)
-					$state.go('cart');
-				else
-					$state.go('personalInfo');
-			}
-			else {
-				$translate(['popup.user_info', 'popup.all_fields_req']).then(function (translate) {
-					$ionicPopup.alert({
-						title: translate['popup.user_info'],
-						template: translate['popup.all_fields_req'],
-						buttons: [{
-							text: 'OK',
-							type: 'button-search'
-						}]
-					});
-				});
-			}
-		};
+		$scope.user = {};
 
-		//facebook login
-		$scope.facebookLogin = function () {
-			facebookConnectPlugin.getLoginStatus(
-				function (response) {
-					console.log(JSON.stringify(response));
-					if (response.status === 'connected') {
-						FBlogin();
-					}
-					else
-						facebookConnectPlugin.login(['email, public_profile'],
-													function (response) {
-							if (response.status === 'connected') {
-								console.log(response);
-								FBlogin();
-							}
-						});
+		$scope.login = function () {
+			console.log($scope.user);
+			var promise = ShopService.userLogin($scope.user);
+			promise.then(
+				//if login was succesfull redirect to cart
+				function(response) {
+					console.log(response.data);
+					$state.go("cart")
 				},
-				function (error) {
-					console.log(JSON.stringify(error));
+				//throw error popup if credentials are wrong
+				function(error) {
+					console.log(error.data);
+					//$state.go("leftdrawer.userLogin")
 				});
-		};
-
-		var FBlogin = function () {
-			facebookConnectPlugin.api('/me/?fields=first_name,last_name,email', ['public_profile'],
-									  function (response) {
-				DeliveryInfoService.user = response;
-				$scope.user = response;
-				$scope.$apply();
-			},
-									  function (response) {
-				console.log(JSON.stringify(response));
-			});
-
-		};
+		}
 	});
 
 })();

@@ -26,11 +26,15 @@
 		service.productInfo = [];
 		service.productTotal = 0;
 		service.url = baseUrl;
+		service.subCategories = [];
+		service.categProducts = [];
+		service.allProducts = [];
 
 		service.modifiers = [{"id": "1", "name": " Marime", "type": "single", "validation": "required", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mica (25cm)", "price": "15"}, {"id": " 3", "isActuallyProduct": "false", "name": "medie (30cm)", "price": "20"}, {"id": "4", "isActuallyProduct": "false", "name": "mare (40cm)", "price": "30"}]}, {"id": "5", "name": " Blat", "type": "single", "validation": "required", "modifierElement": [{"id": "1", "isActuallyProduct": "false", "name": " traditional", "price": "0"}, {"id": " 2", "isActuallyProduct": "false", "name": "italian", "price": "0"}]}, {"id": "1", "name": " Sos pe blat", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "true", "name": "pizza", "price": "2 "}, {"id": " 3", "isActuallyProduct": "true", "name": "bbq dulce", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "bbq iute", "price": "2"}, {"id": "4", "isActuallyProduct": "true", "name": "salsa", "price": "2"}]}, {"id": "1", "name": " Ingrediente", "type": "multiple", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "Ciuperci", "price": "1.5"}, {"id": " 3", "isActuallyProduct": "false", "name": "Ardei", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "rosii", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "porumb", "price": "1.5"}, {"id": "4", "isActuallyProduct": "false", "name": "sunca", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "pui", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "vita", "price": "2"}, {"id": "4", "isActuallyProduct": "false", "name": "porc", "price": "2"}]}, {"id": "1", "name": " Instructiuni speciale", "type": "single", "validation": "optional", "modifierElement": [{"id": "2", "isActuallyProduct": "false", "name": "mai bine coapta", "price": "0"}, {"id": " 3", "isActuallyProduct": "false", "name": "mai putin coapta", "price": "0"}]}];
-
 		service.testProducts = [{"product_id":42,"name":"Apple Cinema 30\" bla ultra hd many cats, workings bla sla bnak safala asjfas asfjas asfjasa asja","description":"\r\n\tThe 30-inch Apple Cinema HD Display delivers an amazing 2560 x 1600 pixel resolution. Designed sp..","price":"$122.00","special":"$110.00","tax":"$90.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/apple_cinema_30-228x228.jpg"},{"product_id":30,"name":"Canon EOS 5D","description":"\r\n\tCanon's press material for the EOS 5D states that it 'defines (a) new D-SLR category', while we'r..","price":"$122.00","special":"$98.00","tax":"$80.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/canon_eos_5d_1-228x228.jpg"},{"product_id":47,"name":"HP LP3065","description":"\r\n\tStop your co-workers in their tracks with the stunning new 30-inch diagonal HP LP3065 Flat Panel ..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/hp_1-228x228.jpg"},{"product_id":28,"name":"HTC Touch HD","description":"\r\n\tHTC Touch - in High Definition. Watch music videos and streaming content in awe-inspiring high de..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/htc_touch_hd_1-228x228.jpg"},{"product_id":40,"name":"iPhone 5s, 32GB, Silver","description":"\r\n\tiPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a nam..","price":"$123.20","special":null,"tax":"$101.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/iphone_1-228x228.jpg"},{"product_id":48,"name":"iPod Classic","description":"\r\n\t\r\n\t\t\r\n\t\t\tMore room to move.\r\n\t\t\r\n\t\t\tWith 80GB or 160GB of storage and up to 40 hours of battery l..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/ipod_classic_1-228x228.jpg"},{"product_id":43,"name":"MacBook","description":"\r\n\t\r\n\t\tIntel Core 2 Duo processor\r\n\t\r\n\t\tPowered by an Intel Core 2 Duo processor at speeds up to 2.1..","price":"$602.00","special":null,"tax":"$500.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/macbook_1-228x228.jpg"},{"product_id":44,"name":"MacBook Air","description":"\r\n\tMacBook Air is ultrathin, ultraportable, and ultra unlike anything else. But you don’t lose..","price":"$1,202.00","special":null,"tax":"$1,000.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/macbook_air_1-228x228.jpg"},{"product_id":29,"name":"Palm Treo Pro","description":"\r\n\tRedefine your workday with the Palm Treo Pro smartphone. Perfectly balanced, you can respond to b..","price":"$337.99","special":null,"tax":"$279.99","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/palm_treo_pro_1-228x228.jpg"},{"product_id":35,"name":"Product 8","description":"\r\n\tProduct 8\r\n..","price":"$122.00","special":null,"tax":"$100.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/placeholder-228x228.png"},{"product_id":33,"name":"Samsung SyncMaster 941BW","description":"\r\n\tImagine the advantages of going big without slowing down. The big 19\" 941BW monitor combines..","price":"$242.00","special":null,"tax":"$200.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/samsung_syncmaster_941bw-228x228.jpg"},{"product_id":46,"name":"Sony VAIO","description":"\r\n\tUnprecedented power. The next generation of processing technology has arrived. Built into the new..","price":"$1,202.00","special":null,"tax":"$1,000.00","rating":0,"thumb_image":"http://apitoo.gungoos.com/opencart-2.0.0.0/upload/image/cache/catalog/demo/sony_vaio_1-228x228.jpg"}];
+
 		service.getAllCategories = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.CATEGORIES,
 				method: "GET",
@@ -38,24 +42,37 @@
 				headers: {'Authorization': '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD'}
 			})
 			.then(function (response) {
+				$ionicLoading.hide();
 				console.log('toate categoriile');
-				console.log(response.data);
-				return response.data;
+				console.log(response.data.categories);
+				return response.data.categories;
 			});
 			return promise;
 		};
 
+		service.getAllProducts = function (categArray) {
+			service.allProducts = [];
+			for (var i=0 ; i< categArray.length ; i++){
+				var category = service.getCategoryProducts(categArray[i].category_id)
+				service.allProducts.push(category);
+			}
+			console.log(service.allProducts);
+		}
+
 		service.getCategoryProducts = function (id) {
+			service.categProducts = [];
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.CATEGORIES + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				console.log('categorie');
-				console.log(response.data);
-				return response.data;
-
+				$ionicLoading.hide();
+				console.log(response.data.category);
+				service.categProducts = response.data.category.products;
+				$rootScope.$broadcast('productsLoaded');
+				return response.data.category;
 			});
 			return promise;
 		};
@@ -93,31 +110,378 @@
 		};
 
 		service.getSpecialOffers = function () {
+			service.categProducts = [];
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.SPECIAL,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				console.log("SPECIAL OFFERS");
+				console.log(response.data);
+				service.categProducts = response.data.products;
+				$rootScope.$broadcast('productsLoaded');
+				$ionicLoading.hide();
 				return response.data;
 			});
 			return promise;
 		};
 
 		service.getManufacturers = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.MANUFACTURER,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				console.log("SPECIAL OFFERS");
+				$ionicLoading.hide();
+				console.log(response.data.manufacturers);
+				return response.data.manufacturers;
+			});
+			return promise;
+		}
+
+		service.getManufacturersProducts = function (id) {
+			service.categProducts = [];
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.MANUFACTURER +id,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				service.categProducts = response.data.manufacturer.products;
+				$rootScope.$broadcast('productsLoaded');
+				console.log(response.data.manufacturer);
+				return response.data.manufacturer;
+			});
+			return promise;
+		}
+
+		service.addProductToCart = function (prod) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var postArray = [];
+			postArray.push({"product_id" : prod.product_id});
+			postArray.push({"quantity" : "1"});
+			for (var i=0 ; i<prod.options.length ; i++) {
+				for(var j=0 ; j<prod.options[i].product_option_value.length; j++) {
+					var option = prod.options[i].product_option_value[j];
+					if (option.checked === true){
+						var property = {};
+						var propertyName = "option["+prod.options[i].product_option_id+"]";
+						var propertyValue = prod.options[i].product_option_value[j].product_option_value_id;
+						if(prod.options[i].type === "checkbox") {
+							propertyName += "[]"
+						}
+						property[propertyName] = propertyValue;
+						postArray.push(property);
+					}
+				}
+			}
+			console.log(postArray);
+
+			$http({
+				method: "post",
+				url: OC_CONFIG.CART,
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						var myobj = Object.keys(obj[p])
+						console.log(myobj);
+						console.log(obj[p][myobj]);
+						str.push((myobj) + "=" + encodeURIComponent(obj[p][myobj]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: postArray
+			}).
+			success(function (data, status, headers, config) {
+				$ionicLoading.hide();
+				console.log(data.cart.products);
+			}).
+			error(function (data, status, headers, config) {
+				console.log(data.error);
+				$ionicLoading.hide();
+			});
+		}
+
+		service.deleteProductFromCart = function (id) {
+			//console.log(key);
+			var key = "YToxOntzOjEwOiJwcm9kdWN0X2lkIjtpOjQ2O30=";
+			var promise = $http({
+				url: OC_CONFIG.CART + key,
+				method: "DELETE",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log("Delete from cart");
 				console.log(response.data);
 				return response.data;
 			});
 			return promise;
 		}
+
+		service.getCart = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.GET_CART,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log("cart");
+				console.log(response.data.cart);
+				return response.data.cart;
+			});
+			return promise;
+		}
+
+
+		// Checkout Step 1
+		service.postPaymentAddress = function (address) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+
+			var postArray = [];
+			if(address.existing === true){
+				postArray.push({"payment_address" : "existing"});
+				postArray.push({"address_id" : address.address_id});
+			}
+			else{
+				postArray.push({"payment_address" : "new"});
+				postArray.push({"firstname" : address.firstname});
+				postArray.push({"lastname" : address.lastname});
+				postArray.push({"address_1" : address.address});
+				postArray.push({"city" : address.city});
+				postArray.push({"postcode":address.postcode});
+				postArray.push({"country_id" : address.country_id});
+				postArray.push({"zone_id" : address.zone_id});
+			}
+
+			$http({
+				method: "post",
+				url: OC_CONFIG.CHECKOUT + 'payment_address',
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						var myobj = Object.keys(obj[p])
+						console.log(myobj);
+						console.log(obj[p][myobj]);
+						str.push((myobj) + "=" + encodeURIComponent(obj[p][myobj]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: postArray
+			}).
+			success(function (data, status, headers, config) {
+				$ionicLoading.hide();
+				console.log(data);
+			}).
+			error(function (data, status, headers, config) {
+				console.log(data.error);
+				$ionicLoading.hide();
+			});
+		}
+
+
+		// Checkout Step 2
+		service.postShippingAddress = function (address) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+
+			var postArray = [];
+			if(address.existing === true){
+				postArray.push({"shipping_address" : "existing"});
+				postArray.push({"address_id" : address.address_id});
+			}
+			else{
+				postArray.push({"payment_address" : "new"});
+				postArray.push({"firstname" : address.firstname});
+				postArray.push({"lastname" : address.lastname});
+				postArray.push({"address_1" : address.address});
+				postArray.push({"city" : address.city});
+				postArray.push({"postcode":address.postcode});
+				postArray.push({"country_id" : address.country_id});
+				postArray.push({"zone_id" : address.zone_id});
+			}
+
+			service.currentAddress = address;
+
+			$http({
+				method: "post",
+				url: OC_CONFIG.CHECKOUT + 'shipping_address',
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						var myobj = Object.keys(obj[p])
+						str.push((myobj) + "=" + encodeURIComponent(obj[p][myobj]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: postArray
+			}).
+			success(function (data, status, headers, config) {
+				$ionicLoading.hide();
+				console.log(data);
+			}).
+			error(function (data, status, headers, config) {
+				console.log(data.error);
+				$ionicLoading.hide();
+			});
+		}
+
+		// Checkout Step 3
+		service.getShippingMethod = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'shipping_method',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data);
+				return response.data.cart;
+			});
+			return promise;
+		}
+
+		// Checkout Step 4
+		service.postShippingMethod = function (order) {
+			var checkout = [];
+			checkout.push({"shipping_method" : "flat.flat"});
+//			checkout.push({"comment" : "doorbell doesn't work"});
+			$http({
+				method: "post",
+				url: OC_CONFIG.CHECKOUT + 'shipping_method',
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						var myobj = Object.keys(obj[p])
+						str.push((myobj) + "=" + encodeURIComponent(obj[p][myobj]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: checkout
+			}).
+			success(function (data, status, headers, config) {
+				$ionicLoading.hide();
+				console.log(data);
+			}).
+			error(function (data, status, headers, config) {
+				console.log(data.error);
+				$ionicLoading.hide();
+			});
+		}
+
+
+
+		// Checkout Step 5
+		service.getPaymentMethod = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'payment_method',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data.payment_methods);
+				return response.data.payment_methods;
+			});
+			return promise;
+		}
+
+		// Checkout Step 6
+		service.postPaymentMethod = function (payment) {
+			var checkout = {};
+			checkout.payment_method = payment.code;
+			if(payment.agree){
+				checkout.agree = payment.agree;
+			}
+			if(payment.comment){
+				checkout.comment = payment.comment;
+			}
+
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'payment_method',
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: checkout
+			})
+			.then(function (response) {
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
+		// Checkout Step 7
+		service.getCheckoutConfirm = function () {
+			//$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'confirm',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				//$ionicLoading.hide();
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
+		// Checkout Step 8
+		service.getCheckoutPay = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'pay',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
+		// Checkout Step 9
+		service.getCheckoutSuccess = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CHECKOUT + 'success',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
 
 		/**
 		 * @name $ionicModal#fromTemplateUrl
@@ -134,6 +498,7 @@
 		 * an {@link ionic.controller:ionicModal} controller.
 		 */
 		service.searchProducts = function (search, tag, description, category_id, sub_category, sort, order, page, limit) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			$http.get(OC_CONFIG.SEARCH, {params:{"search": search,
 												 "tag" : tag,
 												 "description" : description,
@@ -145,10 +510,197 @@
 												 "limit" : limit
 												}})
 				.then(function (response) {
+				$ionicLoading.hide();
 				console.log('search products');
 				console.log(response.data);
 			})
 		}
+
+		service.userLogin = function (userCreds) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			console.log(userCreds);
+			var userCredentials = {};
+			userCredentials.email = userCreds.email;
+			userCredentials.password = userCreds.password;
+
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'login',
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: userCredentials
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log(response.account);
+				return response.account;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data);
+			});
+			return promise;
+		}
+
+		service.userLogout = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'logout',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log("user logout");
+				console.log(response);
+				return response;
+			})
+			.error(function (response) {
+				console.log(response);
+			});
+			return promise;
+		}
+
+		service.userAccount = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'account',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log("user account");
+				console.log(response.account);
+				return response.account;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response.errors);
+				return response.errors;
+			});
+			return promise;
+		}
+
+		service.userRegister = function (userCreds) {
+			var userCredentials = [];
+			userCredentials.firstname = userCreds.firstname;
+			userCredentials.lastname = userCreds.lastname;
+			userCredentials.email = userCreds.email;
+			userCredentials.telephone = userCreds.telephone;
+			userCredentials.password = userCreds.password;
+			userCredentials.confirm = userCreds.confirm;
+			userCredentials.address_1 = userCreds.address_1;
+			userCredentials.city = userCreds.city;
+			userCredentials.country_id = userCreds.country_id;
+			userCredentials.zone_id = userCreds.zone_id;
+			userCredentials.agree = userCreds.agree;
+
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT,
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: userCredentials
+			})
+			.then(function (response) {
+				console.log("user registered");
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
+		service.getAddresses = function () {
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'address',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("user addresses");
+				console.log(response.data.addresses);
+				return response.data.addresses;
+			});
+			return promise;
+		}
+
+		service.deleteAddress = function (id) {
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'address'  + id,
+				method: "DELETE",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("delete address");
+				console.log(response.data);
+				return response.data;
+			});
+			return promise;
+		}
+
+		service.getWishlist = function () {
+			service.categProducts = [];
+			var promise = $http({
+				url: OC_CONFIG.WISHLIST,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("user wishlist");
+				console.log(response.data.wishlist.products);
+//				service.categProducts = response.data.wishlist.products;
+//				$rootScope.$broadcast('productsLoaded');
+				return response.data.wishlist.products;
+			});
+			return promise;
+		}
+
+		service.addProductToWishlist = function (id) {
+			var promise = $http({
+				url: OC_CONFIG.WISHLIST + id,
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("added product to whishlist");
+				console.log(response.data.wishlist.products);
+				return response.data.wishlist.products;
+			});
+			return promise;
+		}
+
+		service.deleteProductFromWishlist = function (id) {
+			var promise = $http({
+				url: OC_CONFIG.WISHLIST + id,
+				method: "DELETE",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				console.log("delete product from whishlist");
+				console.log(response.data.wishlist.products);
+				return response.data.wishlist.products;
+			});
+			return promise;
+		}
+
+
+
+
 
 
 

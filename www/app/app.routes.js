@@ -11,12 +11,42 @@
 			templateUrl: "templates/left-drawer.html"
 		})
 			.state('leftdrawer.categories', {
-			url: "/menu/:restaurantName",
+			url: "/menu/categories",
 			cache: false,
 			views: {
 				'menuContent': {
 					templateUrl: "templates/menuCategories.html",
 					controller: 'CategoriesController',
+					resolve: {
+						categories: function(ShopService){
+							return ShopService.getAllCategories();
+						}
+					}
+				}
+			}
+		})
+			.state('leftdrawer.subCategories', {
+			url: "/menu/categories/subcategories",
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: "templates/menuSubCategories.html",
+					controller: 'CategoriesController',
+					resolve: {
+						categories: function(ShopService){
+							return ShopService.getAllCategories();
+						}
+					}
+				}
+			}
+		})
+			.state('leftdrawer.products', {
+			url: "/products/",
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: "templates/menuProducts.html",
+					controller: 'ProductsController'
 				}
 			}
 		})
@@ -40,9 +70,34 @@
 					resolve: {
 						featuredProducts: function(ShopService){
 							return ShopService.testProducts;
-							//return ShopService.getSpecialOffers();
 						}
 					}
+				}
+			}
+		})
+			.state('leftdrawer.manufacturers', {
+			url: '/manufacturers',
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/manufacturers.html',
+					controller: 'ManufacturersController',
+					resolve: {
+						manufacturers: function(ShopService){
+							return ShopService.getManufacturers();
+						}
+					}
+				}
+			}
+		})
+			.state('wishlist', {
+			url: '/wishlist',
+			cache: false,
+			templateUrl: 'templates/wishlist.html',
+			controller: 'WishlistController',
+			resolve: {
+				wishlist: function(ShopService){
+					return ShopService.getWishlist();
 				}
 			}
 		})
@@ -95,7 +150,51 @@
 			url: '/cart',
 			cache: false,
 			templateUrl: 'templates/cart.html',
-			controller: 'CartController'
+			controller: 'CartController',
+			resolve: {
+				cart: function( ShopService) {
+					return ShopService.getCart();
+				}
+			}
+		})
+			.state('checkout', {
+			url: '/checkout',
+			cache: false,
+			templateUrl: 'templates/checkout.html',
+			controller: 'CheckoutController',
+			resolve: {
+				cart: function(ShopService) {
+					return ShopService.getCart();
+				},
+				account: function (ShopService) {
+					return ShopService.userAccount();
+				}
+			}
+		})
+			.state('deliveryDetails', {
+			url: '/deliveryDetails',
+			cache: false,
+			templateUrl: 'templates/deliveryDetails.html',
+			controller: 'DeliveryDetailsController',
+			resolve: {
+				addresses: function(ShopService) {
+					return ShopService.getAddresses();
+				},
+				deliveryType: function (ShopService) {
+					return ShopService.getShippingMethod();
+				}
+			}
+		})
+			.state('paymentDetails', {
+			url: '/paymentDetails',
+			cache: false,
+			templateUrl: 'templates/paymentDetails.html',
+			controller: 'PaymentDetailsController',
+			resolve: {
+				paymentMethods: function(ShopService) {
+					return ShopService.getPaymentMethod();
+				}
+			}
 		})
 			.state('addresses', {
 			url: '/addresses',
@@ -114,6 +213,26 @@
 			cache: false,
 			templateUrl: 'templates/location.html',
 			controller: 'MapController'
+		})
+			.state('leftdrawer.userLogin', {
+			url: '/login',
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/userLogin.html',
+					controller: 'PersonalInfoController'
+				}
+			}
+		})
+			.state('leftdrawer.userRegister', {
+			url: '/register',
+			cache: false,
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/userRegister.html',
+					controller: 'PersonalInfoController'
+				}
+			}
 		})
 			.state('personalInfo', {
 			url: '/personalInfo',

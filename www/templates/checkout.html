@@ -1,0 +1,53 @@
+<ion-view title='<div class=" appLogo"></div>'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-ios-arrow-back button-clear" nav-direction="back" ui-sref="cart"></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg cart-view">
+		<div class="header-space"></div>
+
+		<div class="panel">
+			<div class="panel-body account-panel">
+				<div class="list">
+					<div class="item item-icon-left item-icon-right">
+						<i class="icon ion-person"></i>
+						<h2>Contact Details</h2>
+						<p>{{account.firstname}} {{account.lastname}}</p>
+						<i class="icon ion-ios-arrow-right"></i>
+					</div>
+					<div class="item item-icon-left item-icon-right" ui-sref="deliveryDetails">
+						<i class="icon icon-truck fa-flip-horizontal fa-lg"></i>
+						<h2>Delivery Information</h2>
+						<p ng-if="!address">Select delivery address</p>
+						<p ng-if="address">{{address.address_1}}</p>
+						<i class="icon ion-ios-arrow-right"></i>
+					</div>
+					<div class="item item-icon-left item-icon-right" ui-sref="paymentDetails">
+						<i class="icon ion-card"></i>
+						<h2>Payment Type</h2>
+						<p>Select payment type</p>
+						<i class="icon ion-ios-arrow-right"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel">
+			<div class="panel-body cart-summary">
+				<h3>Order Summary</h3>
+				<div class="row" ng-repeat="total in cart.totals">
+					<div class="col col-67" ng-class="{'total-price': total.title === 'Total'}">{{total.title}}</div>
+					<div class="col col-33" ng-class="{'total-price': total.title === 'Total'}">{{total.text}}</div>
+				</div>
+
+				<button class="button button-outline button-light button-search margin-button" ng-click="checkout()"> Continue </button>
+				<button class="button button-outline button-light button-search margin-button" ng-click="step7()"> Pay </button>
+				<button class="button button-outline button-light button-search margin-button" ng-click="step8()"> Success </button>
+			</div>
+		</div>
+
+		<div class="footer-space"></div>
+
+	</ion-content>
+
+
+</ion-view>

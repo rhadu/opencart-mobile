@@ -5,6 +5,7 @@
 		//get orders saved in local storage
 		$scope.orders = DeliveryInfoService.getOrders();
 
+
 		//update cart with selected order
 		$scope.orderToCart = function () {
 			if ($scope.orders !== false) {

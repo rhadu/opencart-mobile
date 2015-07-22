@@ -1,0 +1,45 @@
+<ion-view title='<div class=" appLogo"></div>'>
+	<ion-nav-buttons side="left">
+		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right"  class="customAnim">
+		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg">
+		<!--
+<div class="list" style="font-family:UnitedSans">
+<a class="item item-icon-right" ng-repeat="category in categories" ng-click="getCategory(category)">
+{{category.name}}
+<i class="icon ion-ios-arrow-right"></i>
+</a>
+</div>
+-->
+		<div class="header-space"></div>
+
+		<div class="container products-page-container" style="width:{{viewportWidth/2 - 15}}px; height:{{viewportWidth/2 +50}}px " ng-class="{'margin-bottom-space':$last}" ng-repeat="product in products" ng-click="goToProduct(product.product_id)">
+			<div class="row-photo" >
+				<img class="product-photo" ng-src="{{product.thumb_image}}"/>
+				<!--					<div class="product-discount">{{product.name}}</div>-->
+				<!--					<div class="product-favourites">{{product.productPrice}}</div>-->
+			</div>
+			<div class="row-text">
+				<div class="product-title">{{product.name}}</div>
+			</div>
+			<div class="middle-row">
+				<!--				<stars-rating ng-model="product.rating" readonly="isReadonly"></star-rating>-->
+
+			</div>
+			<div class="row-text" ng-show="{{product.special!==null}}">
+				<div class="product-old-price"><span>{{product.price}}</span></div>
+				<div class="product-price"><span>{{product.special}}</span></div>
+			</div>
+			<div class="row-text" ng-show="{{product.special===null}}">
+				<div class="product-old-price"><span></span></div>
+				<div class="product-price"><span>{{product.price}}</span></div>
+			</div>
+		</div>
+	</ion-content>
+	<div class="footer-space"></div>
+
+</ion-view>

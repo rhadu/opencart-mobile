@@ -6,20 +6,20 @@
 		<ion-scroll style="height:80%"  >
 			<div class="list-inset list-custom" >
 				<label ng-show="{{optionList.type ==='radio' || optionList.type ==='select'}}" class="item item-radio item-custom" ng-repeat="element in optionList.product_option_value" >
-					<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-					<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
+					<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{optionList.name}}" ng-click="addModifier(optionList, element)" >
+					<div class="item-content item-modifier" ng-click="addModifier(optionList, element)">
 						<img class="option-image" ng-src="{{element.image}}"/>
 						<div class="option-name" ng-class="{ 'add-image-margin': element.image }">{{element.name}}</div>
-						<div class="modifier-price" ng-class="{ 'add-image-margin': element.image }">{{element.price_prefix}}{{element.price}}</div>
+						<div class="modifier-price" ng-class="{ 'add-image-margin': element.image }"><span ng-if="element.price">{{element.price_prefix}}</span>{{element.price}}</div>
 					</div>
 					<i class="radio-icon ion-checkmark" ng-class="{ 'add-image-margin': element.image }"></i>
 				</label>
 				<label ng-show="{{optionList.type ==='checkbox'}}" class="item item-radio item-custom"  ng-repeat="element in optionList.product_option_value" >
-					<input type="checkbox" ng-model="elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-					<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
+					<input type="checkbox" ng-model="elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(optionList, element)" >
+					<div class="item-content item-modifier" ng-click="addModifier(optionList, element)">
 						<img class="option-image" ng-src="{{element.image}}"/>
 						<div class="option-name" ng-class="{ 'add-image-margin': element.image }">{{element.name}}</div>
-						<div class="modifier-price" ng-class="{ 'add-image-margin': element.image }">{{element.price_prefix}}{{element.price}}</div>
+						<div class="modifier-price" ng-class="{ 'add-image-margin': element.image }"><span ng-if="element.price">{{element.price_prefix}}</span>{{element.price}}</div>
 					</div>
 					<i class="radio-icon ion-checkmark" ng-class="{ 'add-image-margin': element.image }"></i>
 				</label>

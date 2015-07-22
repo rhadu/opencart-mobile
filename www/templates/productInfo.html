@@ -1,19 +1,20 @@
-<ion-view title='test'>
+<ion-view title='<div class=" appLogo"></div>'>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon button-clear ion-navicon" ng-click="toggleDrawer()">
-		</button>
+		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
-		<button class=" button button-icon ion-ios-cart" ui-sref="cart" ></button>
+		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
 	</ion-nav-buttons>
 	<ion-content class="calm-bg product-page" scroll="false" >
+		<button translate="menu.add_to_cart"  id="cartButton" style="" class="button button-calm add-to-cart-button"  ng-click="addToCart(productDetails)">Add to cart</button>
+
 		<tab-slide-box tab="0">
 			<div class="tsb-icons header-color">
 				<div class="tsb-ic-wrp">
 					<ion-scroll direction="x" class="tsb-hscroll" delegate-handle="subHeaderSlideBox">
 						<a href="javascript:;" class="ion-home1">Product</a>
-						<a href="javascript:;" class="ion-ios-game-controller-b1">Specifications</a>
+						<a href="javascript:;" class="ion-ios-game-controller-b1" >Specifications</a>
 						<a href="javascript:;" class="ion-email1">Description</a>
 						<a href="javascript:;" class="ion-model-s1">Review</a>
 					</ion-scroll>
@@ -22,8 +23,8 @@
 			<ion-slide-box show-pager="false"
 						   on-slide-changed="slideHasChanged($index)"
 						   delegate-handle="subHeaderSlideBox">
-				<ion-slide class="product-slide">
-					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" >
+				<ion-slide class="product-slide" delegate-handle="productSlidePage">
+					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" on-scroll="getCurrentPosition()">
 						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
 									   show-pager="true"
 									   slide-interval="3000"
@@ -32,7 +33,7 @@
 									   on-release="enableTabSlide()"
 									   on-drag-left="dragLastSlide()"
 									   delegate-handle="productSlideBox"
-									   ng-show="productDetails.images.length!==0">
+									   ng-if="productDetails.images.length!==0">
 							<ion-slide ng-repeat="image in productDetails.images" >
 								<img class="slide-photo" ng-src="{{image.image}}">
 							</ion-slide>
@@ -46,7 +47,7 @@
 									   on-drag-left="goNextTabSlide()"
 									   delegate-handle="productSlideBoxOne"
 									   on-slide-changed="photoSlideDelegate()"
-									   ng-show="productDetails.images.length===0">
+									   ng-if="productDetails.images.length===0">
 							<ion-slide >
 								<img class="slide-photo" ng-src="{{productDetails.image}}">
 							</ion-slide>
@@ -58,7 +59,7 @@
 									<span class="product-title">{{productDetails.title}}</span>
 								</div>
 								<div class="middle-row">
-									<stars-rating ng-model="rating" readonly="isReadonly"></star-rating>
+<!--									<stars-rating ng-model="rating" readonly="isReadonly"></star-rating>-->
 								</div>
 								<div class="bottom-row">
 									<div class="row">
@@ -84,14 +85,15 @@
 								<div class="product-option-name">{{option.name}}</div>
 								<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)">Choose</div>
 								<hr/>
-								<div class="selected-option" ng-show="{{!option.selectedOption}}"> Please choose an option </div>
-								<div class="selected-option" ng-show="{{option.selectedOption}}"> {{option.selectedOption}} </div>
+								<div class="selected-option" ng-show="!option.selectedOption || option.selectedOption.length === 0"> Please choose an option </div>
+								<div class="selected-option" ng-if="option.type==='radio' || option.type==='select'" ng-show="option.selectedOption"> {{option.selectedOption.name}} </div>
+								<div class="selected-option" ng-if="option.type==='checkbox'" ng-show="option.selectedOption"><span ng-repeat="option in option.selectedOption">{{option.name}}<span ng-if="!$last">, </span></span></div>
 							</div>
 						</div>
 						<div style="margin:5px;" ng-if="productDetails.related_products.length !==0">
 							<ion-scroll class="product-scroll"
 										 id="productsScroll"
-										 on-touch="disableTabSlide()"
+										 on-touch="disableProductScoller()"
 										 on-release="enableTabSlide()"
 										 direction="x"
 										 has-bouncing="false"

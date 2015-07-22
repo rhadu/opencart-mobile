@@ -1,0 +1,43 @@
+<ion-view title='{{"userinfo.personal_info" | translate}}'>
+	<ion-nav-buttons side="left">
+		<button  class="button button-icon ion-arrow-left-c button-clear" nav-direction="back" ui-sref="leftdrawer.userLogin"></button>
+	</ion-nav-buttons>
+
+	<ion-content class="calm-bg">
+		<div class="header-space"></div>
+		<ion-list>
+			<div class="panel-body user-login">
+				<label class="item item-input item-floating-label">
+					<span class="input-label">First Name</span>
+					<input type="text" placeholder="First Name">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Last Name</span>
+					<input type="text" placeholder="Last Name">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Email</span>
+					<input type="text" placeholder="Email">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Telephone</span>
+					<input type="text" placeholder="Telephone">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Password</span>
+					<input type="password" placeholder="Password">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Confirm password</span>
+					<input type="text" placeholder="Confirm password">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Address</span>
+					<input type="text" placeholder="Address">
+				</label>
+				<button class="button button-outline button-light button-search" ng-click=""> Create account </button>
+				<button class="button button-outline button-light register-button " ng-click=""> Create account </button>
+			</div>
+		</ion-list>
+	</ion-content>
+</ion-view>

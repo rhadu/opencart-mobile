@@ -1,0 +1,20 @@
+<ion-view title='<div class=" appLogo"></div>'>
+	<ion-nav-buttons side="left">
+		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ui-sref="leftdrawer.home">
+		</button>
+	</ion-nav-buttons>
+
+	<ion-nav-buttons side="right"  class="customAnim">
+		<button class=" button button-icon ion-ios-cart " nav-direction="forward" ui-sref="cart" ></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg">
+		<div class="list" style="font-family:UnitedSans">
+			<a class="item item-icon-right" ng-repeat="manufacturer in manufacturers" ng-click="getManufacturer(manufacturer)">
+				{{manufacturer.name}}
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+		</div>
+	</ion-content>
+	<div class="footer-space"></div>
+
+</ion-view>

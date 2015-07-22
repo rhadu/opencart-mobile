@@ -2,102 +2,60 @@
 (function () {
 	var app = angular.module('CartCtrl', ['ui.router']);
 
-	app.controller('CartController', function ($scope, $ionicPopup, $state, $translate, ShopService, CartService, DeliveryInfoService) {
+	app.controller('CartController', function (cart,$log, $scope, $ionicPopup, $state, $translate, ShopService, CartService, DeliveryInfoService) {
+		console.log(cart);
 		$scope.restaurantName = ShopService.restaurantName;
 		$scope.categoryName = ShopService.categoryName;
-		$scope.cartItems = CartService.products;
+		$scope.cartItems = cart.products;
+		$scope.cart = cart;
 		$scope.address = DeliveryInfoService.address;
 		$scope.user = DeliveryInfoService.getUserInfo();
 		$scope.deliveryFee = ShopService.info.deliveryFee;
 
-		var total = function () {
+		var user1 = {};
+		user1.email = "radu.turtoi@gmail.com";
+		user1.password = "radubrau";
+		$scope.checkLogin = function(){
+			$state.go('leftdrawer.userLogin')
+//			ShopService.userLogin(user1);
+			ShopService.userAccount();
+		}
+
+		$scope.cartCheckout = function () {
+//			ShopService.userLogout();
+//			ShopService.userLogin(user1);
+//			return
+
+			var promise = ShopService.userAccount();
+			promise.then(
+				//if user is logged in go to checkout
+				function(response) {
+					console.log(response.data);
+					$state.go("checkout")
+				},
+				//is user is not logged in rediret to login
+				function(error) {
+					console.log(error.data);
+					$state.go("leftdrawer.userLogin")
+				});
+		}
+
+		$scope.getMovieListing = function(movie) {
+			var promise =
+				movieService.getMovie('avengers');
+			promise.then(
+				function(payload) {
+					$scope.listingData = payload.data;
+				},
+				function(errorPayload) {
+					$log.error('failure loading movie', errorPayload);
+				});
+		};
+
+		$scope.totalOrder = function () {
 			return parseFloat(CartService.showTotal()) + parseFloat($scope.deliveryFee);
 		};
-		$scope.totalOrder = total();
 
-		//increment product quantity
-		$scope.incrementQuantity = function (item) {
-			item.quantity = CartService.incrementItem(item);
-			$scope.totalOrder = total();
-		};
-		//decrement product quantity
-		$scope.decrementQuantity = function (item) {
-			item.quantity = CartService.decrementItem(item);
-			$scope.totalOrder = total();
-		};
-		//delete product
-		$scope.deleteItem = function (item) {
-			item.quantity = CartService.deleteItem(item);
-			$scope.totalOrder = total();
-		};
-		//place order
-		$scope.placeOrder = function () {
-			//check if cart empty
-			if ($scope.cartItems.length === 0) {
-				$translate(['popup.cart', 'popup.add_products']).then(function (translate) {
-					$ionicPopup.alert({
-						title: translate['popup.cart'],
-						template: translate['popup.add_products'],
-						buttons: [{
-							text: 'OK',
-							type: 'button-search',
-							onTap: function () {
-								$state.go("leftdrawer.categories", {restaurantName: $scope.restaurantName});
-							}
-						}]
-					});
-					return false;
-				});
-			}
-			//check if total order price is bigger than the minimum delivery fee
-			if ($scope.totalOrder < ShopService.info.minDeliveryFee) {
-				$translate(['popup.cart', 'popup.min_order',  'popup.add_prod']).then(function (translate) {
-					$ionicPopup.alert({
-						title: translate['popup.cart'],
-						template: translate['popup.min_order'] +' '+ ShopService.info.minDeliveryFee + '. ' + translate['popup.add_prod'],
-						buttons: [{
-							text: 'OK',
-							type: 'button-search'
-						}]
-					});
-					return false;
-				});
-			}
-			// check if address is set
-			if (!$scope.address.street) {
-				$translate(['popup.cart', 'popup.choose_address']).then(function (translate) {
-					$ionicPopup.alert({
-						title: translate['popup.cart'],
-						template: translate['popup.choose_address'],
-						buttons: [{
-							text: 'OK',
-							type: 'button-search',
-							onTap: function () {
-								$state.go("addresses");
-							}
-						}]
-					});
-					return false;
-				});
-			}
-			if (!$scope.user) {
-				$translate(['popup.cart', 'popup.personal_info']).then(function (translate) {
-					$ionicPopup.alert({
-						title: translate['popup.cart'],
-						template: translate['popup.personal_info'],
-						buttons: [{
-							text: 'OK',
-							type: 'button-search',
-							onTap: function () {
-								$state.go("personalInfoEdit");
-							}
-						}]
-					});
-					return false;
-				});
-			}
-			//send order through factory
-			ShopService.sendOrder();
-		};
+
 	});
 })();

@@ -1,46 +1,20 @@
-<ion-view title='<h1 class=" appLogo"></h1>'>
+<ion-view title='<div class=" appLogo"></div>'>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon button-clear ion-navicon header-position-fix" ng-click="toggleDrawer()">
+		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ui-sref="leftdrawer.home" >
 		</button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
-		<button class=" button button-icon ion-ios-cart header-position-fix" ui-sref="cart" ></button>
-		<span ng-hide="badgeTest === 0" class="badge badge-calm header-position-fix">{{badgeTest}}$</span>
+		<button class=" button button-icon ion-ios-cart " nav-direction="forward" ui-sref="cart" ></button>
 	</ion-nav-buttons>
 	<ion-content class="calm-bg">
-		<div class="header-space"></div>
-
-		<ion-slide-box class="photo-slider" show-pager="true"  slide-interval="3000" disable-scroll="false"  auto-play="true" does-continue="true">
-			<ion-slide>
-				<img class="slide-photo" src="./img/oferte/deals1.png">
-			</ion-slide>
-			<ion-slide>
-				<img class="slide-photo" src="./img/oferte/deals2.png">
-			</ion-slide>
-			<ion-slide>
-				<img class="slide-photo" src="./img/oferte/deals4.png">
-			</ion-slide>
-		</ion-slide-box>
-		<div class="row category-row" ng-repeat="rows in menuCategories">
-			<div class="col-50 category-col" ng-repeat="category in rows" >
-				<button class="button button-outline button-light category-button"
-						ui-sref="products({restaurantName : restaurantName, categoryId: category.categoryId})"
-						ng-click="selectCategory(category)"
-						nav-direction="forward">
-					{{category.categoryName}}
-				</button>
-			</div>
+		<div class="list" style="font-family:UnitedSans">
+			<a class="item item-icon-right" ng-repeat="category in categories" ng-click="getCategory(category)">
+				{{category.name}}
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
 		</div>
-
-
 	</ion-content>
 	<div class="footer-space"></div>
-	<ion-footer-bar ng-hide="badgeTest === 0" class="bar-stable custom-footer fade-in-up">
-		<div class="row">
-			<div class="col col-20"></div>
-			<div class="col"><button translate="menu.go_to_cart" class="button button-calm footer-button"  ui-sref="cart">Go to Cart</button></div>
-			<div class="col col-20"></div>
-		</div>
-	</ion-footer-bar>
+
 </ion-view>

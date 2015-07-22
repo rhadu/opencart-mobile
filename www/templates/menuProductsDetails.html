@@ -1,9 +1,9 @@
-<ion-view title='<h1 class=" appLogo"></h1>'>
+<ion-view title='<div class=" appLogo"></div>'>
 	<ion-nav-buttons side="left">
 		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="leftdrawer.categories({restaurantName : restaurantName})"></button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
-		<button class="button button-icon ion-ios-cart header-position-fix" ui-sref="cart" ></button>
+		<button class="button button-icon ion-ios-cart header-position-fix" nav-direction="forward" ui-sref="cart" ></button>
 		<span ng-hide="badgeTest === 0" class="badge badge-calm header-position-fix">{{badgeTest}}$</span>
 	</ion-nav-buttons>
 

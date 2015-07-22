@@ -153,8 +153,28 @@ angular.module('tabSlideBox', [])
 									   },
 									   controller : function($scope, $attrs, $element) {
 										   $scope.events = new SimplePubSub();
-
 										   $scope.slideHasChanged = function(index){
+											   var bottomPosition = window.innerHeight - 412;
+											   var cartButton = document.getElementById('cartButton');
+
+											   if(index === 0){
+												   $ionicScrollDelegate.$getByHandle('slide1Scroll').scrollTop();
+												   move(cartButton)
+													   .ease('in-out')
+													   .y(0)
+													   .duration('0.5s')
+													   .end();
+											   }
+											   else{
+
+												   console.log(index);
+												   move(cartButton)
+													   .ease('in-out')
+													   .y(bottomPosition)
+													   .duration('0.5s')
+													   .end();
+											   }
+
 											   $scope.events.trigger("slideChange", {"index" : index});
 											   $timeout(function(){if($scope.onSlideMove) $scope.onSlideMove({"index" : eval(index)});},100);
 										   };

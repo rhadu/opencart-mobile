@@ -15,13 +15,13 @@
 				console.log("done preloading!");
 			});
 
-//			/* hide splashscreen*/
-//			$timeout(function () {
-//				//navigator.splashscreen.hide();
-//			}, 2500, false);
-//
-//			//check for internet connection
-//			var isOffline = $cordovaNetwork.isOffline();
+			/* hide splashscreen*/
+			$timeout(function () {
+				//navigator.splashscreen.hide();
+			}, 2500, false);
+
+			//check for internet connection
+//			//var isOffline = $cordovaNetwork.isOffline();
 //			if (isOffline === true) {
 //				$state.go("noInternet");
 //				return false;

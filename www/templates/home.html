@@ -1,13 +1,14 @@
-<ion-view title='tapitoo'>
+<ion-view align-title="left" title='<div class=" appLogo"></div>'>
 	<ion-nav-buttons side="left">
 		<button class="button button-icon button-clear ion-navicon" ng-click="toggleDrawer()">
 		</button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
-		<button class=" button button-icon ion-ios-cart" ui-sref="cart" ></button>
+		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
 	</ion-nav-buttons>
-	<ion-content class="calm-bg" scroll="true"  delegate-handle="mainScroll">
+
+	<ion-content class="calm-bg home-view-content" scroll="true"  delegate-handle="mainScroll">
 		<ion-slide-box class="photo-slider" show-pager="true"  slide-interval="3000" disable-scroll="false"  auto-play="true" does-continue="true">
 			<ion-slide>
 				<img class="slide-photo" src="./img/deals/deals1.jpg">
@@ -21,27 +22,29 @@
 		</ion-slide-box>
 		<div class="row welcome-row">
 			<div class="col-50 welcome-col">
-				<button translate="homeview.discounts" class="button button-outline button-light button-search discount-button order-search" >
+				<button translate="homeview.discounts" class="button button-outline button-light button-search discount-button order-search" ng-click="getSpecial()">
 					Discounts
 				</button>
 			</div>
 			<div class="col-50 welcome-col">
-				<button translate="homeview.brands" class="button button-outline button-light button-search brands-button order-search" >
-					Promotions
+				<button translate="homeview.brands" class="button button-outline button-light button-search brands-button order-search" ui-sref="leftdrawer.manufacturers" >
+					Manufacturers
 				</button>
 			</div>
 		</div>
 		<div class="row">
-			<button translate="homeview.browse_categories" class="button button-outline button-light button-search categories-browse" ng-click="disableSliding()">Browse by categories</button>
+			<button translate="homeview.browse_categories" class="button button-outline button-light button-search categories-browse" ui-sref="leftdrawer.categories">Browse by categories</button>
 		</div>
+		<h3>Featured Products</h3>
 		<div style="margin:5px;">
 			<ion-scroll class="product-scroll" direction="x" has-bouncing="false" zooming="false" style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;" scrollbar-x="false" delegate-handle="prodScrollDelegate" horizontal-scroll-fix="mainScroll">
 				<div style="width:{{(130 * featuredProducts.length)}}px; height:200px;">
-					<div class="container product-scroll-container" ng-repeat="product in featuredProducts" ng-click="goToProduct(product.product_id)">
+					<div class="container product-scroll-container" ng-repeat="product in featuredProducts" ng-click="goToProduct(product.product_id, $event)">
 						<div class="row-photo" >
 							<img class="product-photo" ng-src="{{product.thumb_image}}"/>
 							<!--					<div class="product-discount">{{product.name}}</div>-->
-							<!--					<div class="product-favourites">{{product.productPrice}}</div>-->
+							<i class="fa fa-ellipsis-v fa-2x add-to-whishlist" ng-click="openPopover(product.product_id,$event)"></i>
+
 						</div>
 						<div class="row-text">
 							<div class="product-title">{{product.name}}</div>

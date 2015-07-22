@@ -12,12 +12,17 @@
 											   'Tapitoo.googleMap',
 											   'Tapitoo.filterModifiers',
 											   'Tapitoo.HomeViewController',
+											   'Tapitoo.ManufacturersController',
+											   'Tapitoo.WishlistCtrl',
 											   'HomeCtrl',
 											   'DeliveryCtrl',
 											   'CategoriesCtrl',
 											   'ProductsCtrl',
 											   'ProductsDetailsCtrl',
 											   'CartCtrl',
+											   'CheckoutCtrl',
+											   'DeliveryDetailsCtrl',
+											   'PaymentDetailsCtrl',
 											   'OrderHistoryCtrl',
 											   'DeliveryInformationCtrl',
 											   'AddressListCtrl',
@@ -27,9 +32,10 @@
 											   'ngCordova',
 											   'ion-google-place',
 											   'horizontalScroll',
-											   'starRating',
+//											   'starRating',
 											   'cordova',
 											   'tabSlideBox',
+											   'angular-inview',
 											   'ionic.ion.imageCacheFactory',
 											   'ionic.ion.headerShrink',
 											   'pascalprecht.translate']);
@@ -47,6 +53,7 @@
 
 		$ionicConfigProvider.views.transition('ios');
 		$ionicConfigProvider.navBar.alignTitle('center')
+		$ionicConfigProvider.views.swipeBackEnabled(false);
 
 		// configures staticFilesLoader
 		$translateProvider.useStaticFilesLoader({

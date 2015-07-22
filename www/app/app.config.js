@@ -17,8 +17,13 @@
 			PRODUCT: backend + '/product/product/',
 			REVIEWS: backend + '/product/',
 			SPECIAL: backend + '/product/special/',
-			MANUFACTURER: backend + '/product/manufacturer',
-			SEARCH: backend + '/product/search'
+			MANUFACTURER: backend + '/product/manufacturer/',
+			SEARCH: backend + '/product/search',
+			CART: backend + '/cart/product/',
+			GET_CART: backend + '/cart/cart/',
+			ACCOUNT: backend + '/account/',
+			CHECKOUT: backend + '/checkout/',
+			WISHLIST: backend + '/account/wishlist/'
 		}
 	})());
 
