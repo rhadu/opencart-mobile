@@ -23,7 +23,8 @@
 			GET_CART: backend + '/cart/cart/',
 			ACCOUNT: backend + '/account/',
 			CHECKOUT: backend + '/checkout/',
-			WISHLIST: backend + '/account/wishlist/'
+			WISHLIST: backend + '/account/wishlist/',
+			COMMON: backend + '/common/'
 		}
 	})());
 

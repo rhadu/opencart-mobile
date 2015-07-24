@@ -8,7 +8,8 @@
 			.state('leftdrawer', {
 			url: "/drawer",
 			abstract: true,
-			templateUrl: "templates/left-drawer.html"
+			templateUrl: "templates/left-drawer.html",
+			controller: "PersonalInfoController"
 		})
 			.state('leftdrawer.categories', {
 			url: "/menu/categories",
@@ -171,16 +172,35 @@
 				}
 			}
 		})
-			.state('deliveryDetails', {
-			url: '/deliveryDetails',
+			.state('paymentAddress', {
+			url: '/paymentAddress',
 			cache: false,
-			templateUrl: 'templates/deliveryDetails.html',
+			templateUrl: 'templates/checkoutPaymentAddress.html',
 			controller: 'DeliveryDetailsController',
 			resolve: {
-				addresses: function(ShopService) {
+				deliveryData: function(ShopService) {
 					return ShopService.getAddresses();
-				},
-				deliveryType: function (ShopService) {
+				}
+			}
+		})
+			.state('shippingAddress', {
+			url: '/shippingAddress',
+			cache: false,
+			templateUrl: 'templates/checkoutShippingAddress.html',
+			controller: 'DeliveryDetailsController',
+			resolve: {
+				deliveryData: function(ShopService) {
+					return ShopService.getAddresses();
+				}
+			}
+		})
+			.state('shippingMethod', {
+			url: '/shippingMethod',
+			cache: false,
+			templateUrl: 'templates/checkoutShippingMethod.html',
+			controller: 'DeliveryDetailsController',
+			resolve: {
+				deliveryData: function(ShopService) {
 					return ShopService.getShippingMethod();
 				}
 			}

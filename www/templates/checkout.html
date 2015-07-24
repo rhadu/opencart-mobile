@@ -14,7 +14,7 @@
 						<p>{{account.firstname}} {{account.lastname}}</p>
 						<i class="icon ion-ios-arrow-right"></i>
 					</div>
-					<div class="item item-icon-left item-icon-right" ui-sref="deliveryDetails">
+					<div class="item item-icon-left item-icon-right" ui-sref="paymentAddress">
 						<i class="icon icon-truck fa-flip-horizontal fa-lg"></i>
 						<h2>Delivery Information</h2>
 						<p ng-if="!address">Select delivery address</p>
@@ -24,7 +24,8 @@
 					<div class="item item-icon-left item-icon-right" ui-sref="paymentDetails">
 						<i class="icon ion-card"></i>
 						<h2>Payment Type</h2>
-						<p>Select payment type</p>
+						<p ng-if="!payment">Select payment type</p>
+						<p ng-if="payment">{{payment.title}}</p>
 						<i class="icon ion-ios-arrow-right"></i>
 					</div>
 				</div>
@@ -40,8 +41,8 @@
 				</div>
 
 				<button class="button button-outline button-light button-search margin-button" ng-click="checkout()"> Continue </button>
-				<button class="button button-outline button-light button-search margin-button" ng-click="step7()"> Pay </button>
-				<button class="button button-outline button-light button-search margin-button" ng-click="step8()"> Success </button>
+
+
 			</div>
 		</div>
 

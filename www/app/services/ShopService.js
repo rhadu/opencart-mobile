@@ -263,7 +263,7 @@
 				postArray.push({"zone_id" : address.zone_id});
 			}
 
-			$http({
+			var promise = $http({
 				method: "post",
 				url: OC_CONFIG.CHECKOUT + 'payment_address',
 				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
@@ -288,6 +288,8 @@
 				console.log(data.error);
 				$ionicLoading.hide();
 			});
+
+			return promise;
 		}
 
 
@@ -313,7 +315,7 @@
 
 			service.currentAddress = address;
 
-			$http({
+			var promise = $http({
 				method: "post",
 				url: OC_CONFIG.CHECKOUT + 'shipping_address',
 				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
@@ -336,6 +338,8 @@
 				console.log(data.error);
 				$ionicLoading.hide();
 			});
+
+			return promise;
 		}
 
 		// Checkout Step 3
@@ -349,7 +353,7 @@
 			.then(function (response) {
 				$ionicLoading.hide();
 				console.log(response.data);
-				return response.data.cart;
+				return response.data;
 			});
 			return promise;
 		}
@@ -357,9 +361,10 @@
 		// Checkout Step 4
 		service.postShippingMethod = function (order) {
 			var checkout = [];
-			checkout.push({"shipping_method" : "flat.flat"});
+
+			checkout.push({"shipping_method" : order.code});
 //			checkout.push({"comment" : "doorbell doesn't work"});
-			$http({
+			var promise = $http({
 				method: "post",
 				url: OC_CONFIG.CHECKOUT + 'shipping_method',
 				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
@@ -382,6 +387,7 @@
 				console.log(data.error);
 				$ionicLoading.hide();
 			});
+			return promise;
 		}
 
 
@@ -458,10 +464,14 @@
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-			.then(function (response) {
+			.success(function (response) {
 				$ionicLoading.hide();
 				console.log(response.data);
 				return response.data;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response);
 			});
 			return promise;
 		}
@@ -590,7 +600,7 @@
 		}
 
 		service.userRegister = function (userCreds) {
-			var userCredentials = [];
+			var userCredentials = {};
 			userCredentials.firstname = userCreds.firstname;
 			userCredentials.lastname = userCreds.lastname;
 			userCredentials.email = userCreds.email;
@@ -602,9 +612,21 @@
 			userCredentials.country_id = userCreds.country_id;
 			userCredentials.zone_id = userCreds.zone_id;
 			userCredentials.agree = userCreds.agree;
+//
+//			userCredentials.firstname = 'john';
+//			userCredentials.lastname = 'roberts';
+//			userCredentials.email = 'johnny@robertsons.com';
+//			userCredentials.telephone = '123456890312';
+//			userCredentials.password = 'password';
+//			userCredentials.confirm = 'password';
+//			userCredentials.address_1 = 'street 1';
+//			userCredentials.city = 'bucharest';
+//			userCredentials.country_id = '5';
+//			userCredentials.zone_id = '122';
+//			userCredentials.agree = 'true';
 
 			var promise = $http({
-				url: OC_CONFIG.ACCOUNT,
+				url: OC_CONFIG.ACCOUNT + 'register',
 				method: "POST",
 				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
 				transformRequest: function (obj) {
@@ -617,10 +639,13 @@
 				},
 				data: userCredentials
 			})
-			.then(function (response) {
+			.success(function (response) {
 				console.log("user registered");
 				console.log(response.data);
 				return response.data;
+			})
+			.error(function (error) {
+				console.log(error);
 			});
 			return promise;
 		}
@@ -696,6 +721,49 @@
 				return response.data.wishlist.products;
 			});
 			return promise;
+		}
+
+		service.getCountries = function () {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.COMMON + 'country',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log("user account");
+				console.log(response);
+				return response;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response.errors);
+				return response.errors;
+			});
+			return promise;
+		}
+
+		service.getZoneIds = function (id) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.COMMON + 'country/' + id,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log("user account");
+				console.log(response);
+				return response;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response.errors);
+				return response.errors;
+			});
+			return promise;
+
 		}
 
 

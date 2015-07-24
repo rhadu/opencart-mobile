@@ -2,34 +2,23 @@
 (function () {
 	var app = angular.module('CheckoutCtrl', ['ui.router']);
 
-	app.controller('CheckoutController', function (cart, account, $scope, $ionicPopup, $state, $translate, ShopService) {
+	app.controller('CheckoutController', function (cart, account, $scope, $rootScope, $ionicPopup, $state, $translate, ShopService) {
 		$scope.cart = cart;
 		$scope.account = account.data.account;
 		$scope.address = ShopService.currentAddress;
+		$scope.payment = ShopService.currentPayment;
 
 		$scope.checkout = function () {
-			console.log(account);
-return;
-			var address ={};
-			var delivery = {};
-			var payment = {};
-			address.existing = true;
-			address.id = '1';
-			delivery.code = 'flat.flat'
-			payment.code = 'cod'
-			payment.agree = 'true'
-			payment.comment = 'da da da'
+//			if($rootScope.checkoutStep1 === true && $rootScope.checkoutStep2 === true){
+//				ShopService.getCheckoutConfirm();
+//			}
 
-			//			ShopService.postPaymentAddress(address);
-			//			ShopService.postShippingAddress(address);
-			//			ShopService.getShippingMethod();
-			//			ShopService.postShippingMethod(delivery);
-			//			ShopService.getPaymentMethod();
-			//			ShopService.postPaymentMethod(payment);
-			ShopService.getCheckoutConfirm();
-			//			ShopService.getCheckoutPay()
-			//			ShopService.getCheckoutSuccess();
-			//			$state.go('leftdrawer.home');
+			if($rootScope.checkoutStep3 === true){
+				ShopService.getCheckoutPay().finally(function () {
+					$scope.step8();
+				})
+			}
+
 		}
 
 		$scope.step7 = function () {

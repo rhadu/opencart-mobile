@@ -6,37 +6,49 @@
 	<ion-content class="calm-bg">
 		<div class="header-space"></div>
 		<ion-list>
-			<div class="panel-body user-login">
+			<div class="user-register">
 				<label class="item item-input item-floating-label">
 					<span class="input-label">First Name</span>
-					<input type="text" placeholder="First Name">
+					<input type="text" placeholder="First Name" ng-model="user.firstname">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Last Name</span>
-					<input type="text" placeholder="Last Name">
+					<input type="text" placeholder="Last Name" ng-model="user.lastname">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Email</span>
-					<input type="text" placeholder="Email">
+					<input type="text" placeholder="Email" ng-model="user.email">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Telephone</span>
-					<input type="text" placeholder="Telephone">
+					<input type="text" placeholder="Telephone" ng-model="user.telephone">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Password</span>
-					<input type="password" placeholder="Password">
+					<input type="password" placeholder="Password" ng-model="user.password">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Confirm password</span>
-					<input type="text" placeholder="Confirm password">
+					<input type="password" placeholder="Confirm password" ng-model="user.confirm">
 				</label>
 				<label class="item item-input item-floating-label">
 					<span class="input-label">Address</span>
-					<input type="text" placeholder="Address">
+					<input type="text" placeholder="Address" ng-model="user.address_1">
 				</label>
-				<button class="button button-outline button-light button-search" ng-click=""> Create account </button>
-				<button class="button button-outline button-light register-button " ng-click=""> Create account </button>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">City</span>
+					<input type="text" placeholder="City" ng-model="user.city">
+				</label>
+				<label class="item item-input item-floating-label" ng-click="openModalCountry()">
+					<span class="input-label">Country</span>
+					<input type="text" placeholder="Country" ng-model="user.country_name">
+				</label>
+				<label class="item item-input item-floating-label" ng-click="openModalZoneID()">
+					<span class="input-label">Region/State</span>
+					<input type="text" placeholder="Region/State" ng-model="user.zone_name">
+				</label>
+				<br/>
+				<button class="button button-outline button-light button-search" ng-click="register()"> Create account </button>
 			</div>
 		</ion-list>
 	</ion-content>

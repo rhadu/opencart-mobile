@@ -1699,41 +1699,65 @@ modal
 	text-align: left;
 }
 
-
 .total-price{
 	color: #e72d23;
 	font-size: 120%;
 	font-weight: bold;
 }
+.user-register {
+	position: relative;
+	border-radius: 4px;
+	padding: 15px;
+	display:block;
+	width: 90%;
+	margin:auto;
+	background-color: rgba(0,0,0,.3) !important;
+	height: auto !important ;
+	margin-bottom: 65px;
+	border: 1px solid rgba(255,255,255,.2);
+}
 
-.user-login .item{
+.user-login .item,
+.user-register .item{
 	border:none;
 	border-bottom: 1px solid darkgrey;
 }
-.user-login input{
+
+.user-login input,
+.user-register input{
 	color: #fff;
 	font-size: 16px;
 }
+
 .lost-pass{
 	color: #e72d23;
 	margin-top: 15px;
 }
+
 .user-login{
 	height:360px;
+	margin-bottom: 65px;
 	border: 1px solid rgba(255,255,255,.2);
 }
 
-.user-login .input-label{
+
+.user-login .input-label,
+.user-register .input-label{
 	color:darkgrey;
 	font-size: 13px;
+	width: 130px;
 }
-.user-login .item{
+
+.user-login .item,
+.user-register .item{
 	background-color: transparent !important;
 }
 
-.user-login .item-input{
+.user-login .item-input,
+.user-register .item-input{
 	padding: 6px 0 5px 0 !important;
 }
+
 
 
 

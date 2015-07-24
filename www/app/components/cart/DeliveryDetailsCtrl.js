@@ -2,63 +2,43 @@
 (function () {
 	var app = angular.module('DeliveryDetailsCtrl', ['ui.router']);
 
-	app.controller('DeliveryDetailsController', function (addresses, deliveryType, $scope, $ionicPopup, $state, $translate, ShopService) {
-		$scope.addresses = addresses;
+	app.controller('DeliveryDetailsController', function (deliveryData,$rootScope, $scope, $ionicPopup, $state, $translate, ShopService) {
+		$scope.deliveryData = deliveryData;
 
 		$scope.setAddress = function (address) {
+			console.log(address);
 			$scope.address = address;
 			$scope.address.existing = true;
-			console.log($scope.address);
 		}
 
-		$scope.saveAddress = function () {
-//			var address = $scope.address;
-//			address.existing = true;
-
-		//	ShopService.postPaymentAddress(address);
-//			ShopService.postShippingAddress(address);
-//			ShopService.postShippingMethod();
-			$state.go('checkout');
+		$scope.chooseShippingMethod = function (method) {
+			console.log(method);
+			$scope.shippingMethod = method;
 		}
 
-
-		$scope.step1 = function () {
-			ShopService.postPaymentAddress($scope.address);
+		$scope.setPaymentAddress = function () {
+			ShopService.postPaymentAddress($scope.address).finally(function () {
+				$state.go('shippingAddress');
+			});
 		}
 
-		$scope.step2 = function () {
-			ShopService.postShippingAddress($scope.address);
+		$scope.setShippingAddress = function () {
+			ShopService.postShippingAddress($scope.address).finally(function () {
+				$state.go('shippingMethod');
+			});
 		}
 
-		$scope.step3 = function () {
+		$scope.setShippingMethod = function () {
+			ShopService.postShippingMethod($scope.shippingMethod).finally(function () {
+				$state.go('paymentDetails');
+			});
+			$rootScope.checkoutStep1 = true;
+		}
+
+		$scope.getShippingMethod = function () {
 			ShopService.getShippingMethod();
 		}
 
-		$scope.step4 = function () {
-			ShopService.postShippingMethod();
-		}
 
-		$scope.checkout = function () {
-			var address ={};
-			var delivery = {};
-			var payment = {};
-			address.existing = true;
-			address.id = '1';
-			delivery.code = 'flat.flat'
-			payment.code = 'cod'
-			payment.agree = 'true'
-			payment.comment = 'da da da'
-
-			//			ShopService.postPaymentAddress(address);
-			//			ShopService.postShippingAddress(address);
-			//			ShopService.getShippingMethod();
-			//			ShopService.postShippingMethod(delivery);
-			//			ShopService.getPaymentMethod();
-			//			ShopService.postPaymentMethod(payment);
-			//			ShopService.getCheckoutConfirm();
-			//			ShopService.getCheckoutPay()
-			//			ShopService.getCheckoutSuccess();
-
-		}
 	});
 })();

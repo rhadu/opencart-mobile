@@ -22,7 +22,7 @@
 		</ion-slide-box>
 		<div class="row welcome-row">
 			<div class="col-50 welcome-col">
-				<button translate="homeview.discounts" class="button button-outline button-light button-search discount-button order-search" ng-click="getSpecial()">
+				<button translate="homeview.discounts" class="button button-outline button-light button-search discount-button order-search" nav-direction="forward" ng-click="getSpecial()">
 					Discounts
 				</button>
 			</div>
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<button translate="homeview.browse_categories" class="button button-outline button-light button-search categories-browse" ui-sref="leftdrawer.categories">Browse by categories</button>
+			<button translate="homeview.browse_categories" class="button button-outline button-light button-search categories-browse" nav-direction="forward" ui-sref="leftdrawer.categories">Browse by categories</button>
 		</div>
 		<h3>Featured Products</h3>
 		<div style="margin:5px;">

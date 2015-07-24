@@ -17,12 +17,14 @@
 		user1.password = "radubrau";
 		$scope.checkLogin = function(){
 			$state.go('leftdrawer.userLogin')
-//			ShopService.userLogin(user1);
+			//			ShopService.userLogin(user1);
 			ShopService.userAccount();
 		}
 
 		$scope.cartCheckout = function () {
 //			ShopService.userLogout();
+//			return
+//
 //			ShopService.userLogin(user1);
 //			return
 
@@ -40,17 +42,6 @@
 				});
 		}
 
-		$scope.getMovieListing = function(movie) {
-			var promise =
-				movieService.getMovie('avengers');
-			promise.then(
-				function(payload) {
-					$scope.listingData = payload.data;
-				},
-				function(errorPayload) {
-					$log.error('failure loading movie', errorPayload);
-				});
-		};
 
 		$scope.totalOrder = function () {
 			return parseFloat(CartService.showTotal()) + parseFloat($scope.deliveryFee);

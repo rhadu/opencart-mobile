@@ -53,9 +53,8 @@
 
 		$scope.addToWishlist = function () {
 			//ShopService.getWishlist();
-			$state.go("wishlist")
+			ShopService.addProductToWishlist($scope.productID);
 			$scope.popover.hide();
-//			ShopService.addProductToWishlist($scope.productID);
 		}
 	})
 

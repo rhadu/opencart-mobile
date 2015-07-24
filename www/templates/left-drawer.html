@@ -7,11 +7,12 @@
 	<ion-side-menu width="200" side="left">
 		<ion-content scroll="false">
 			<ul class="list inset drawer-left" style="margin-bottom: 0px">
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.login'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.userLogin" menu-close>{{'drawer.login'| translate}}</a>
+				<a class="item item-icon-left custom-style" ng-click="logOut()" menu-close>Log out</a>
 				<a class="item item-icon-left custom-style" menu-close>{{'drawer.home'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.products'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.favourites'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.cart'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.categories" menu-close>{{'drawer.products'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="wishlist" menu-close>{{'drawer.favourites'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="cart" menu-close>{{'drawer.cart'| translate}}</a>
 				<a class="item item-icon-left custom-style" menu-close>{{'drawer.messages'| translate}}</a>
 				<a class="item item-icon-left custom-style" menu-close>{{'drawer.settings'| translate}}</a>
 			</ul>
