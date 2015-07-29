@@ -9,9 +9,11 @@
 	});
 
 	app.constant('OC_CONFIG', (function() {
-		var backend = 'http://apitoo.gungoos.com/opencart-2.0.0.0/upload/api/v1';
+//		var backend = 'http://apitoo.gungoos.com/opencart-2.0.0.0/upload/api/v1';
+		var backend = 'http://185.16.40.144/opencart-2.0.1.0/upload/api/v1';
 		return {
-			TOKEN: '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD',
+//			TOKEN: '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD',
+			TOKEN: 'X68AWVTSMNblJki5OzcSnYLtw3HxPWdgyGevyiE4',
 			BACKEND : backend,
 			CATEGORIES: backend + '/product/category/',
 			PRODUCT: backend + '/product/product/',
