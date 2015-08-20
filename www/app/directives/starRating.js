@@ -18,10 +18,7 @@
 			},
 			link : function(scope, elem, attrs) {
 				if (scope.max == undefined) { scope.max = 5; }
-				scope.stars = [];
-				for(var i = 0; i<scope.max; i++){
-					scope.stars.push({i});
-				}
+
 				scope.stars = [1,2,3,4,5]
 				function updateStars() {
 					scope.stars = [];
@@ -39,7 +36,7 @@
 						});
 					}
 				};
-				scope.$watch("ratingValue", function(oldVal, newVal) {
+				scope.$watch("ratingValue", function( newVal, oldVal) {
 					if (newVal) { updateStars(); }
 				});
 			}

@@ -7,7 +7,8 @@
 		$stateProvider
 			.state('leftdrawer', {
 			url: "/drawer",
-			abstract: true,
+			cache: false,
+//			abstract: true,
 			templateUrl: "templates/left-drawer.html",
 			controller: "PersonalInfoController"
 		})
@@ -70,7 +71,7 @@
 					controller: 'HomeViewController',
 					resolve: {
 						featuredProducts: function(ShopService){
-							return ShopService.testProducts;
+							return ShopService.getCategoryProducts(20);
 						}
 					}
 				}
@@ -88,6 +89,17 @@
 							return ShopService.getManufacturers();
 						}
 					}
+				}
+			}
+		})
+			.state('userAccount', {
+			url: '/account',
+			cache: false,
+			templateUrl: 'templates/userAccount.html',
+			controller: 'UserAccountController',
+			resolve: {
+				account: function (ShopService) {
+					return ShopService.userAccount();
 				}
 			}
 		})
@@ -142,6 +154,9 @@
 					resolve: {
 						product: function($stateParams, ShopService) {
 							return ShopService.getProduct($stateParams.productId);
+						},
+						reviews: function ($stateParams, ShopService) {
+							return ShopService.getProductReviews($stateParams.productId)
 						}
 					}
 				}
@@ -215,6 +230,12 @@
 					return ShopService.getPaymentMethod();
 				}
 			}
+		})
+			.state('newAddress', {
+			url: '/newAddress',
+			cache: false,
+			templateUrl: 'templates/addNewAddress.html',
+			controller: 'AddressesController'
 		})
 			.state('addresses', {
 			url: '/addresses',

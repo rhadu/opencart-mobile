@@ -9,6 +9,10 @@
 	</ion-nav-buttons>
 	<ion-content class="calm-bg">
 		<div class="list" style="font-family:UnitedSans">
+			<a class="item item-icon-right" ng-click="getProducts(category)">
+				All products
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
 			<a class="item item-icon-right" ng-repeat="category in subCategories" ng-click="getCategory(category)">
 				{{category.name}}
 				<i class="icon ion-ios-arrow-right"></i>

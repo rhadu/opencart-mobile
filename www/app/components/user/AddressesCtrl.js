@@ -1,26 +1,14 @@
 'use strict';
 (function () {
-	var app = angular.module('PersonalInfoCtrl', ['ui.router']);
+	var app = angular.module('AddressesCtrl', ['ui.router']);
 
-	app.controller('PersonalInfoController', function ($scope, $state,$timeout, $ionicModal, $translate, $ionicPopup, ShopService) {
+	app.controller('AddressesController', function ($scope, $state,$timeout, $rootScope,$ionicHistory, $ionicModal, $translate, $ionicPopup, ShopService) {
 		//save user info
-		$scope.user = {};
+		$scope.address = {};
 
-		$scope.login = function () {
-			console.log($scope.user);
-			var promise = ShopService.userLogin($scope.user);
-			promise.then(
-				//if login was succesfull redirect to cart
-				function(response) {
-					console.log(response.data);
-					$state.go("cart")
-				},
-				//throw error popup if credentials are wrong
-				function(error) {
-					console.log(error.data);
-					//$state.go("leftdrawer.userLogin")
-				});
-		}
+		$scope.goBack = function() {
+			$ionicHistory.goBack();
+		};
 
 		$ionicModal.fromTemplateUrl('templates/modal-country.html', {
 			scope: $scope,
@@ -51,8 +39,8 @@
 
 		$scope.chooseCountry = function (country) {
 			$timeout(function () {
-				$scope.user.country_id = country.country_id
-				$scope.user.country_name = country.name
+				$scope.address.country_id = country.country_id
+				$scope.address.country_name = country.name
 				$scope.selectedCountry = country;
 				$scope.countryModal.hide();
 			}, 0, false);
@@ -80,48 +68,27 @@
 		$scope.chooseZone = function (zone) {
 			console.log(zone);
 			$timeout(function () {
-				$scope.user.zone_id = zone.zone_id;
-				$scope.user.zone_name = zone.name;
+				$scope.address.zone_id = zone.zone_id;
+				$scope.address.zone_name = zone.name;
 				$scope.selectedZone = zone;
 				$scope.zonesModal.hide();
 			}, 0, false);
 		}
 
-		$scope.register = function () {
-//			ShopService.userAccount();
-//			return;
-
-			//			ShopService.userLogout();
-			//			return
-
-			$scope.user.agree = true;
-			var promise = ShopService.userRegister($scope.user);
+		$scope.addNewAddress = function () {
+			$scope.address.firstname = $rootScope.account.firstname;
+			$scope.address.lastname = $rootScope.account.lastname;
+			var promise = ShopService.addAddress($scope.address);
 			promise.then(
 				function(response) {
 					console.log(response);
-					$state.go("cart")
+					$ionicHistory.goBack();
 				},
 				function(error) {
 					console.log(error);
-					$state.go("cart")
 				});
 
 		}
-
-
-		$scope.logOut = function () {
-			console.log("asadasdaobj");
-			ShopService.userLogout();
-			$state.go('leftdrawer.home')
-		}
-
-		$scope.userLogin = function () {
-			$state.go("leftdrawer.userLogin")
-		}
-		$scope.userRegister = function () {
-			$state.go("leftdrawer.userRegister")
-		}
-
 
 	});
 

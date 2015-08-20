@@ -5,15 +5,10 @@
 	app.controller('DeliveryDetailsController', function (deliveryData,$rootScope, $scope, $ionicPopup, $state, $translate, ShopService) {
 		$scope.deliveryData = deliveryData;
 
-		$scope.setAddress = function (address) {
+		$scope.chooseAddress = function (address) {
 			console.log(address);
 			$scope.address = address;
 			$scope.address.existing = true;
-		}
-
-		$scope.chooseShippingMethod = function (method) {
-			console.log(method);
-			$scope.shippingMethod = method;
 		}
 
 		$scope.setPaymentAddress = function () {
@@ -26,6 +21,11 @@
 			ShopService.postShippingAddress($scope.address).finally(function () {
 				$state.go('shippingMethod');
 			});
+		}
+
+		$scope.chooseShippingMethod = function (method) {
+			console.log(method);
+			$scope.shippingMethod = method;
 		}
 
 		$scope.setShippingMethod = function () {

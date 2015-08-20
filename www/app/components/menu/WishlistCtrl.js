@@ -29,7 +29,16 @@
 
 		$scope.removeFromWishlist = function () {
 			console.log($scope.productID );
-			ShopService.deleteProductFromWishlist($scope.productID)
+			var promise = ShopService.deleteProductFromWishlist($scope.productID)
+			promise.then(
+				function(response) {
+					console.log(response.data);
+					$state.go($state.current, {}, { reload: true });
+				},
+				function(error) {
+					$state.go($state.current, {}, { reload: true });
+
+				});
 			$scope.popover.hide();
 		}
 

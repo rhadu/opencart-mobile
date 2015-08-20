@@ -8,7 +8,7 @@
 		<div class="panel">
 			<div class="panel-body account-panel delivery-panel">
 				<ul class="list">
-					<label class="item item-radio" ng-repeat="address in deliveryData" ng-click="setAddress(address)">
+					<label class="item item-radio" ng-repeat="address in deliveryData" ng-click="chooseAddress(address)">
 						<input type="radio" name="group">
 						<i class="radio-icon ion-checkmark"></i>
 						<div class="item-content">
@@ -17,7 +17,7 @@
 						</div>
 
 					</label>
-					<label class="item" >
+					<label class="item" ui-sref="newAddress">
 						<div class="item-content add-new-button">
 							<h2>ADD A NEW ADDRESS</h2>
 						</div>

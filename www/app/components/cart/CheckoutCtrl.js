@@ -9,24 +9,37 @@
 		$scope.payment = ShopService.currentPayment;
 
 		$scope.checkout = function () {
-//			if($rootScope.checkoutStep1 === true && $rootScope.checkoutStep2 === true){
-//				ShopService.getCheckoutConfirm();
-//			}
+			//			if($rootScope.checkoutStep1 === true && $rootScope.checkoutStep2 === true){
+			//				ShopService.getCheckoutConfirm();
+			//			}
 
 			if($rootScope.checkoutStep3 === true){
-				ShopService.getCheckoutPay().finally(function () {
-					$scope.step8();
-				})
+				//				ShopService.getCheckoutPay();
+				var promise = ShopService.getCheckoutPay();
+				promise.then(
+					function(response) {
+						console.log(response.data);
+						$scope.checkoutSuccess();
+					},
+					function(error) {
+						console.log(error.data);
+
+					});
 			}
-
 		}
 
-		$scope.step7 = function () {
-			ShopService.getCheckoutPay()
+		$scope.checkoutSuccess = function () {
+			var promise = ShopService.getCheckoutSuccess();
+			promise.then(
+				function(response) {
+					console.log(response);
+					$state.go('leftdrawer.home');
+				},
+				function(error) {
+					console.log(error);
+
+				});
 		}
-		$scope.step8 = function () {
-			ShopService.getCheckoutSuccess();
-			$state.go('leftdrawer.home');
-		}
+
 	});
 })();

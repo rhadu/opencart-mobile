@@ -39,7 +39,7 @@
 				url: OC_CONFIG.CATEGORIES,
 				method: "GET",
 				withCredentials: true,
-				headers: {'Authorization': '8PaRv1SKlKZYxOTzbM0b3UZ9uRC6vUut7FZFNJPD'}
+				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
 				$ionicLoading.hide();
@@ -77,6 +77,23 @@
 			return promise;
 		};
 
+		service.getSubcategories = function (id) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var promise = $http({
+				url: OC_CONFIG.CATEGORIES + id +'/subcategory',
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN}
+			})
+			.then(function (response) {
+				$ionicLoading.hide();
+				service.subCategories = response.data.categories;
+				service.categoryID = id;
+				console.log(response.data.categories);
+				return response.data.categories;
+			});
+			return promise;
+		};
+
 		service.getProduct = function (id) {
 			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
@@ -96,18 +113,52 @@
 		service.getProductReviews = function (id) {
 			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
-				url: OC_CONFIG.REVIEWS + id +'/review',
+				url: OC_CONFIG.REVIEWS + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
 				$ionicLoading.hide();
-				console.log('reviews');
-				console.log(response.data);
-				return response.data;
+				console.log(response.data.product_reviews);
+				return response.data.product_reviews;
 			});
 			return promise;
 		};
+
+		service.postReview = function (reviewData, id) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var review= {};
+			review.name = reviewData.name;
+			review.text = reviewData.text;
+			review.rating = reviewData.rating;
+			console.log(review);
+
+
+			var promise = $http({
+				url: OC_CONFIG.PRODUCT + id + '/review',
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: review
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log(response);
+				return response;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response.data);
+			});
+			return promise;
+		}
 
 		service.getSpecialOffers = function () {
 			service.categProducts = [];
@@ -209,19 +260,23 @@
 			});
 		}
 
+
 		service.deleteProductFromCart = function (id) {
 			//console.log(key);
-			var key = "YToxOntzOjEwOiJwcm9kdWN0X2lkIjtpOjQ2O30=";
 			var promise = $http({
-				url: OC_CONFIG.CART + key,
-				method: "DELETE",
+				url: OC_CONFIG.EDIT_CART + 'deleteproduct/' + id,
+				method: "POST",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-			.then(function (response) {
+			.success(function (response) {
 				$ionicLoading.hide();
 				console.log("Delete from cart");
-				console.log(response.data);
-				return response.data;
+				console.log(response);
+				return response;
+			})
+			.error(function (error) {
+				$ionicLoading.hide();
+				console.log(error);
 			});
 			return promise;
 		}
@@ -241,6 +296,40 @@
 			});
 			return promise;
 		}
+		service.postProductQuantity = function (quantity, product_key) {
+			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			var propertyName = product_key;
+			var propertyValue = quantity;
+			var property = {};
+			property[propertyName] = propertyValue;
+
+			var promise = $http({
+				url: OC_CONFIG.EDIT_CART + 'putproduct',
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: property
+			})
+			.success(function (response) {
+				$ionicLoading.hide();
+				console.log(response.cart);
+				return response.cart;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response);
+			});
+			return promise;
+		}
+
+
 
 
 		// Checkout Step 1
@@ -271,8 +360,6 @@
 					var str = [];
 					for (var p in obj){
 						var myobj = Object.keys(obj[p])
-						console.log(myobj);
-						console.log(obj[p][myobj]);
 						str.push((myobj) + "=" + encodeURIComponent(obj[p][myobj]));
 						console.log(str);
 					}
@@ -363,7 +450,7 @@
 			var checkout = [];
 
 			checkout.push({"shipping_method" : order.code});
-//			checkout.push({"comment" : "doorbell doesn't work"});
+			//			checkout.push({"comment" : "doorbell doesn't work"});
 			var promise = $http({
 				method: "post",
 				url: OC_CONFIG.CHECKOUT + 'shipping_method',
@@ -466,8 +553,8 @@
 			})
 			.success(function (response) {
 				$ionicLoading.hide();
-				console.log(response.data);
-				return response.data;
+				console.log(response);
+				return response;
 			})
 			.error(function (response) {
 				$ionicLoading.hide();
@@ -484,10 +571,14 @@
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-			.then(function (response) {
+			.success(function (response) {
 				$ionicLoading.hide();
-				console.log(response.data);
-				return response.data;
+				console.log(response);
+				return response;
+			})
+			.error(function (response) {
+				$ionicLoading.hide();
+				console.log(response);
 			});
 			return promise;
 		}
@@ -549,7 +640,9 @@
 			})
 			.success(function (response) {
 				$ionicLoading.hide();
-				console.log(response.account);
+
+				$rootScope.account = response.account;
+				console.log($rootScope.account);
 				return response.account;
 			})
 			.error(function (response) {
@@ -569,6 +662,8 @@
 			.success(function (response) {
 				$ionicLoading.hide();
 				console.log("user logout");
+				$rootScope.account = '';
+				console.log($rootScope.account);
 				console.log(response);
 				return response;
 			})
@@ -589,6 +684,7 @@
 				$ionicLoading.hide();
 				console.log("user account");
 				console.log(response.account);
+				$rootScope.account = response.account;
 				return response.account;
 			})
 			.error(function (response) {
@@ -612,18 +708,18 @@
 			userCredentials.country_id = userCreds.country_id;
 			userCredentials.zone_id = userCreds.zone_id;
 			userCredentials.agree = userCreds.agree;
-//
-//			userCredentials.firstname = 'john';
-//			userCredentials.lastname = 'roberts';
-//			userCredentials.email = 'johnny@robertsons.com';
-//			userCredentials.telephone = '123456890312';
-//			userCredentials.password = 'password';
-//			userCredentials.confirm = 'password';
-//			userCredentials.address_1 = 'street 1';
-//			userCredentials.city = 'bucharest';
-//			userCredentials.country_id = '5';
-//			userCredentials.zone_id = '122';
-//			userCredentials.agree = 'true';
+			//
+			//			userCredentials.firstname = 'john';
+			//			userCredentials.lastname = 'roberts';
+			//			userCredentials.email = 'johnny@robertsons.com';
+			//			userCredentials.telephone = '123456890312';
+			//			userCredentials.password = 'password';
+			//			userCredentials.confirm = 'password';
+			//			userCredentials.address_1 = 'street 1';
+			//			userCredentials.city = 'bucharest';
+			//			userCredentials.country_id = '5';
+			//			userCredentials.zone_id = '122';
+			//			userCredentials.agree = 'true';
 
 			var promise = $http({
 				url: OC_CONFIG.ACCOUNT + 'register',
@@ -666,14 +762,49 @@
 
 		service.deleteAddress = function (id) {
 			var promise = $http({
-				url: OC_CONFIG.ACCOUNT + 'address'  + id,
-				method: "DELETE",
+				url: OC_CONFIG.ACCOUNT + 'deleteaddress/'  + id,
+				method: "POST",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
 				console.log("delete address");
 				console.log(response.data);
 				return response.data;
+			});
+			return promise;
+		}
+
+		service.addAddress = function (data) {
+			var address = {};
+			address.firstname = data.firstname;
+			address.lastname = data.lastname;
+			address.address_1 = data.address;
+			address.city = data.city;
+			address.postcode  = data.postcode ;
+			address.country_id  = data.country_id ;
+			address.zone_id  = data.zone_id ;
+
+			var promise = $http({
+				url: OC_CONFIG.ACCOUNT + 'address',
+				method: "POST",
+				headers: {'Authorization': OC_CONFIG.TOKEN, 'Content-Type': 'application/x-www-form-urlencoded'},
+				transformRequest: function (obj) {
+					var str = [];
+					for (var p in obj){
+						str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+						console.log(str);
+					}
+					return str.join("&");
+				},
+				data: address
+			})
+			.success(function (response) {
+				console.log("user registered");
+				console.log(response.data);
+				return response.data;
+			})
+			.error(function (error) {
+				console.log(error);
 			});
 			return promise;
 		}
@@ -688,8 +819,8 @@
 			.then(function (response) {
 				console.log("user wishlist");
 				console.log(response.data.wishlist.products);
-//				service.categProducts = response.data.wishlist.products;
-//				$rootScope.$broadcast('productsLoaded');
+				//				service.categProducts = response.data.wishlist.products;
+				//				$rootScope.$broadcast('productsLoaded');
 				return response.data.wishlist.products;
 			});
 			return promise;
@@ -715,10 +846,13 @@
 				method: "DELETE",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
-			.then(function (response) {
+			.success(function (response) {
 				console.log("delete product from whishlist");
-				console.log(response.data.wishlist.products);
-				return response.data.wishlist.products;
+				console.log(response);
+				return response;
+			})
+			.error(function (error) {
+				return error;
 			});
 			return promise;
 		}
@@ -850,7 +984,6 @@
 							type: 'button-calm'
 						}]
 					});
-
 					return false;
 				});
 			}

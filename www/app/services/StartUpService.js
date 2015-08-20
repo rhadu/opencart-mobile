@@ -3,7 +3,7 @@
 	var app = angular.module('Tapitoo.StartUpService', ['ui.router']);
 
 	//factory for HTTP requests
-	app.factory('StartUpService', function (TAPITOO_CONFIG, OC_CONFIG, $http, $ionicPlatform, ShopService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory) {
+	app.factory('StartUpService', function (TAPITOO_CONFIG, OC_CONFIG, $http,$rootScope, $ionicPlatform, ShopService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory) {
 		var service = {};
 
 		service.initialization = function  () {
@@ -21,11 +21,11 @@
 			}, 2500, false);
 
 			//check for internet connection
-//			//var isOffline = $cordovaNetwork.isOffline();
-//			if (isOffline === true) {
-//				$state.go("noInternet");
-//				return false;
-//			}
+			//			//var isOffline = $cordovaNetwork.isOffline();
+			//			if (isOffline === true) {
+			//				$state.go("noInternet");
+			//				return false;
+			//			}
 
 			//facebook initialization
 			var appID = "271360646354244";
@@ -42,6 +42,16 @@
 
 			$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
 
+			var promise = ShopService.userAccount();
+			promise.then(
+				//if user is logged in go to checkout
+				function(response) {
+					console.log($rootScope.account);
+				},
+				function(error) {
+					console.log($rootScope.account);
+					console.log(error.data);
+				});
 		}
 		return service;
 	});

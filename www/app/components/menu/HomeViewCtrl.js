@@ -4,7 +4,7 @@
 	//factory for cart operations
 	app.controller('HomeViewController', function ($scope,$state,$ionicPopover, $rootScope, featuredProducts, $ionicSlideBoxDelegate, $ionicGesture, $timeout,  ShopService) {
 
-		$scope.featuredProducts = featuredProducts;
+		$scope.featuredProducts = featuredProducts.products;
 		console.log($scope.featuredProducts);
 		//ShopService.getManufacturers();
 
@@ -56,6 +56,7 @@
 			ShopService.addProductToWishlist($scope.productID);
 			$scope.popover.hide();
 		}
+
 	})
 
 })();

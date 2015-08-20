@@ -2,22 +2,68 @@
 (function () {
 	var app = angular.module('ProductsDetailsCtrl', ['ui.router']);
 
-	app.controller('ProductDetailsController', function ($scope, product, $ionicHistory, $ionicModal,$timeout, $state, ShopService, CartService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
+	app.controller('ProductDetailsController', function ($scope, product, reviews, $ionicHistory, $ionicModal,$timeout, $state, ShopService, CartService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
 		//$scope.restaurantName = ShopService.restaurantName;
 		//$scope.menuProducts = ShopService.products;
 		//$scope.productInfo = ShopService.productInfo;
 		//console.log("init slider");
 		$scope.productDetails = product;
+		$scope.reviews = reviews;
+
+		$scope.maxRatingValue = 0;
+		$scope.initRating = 0;
+		$scope.stars = [
+			{rating: 1, value: 0},
+			{rating: 2, value: 0},
+			{rating: 3, value: 0},
+			{rating: 4, value: 0},
+			{rating: 5, value: 0},
+		];
+
+		if(reviews){
+			for(var i=0; i<reviews.length; i++){
+				for(var j=0; j<$scope.stars.length; j++){
+					if(parseInt(reviews[i].rating) === $scope.stars[j].rating){
+						$scope.stars[j].value++;
+						if($scope.maxRatingValue < $scope.stars[j].value)
+							$scope.maxRatingValue = $scope.stars[j].value;
+					}
+				}
+			}
+			console.log($scope.maxRatingValue);
+		}
+
+		$scope.openReviewModal = function () {
+			console.log($scope.productDetails.product_id);
+			$scope.reviewModal.show();
+		}
+
+		$scope.closeReviewModal = function () {
+			$scope.reviewModal.hide();
+		}
+
+		$scope.sendReview = function (review) {
+			var promise = ShopService.postReview(review, $scope.productDetails.product_id);
+			promise.then(
+				//if user is logged in go to checkout
+				function(response) {
+					console.log(response.data);
+					$scope.reviewModal.hide();
+				},
+				//is user is not logged in rediret to login
+				function(error) {
+					console.log(error.data);
+//					$state.go("leftdrawer.userLogin")
+				});
+
+		}
+
 		$ionicSlideBoxDelegate.update();
 		$ionicScrollDelegate.resize();
-		//$scope.productTotal = CartService.productPrice($scope.productInfo);
-		//$scope.url = ShopService.url;
-		//$scope.badgeTest = CartService.showTotal();
-		//$scope.addedToCart = true;
 
-		$scope.rating = Math.round($scope.productDetails.rating);
-		//console.log($scope.rating);
-		$scope.isReadonly = true;
+
+		$scope.productRating = Math.round($scope.productDetails.rating);
+
 		$scope.rateFunction = function(rating) {
 			console.log("Rating selected: " + rating);
 		};
@@ -36,7 +82,14 @@
 			scope: $scope,
 			animation: 'modal-fade'
 		}).then(function(modal) {
-			$scope.modal = modal
+			$scope.modal = modal;
+		})
+
+		$ionicModal.fromTemplateUrl('templates/modal-add-review.html', {
+			scope: $scope,
+			animation: 'modal-fade'
+		}).then(function(modal) {
+			$scope.reviewModal = modal;
 		})
 
 		$scope.openModal = function() {
@@ -85,7 +138,7 @@
 		//add product to cart
 		$scope.addToCart = function (item) {
 			ShopService.addProductToCart(item);
-		//	ShopService.getCart();
+			//	ShopService.getCart();
 		};
 
 		$scope.deleteFromCart = function () {

@@ -7,14 +7,22 @@
 	<ion-side-menu width="200" side="left">
 		<ion-content scroll="false">
 			<ul class="list inset drawer-left" style="margin-bottom: 0px">
-				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.userLogin" menu-close>{{'drawer.login'| translate}}</a>
-				<a class="item item-icon-left custom-style" ng-click="logOut()" menu-close>Log out</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.home'| translate}}</a>
-				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.categories" menu-close>{{'drawer.products'| translate}}</a>
-				<a class="item item-icon-left custom-style" ui-sref="wishlist" menu-close>{{'drawer.favourites'| translate}}</a>
-				<a class="item item-icon-left custom-style" ui-sref="cart" menu-close>{{'drawer.cart'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.messages'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close>{{'drawer.settings'| translate}}</a>
+				<a ng-show="account" class="item item-avatar custom-style" ui-sref="userAccount" menu-close>
+					<img src="./img/Pizza-layer.png">
+					{{account.firstname}} {{account.lastname}}
+				</a>
+				<a ng-show="!account" class="item item-avatar custom-style" >
+					<img src="./img/user1.png">
+					<span class="drawer-login" ng-click="userLogin()" menu-close>{{'drawer.login'| translate}}</span>
+					<span class="drawer-register" ng-click="userRegister()" menu-close>Register</span>
+				</a>
+				<!--				<a class="item item-icon-left custom-style" ng-click="logOut()" menu-close>Log out</a>-->
+				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-ios-home"></i>{{'drawer.home'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.categories" menu-close><i class="icon ion-ios-search-strong"></i>{{'drawer.products'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="wishlist" menu-close><i class="icon ion-heart"></i>{{'drawer.favourites'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="cart" menu-close><i class="icon ion-ios-cart"></i>{{'drawer.cart'| translate}}</a>
+				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-email"></i>{{'drawer.messages'| translate}}</a>
+				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-gear-a"></i>{{'drawer.settings'| translate}}</a>
 			</ul>
 			<div class="drawer-fix"></div>
 		</ion-content>
