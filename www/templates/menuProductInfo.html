@@ -1,98 +1,198 @@
 <ion-view title='<div class=" appLogo"></div>'>
 	<ion-nav-buttons side="left">
-		<button  class="button button-icon ion-arrow-left-c button-clear header-position-fix" ui-sref="products({restaurantName : restaurantName, categoryId: productInfo.categoryId})"></button>
-	</ion-nav-buttons>
-	<ion-nav-buttons side="right">
-		<button class="button button-icon ion-ios-cart header-position-fix" nav-direction="forward" ui-sref="cart" ></button>
-		<span ng-hide="badgeTest === 0" class="badge badge-calm header-position-fix">{{badgeTest}}$</span>
+		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
 	</ion-nav-buttons>
 
-	<div class="container fade-down" ng-hide="addedToCart" id="productConfirm"><span translate="menu.added_to_cart">Product added to cart!</span></div>
+	<ion-nav-buttons side="right"  class="customAnim">
+		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
+	</ion-nav-buttons>
+	<ion-content class="calm-bg product-page" scroll="false" >
+		<button translate="menu.add_to_cart"  id="cartButton" style="" class="button button-calm add-to-cart-button"  ng-click="addToCart(productDetails)">Add to cart</button>
 
-	<ion-content  class="calm-bg">
-
-		<div class="header-space"></div>
-		<div class="hero" style="background-image: url('{{url + productInfo.normalPic}}')">
-			<div class="has-mask">
-				<span class="hero-content">{{productInfo.productName}}</span>
-			</div>
-
-		</div>
-		<p class="hero-container">{{productInfo.productDescription}}</p>
-
-		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'required'} | filter :  {type :'single'}">
-			<div class="item item-divider">
-				{{modifier.name}}<!--: {{elementName}}-->
-			</div>
-
-			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
-				<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
-					<span>{{element.name}}</span>
-					<span class="modifier-price">{{element.price}} lei</span>
+		<tab-slide-box tab="0">
+			<div class="tsb-icons header-color">
+				<div class="tsb-ic-wrp">
+					<ion-scroll direction="x" class="tsb-hscroll" delegate-handle="subHeaderSlideBox">
+						<a href="javascript:;" class="ion-home1">Product</a>
+						<a href="javascript:;" class="ion-ios-game-controller-b1" >Specifications</a>
+						<a href="javascript:;" class="ion-email1">Description</a>
+						<a href="javascript:;" class="ion-model-s1">Review</a>
+					</ion-scroll>
 				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-
-		</div>
-
-		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'required'} | filter :  {type :'multiple'}">
-			<div class="item item-divider">
-				{{modifier.name}}<!--: {{elementName}}-->
 			</div>
-			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
-				<input type="checkbox" ng-model="elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)">
-					<span>{{element.name}}</span>
-					<span class="modifier-price">{{element.price}} lei</span>
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-		</div>
+			<ion-slide-box show-pager="false"
+						   on-slide-changed="slideHasChanged($index)"
+						   delegate-handle="subHeaderSlideBox">
+				<ion-slide class="product-slide" delegate-handle="productSlidePage">
+					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" on-scroll="getCurrentPosition()">
+						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
+									   show-pager="true"
+									   slide-interval="3000"
+									   disable-scroll="false"
+									   on-touch="disableTabSlide()"
+									   on-release="enableTabSlide()"
+									   on-drag-left="dragLastSlide()"
+									   delegate-handle="productSlideBox"
+									   ng-if="productDetails.images.length!==0">
+							<ion-slide ng-repeat="image in productDetails.images" >
+								<img class="slide-photo" ng-src="{{image.image}}">
+							</ion-slide>
+						</ion-slide-box>
+						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
+									   show-pager="true"
+									   slide-interval="3000"
+									   disable-scroll="false"
+									   on-touch="disableTabSlide()"
+									   on-release="enableTabSlide()"
+									   on-drag-left="goNextTabSlide()"
+									   delegate-handle="productSlideBoxOne"
+									   on-slide-changed="photoSlideDelegate()"
+									   ng-if="productDetails.images.length===0">
+							<ion-slide >
+								<img class="slide-photo" ng-src="{{productDetails.image}}">
+							</ion-slide>
+						</ion-slide-box>
+
+						<div class="panel">
+							<div class="panel-body product-info">
+								<div class="top-row">
+									<span class="product-title">{{productDetails.title}}</span>
+								</div>
+								<div class="middle-row">
+									<stars-rating ng-model="productDetails.rating" readonly="true"></star-rating>
+								</div>
+								<div class="bottom-row">
+									<div class="row">
+										<div class="col col-40 col-offset-60">
+											<div ng-show="{{productDetails.special!==null}}" class="product-old-price-right"><span>{{productDetails.price}}</span></div>
+											<div ng-show="{{productDetails.special===null}}" style="height:20px"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col col-20">
+											<span class="stock-status">{{productDetails.stock_status}}</span>
+										</div>
+										<div class="col col-40">
+											<div ng-show="{{productDetails.special!==null}}" class="product-price-right"><span>{{productDetails.special}}</span></div>
+											<div ng-show="{{productDetails.special===null}}" class="product-price-right"><span>{{productDetails.price}}</span></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel" ng-repeat="option in productDetails.options">
+							<div class="panel-body product-options">
+								<div class="product-option-name">{{option.name}}</div>
+								<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)">Choose</div>
+								<hr/>
+								<div class="selected-option" ng-show="!option.selectedOption || option.selectedOption.length === 0"> Please choose an option </div>
+								<div class="selected-option" ng-if="option.type==='radio' || option.type==='select'" ng-show="option.selectedOption"> {{option.selectedOption.name}} </div>
+								<div class="selected-option" ng-if="option.type==='checkbox'" ng-show="option.selectedOption"><span ng-repeat="option in option.selectedOption">{{option.name}}<span ng-if="!$last">, </span></span></div>
+							</div>
+						</div>
+						<div style="margin:5px;" ng-if="productDetails.related_products.length !==0">
+							<ion-scroll class="product-scroll"
+										id="productsScroll"
+										on-touch="disableProductScoller()"
+										on-release="enableTabSlide()"
+										direction="x"
+										has-bouncing="false"
+										zooming="false"
+										style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;"
+										scrollbar-x="false" delegate-handle="prodScrollDelegate"
+										horizontal-scroll-fix="slide1Scroll">
+								<div style="width:{{(130 * productDetails.related_products.length)}}px; height:200px;">
+									<div class="container product-scroll-container" ng-repeat="product in productDetails.related_products" ng-click="goToProduct(product.product_id)">
+										<div class="row-photo" >
+											<img class="product-photo" ng-src="{{product.thumb_image}}"/>
+											<!--					<div class="product-discount">{{product.name}}</div>-->
+											<!--					<div class="product-favourites">{{product.productPrice}}</div>-->
+										</div>
+										<div class="row-text">
+											<div class="product-title">{{product.name}}</div>
+										</div>
+										<div class="row-text" ng-show="{{product.special!==null}}">
+											<div class="product-old-price"><span>{{product.price}}</span></div>
+											<div class="product-price"><span>{{product.special}}</span></div>
+										</div>
+										<div class="row-text" ng-show="{{product.special===null}}">
+											<div class="product-old-price"><span></span></div>
+											<div class="product-price"><span>{{product.price}}</span></div>
+										</div>
+
+									</div>
+								</div>
+							</ion-scroll>
+						</div>
+						<div style="padding-top:140px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="specification-slide">
+					<ion-scroll style="height:100%" delegate-handle="slide2Scroll" direction="y">
+						<div style="padding-bottom:20px"></div>
+						<div ng-repeat="group in productDetails.attribute_groups">
+							<p class="group-name">{{group.name}}</p>
+							<div class="panel">
+								<div class="panel-body panel-attributes">
+									<div ng-repeat="attribute in group.attribute">
+										<div class="attribute-name">{{attribute.name}}</div>
+										<div class="attribute-text">{{attribute.text}}</div>
+										<hr ng-if="!$last"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="padding-top:140px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="description-slide">
+					<ion-scroll style="height:100%" direction="y">
+						<div  ng-bind-html="productDetails.description" style="color:#fff; text-align:justify; padding: 15px"></div>
+						<div style="padding-top:140px"></div>
+					</ion-scroll>
+				</ion-slide>
+				<ion-slide class="review-slide">
+					<ion-scroll style="height:100%" direction="y">
+						<div style="padding-bottom:20px"></div>
+						<div ng-if="reviews.length>0">
+							<div class="row">
+								<div class="col col-25 stars-average"><span style="font-size:22px">{{productRating}}</span><br><span>out of 5 stars</span></div>
+								<div class="col col-50">
+									<stars-rating class="product-review" ng-model="productRating" readonly="true"></star-rating><br/>
+								</div>
+								<div class="col col-25"><button class="button button-outline add-review-button" ng-click="openReviewModal()">Add review</button></div>
+							</div>
+
+							<div class="row" ng-repeat="star in stars.slice().reverse()">
+								<div class="col col-20"><span style="color:white; font-size:13px " >{{star.rating}} stars </span></div>
+								<div class="col col-50"><progress max="{{maxRatingValue}}" ng-value="{{star.value}}"></progress></div>
+								<div class="col"><span style="color:white; " >{{star.value}}</span></div>
+							</div>
+							<br>
+							<div ng-repeat="review in reviews">
+								<div class="panel">
+									<div class="panel-body panel-attributes">
+										<div>
+											<stars-rating ng-model="review.rating" readonly="true"></star-rating><br/>
+										</div>
+										<span>{{review.date_added}}</span>
+										<span> by {{review.author}}</span>
+										<div class="review-text">{{review.text}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="reviews.length === 0">
+							<h3>NO REVIEWS</h3>
+						</div>
+						<div style="padding-top:140px"></div>
+					</ion-scroll>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
 
 
-
-		<p translate="menu.optional_settings" class="optional-settings">Setari Optionale</p>
-
-
-		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'optional'} | filter :  {type :'single'}">
-			<div class="item item-divider">
-				{{modifier.name}}<!--: {{elementName}}-->
-			</div>
-			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
-				<input type="radio" ng-model="$parent.elementName" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-				<div class="item-content item-modifier"  ng-click="addModifier(modifier, element)">
-					<span>{{element.name}}</span>
-					<span class="modifier-price">{{element.price}} lei</span>
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-		</div>
-
-		<div class="list-inset list-custom" ng-repeat="modifier in productInfo.modifiers| filter : {validation:'optional'} | filter :  {type :'multiple'}">
-			<div class="item item-divider">
-				{{modifier.name}}
-			</div>
-			<label class="item item-radio item-custom"  ng-repeat="element in modifier.modifierElement" >
-				<input type="checkbox" ng-model="selected[element.name]" value="{{element.name}}" ng-checked="element.checked" name="{{modifier.name}}" ng-click="addModifier(modifier, element)" >
-				<div class="item-content item-modifier" ng-click="addModifier(modifier, element)" >
-					<span>{{element.name}}</span>
-					<span class="modifier-price">{{element.price}} lei</span>
-				</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-		</div>
-
-		<div class="footer-space"></div>
 	</ion-content>
-	<ion-footer-bar class="bar-stable custom-footer cart-footer" >
-		<div class="row">
-			<div class="col col-20"></div>
-			<div class="col">
-				<span class="footer-total" >{{"menu.total" | translate}}: {{productTotal|currency}} </span>
-				<button translate="menu.add_to_cart" class="button button-calm footer-button place-order-button"  ng-click="addToCart(productInfo)">Add to cart</button>
-			</div>
-			<div class="col col-20"></div>
-		</div>
-	</ion-footer-bar>
+	<div class="footer-space"></div>
+
 </ion-view>

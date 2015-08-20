@@ -52,16 +52,6 @@
 				}
 			}
 		})
-			.state('leftdrawer.welcome', {
-			url: '/welcome',
-			cache: false,
-			views: {
-				'menuContent': {
-					templateUrl: 'templates/welcome.html',
-					controller: 'WelcomeController'
-				}
-			}
-		})
 			.state('leftdrawer.home', {
 			url: '/home',
 			cache: false,
@@ -114,42 +104,12 @@
 				}
 			}
 		})
-			.state('orderDelivery', {
-			url: '/orderDelivery',
-			cache: false,
-			templateUrl: 'templates/orderDelivery.html',
-			controller: 'DeliveryController'
-		})
-			.state('orderPickUp', {
-			url: '/orderPickUp',
-			cache: false,
-			templateUrl: 'templates/orderPickUp.html',
-			controller: 'DeliveryController'
-		})
-			.state('locationsList', {
-			url: '/locationsList',
-			cache: false,
-			templateUrl: 'templates/locationsList.html',
-			controller: 'DeliveryController'
-		})
-			.state('products', {
-			url: '/menu/:restaurantName/:categoryId',
-			cache: false,
-			templateUrl: 'templates/menuProductsDetails.html',
-			controller: 'ProductsController'
-		})
-			.state('productInfo', {
-			url: '/menu/:restaurantName/:categoryId/:productId',
-			cache: false,
-			templateUrl: 'templates/menuProductInfo.html',
-			controller: 'ProductDetailsController'
-		})
 			.state('leftdrawer.productInfo', {
 			url: '/product/:productId',
 			cache: false,
 			views: {
 				'menuContent': {
-					templateUrl: 'templates/productInfo.html',
+					templateUrl: 'templates/menuProductInfo.html',
 					controller: 'ProductDetailsController',
 					resolve: {
 						product: function($stateParams, ShopService) {
@@ -237,24 +197,6 @@
 			templateUrl: 'templates/addNewAddress.html',
 			controller: 'AddressesController'
 		})
-			.state('addresses', {
-			url: '/addresses',
-			cache: false,
-			templateUrl: 'templates/addresses.html',
-			controller: 'AddressesController'
-		})
-			.state('deliveryinfo', {
-			url: '/delivery',
-			cache: false,
-			templateUrl: 'templates/delivery.html',
-			controller: 'DeliveryInformationController'
-		})
-			.state('location', {
-			url: '/location',
-			cache: false,
-			templateUrl: 'templates/location.html',
-			controller: 'MapController'
-		})
 			.state('leftdrawer.userLogin', {
 			url: '/login',
 			cache: false,
@@ -275,28 +217,11 @@
 				}
 			}
 		})
-			.state('personalInfo', {
-			url: '/personalInfo',
+			.state('addCard', {
+			url: '/addCard',
 			cache: false,
-			templateUrl: 'templates/personalInfo.html',
+			templateUrl: 'templates/checkoutAddCard.html',
 			controller: 'PersonalInfoController'
-		})
-			.state('personalInfoEdit', {
-			url: '/personalInfoEdit',
-			cache: false,
-			templateUrl: 'templates/personalInfoEdit.html',
-			controller: 'PersonalInfoController'
-		})
-			.state('orderHistory', {
-			url: '/orderHistory',
-			cache: false,
-			templateUrl: 'templates/orderHistory.html',
-			controller: 'OrderHistoryController'
-		})
-			.state('goodbye', {
-			url: '/goodbye',
-			templateUrl: 'templates/goodbye.html',
-			controller: 'GoodbyeController'
 		})
 			.state('noInternet', {
 			url: '/noInternet',

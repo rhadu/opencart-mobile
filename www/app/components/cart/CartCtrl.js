@@ -67,7 +67,7 @@
 		};
 	}])
 
-	app.controller('CartController', function (cart,$log,$rootScope, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService, CartService, DeliveryInfoService) {
+	app.controller('CartController', function (cart,$log,$rootScope, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService) {
 		console.log(cart);
 		$rootScope.buttonsOpened = false;
 		$rootScope.canEditCart = false;
@@ -76,8 +76,6 @@
 		$scope.categoryName = ShopService.categoryName;
 		$scope.cartItems = cart.products;
 		$scope.cart = cart;
-		$scope.address = DeliveryInfoService.address;
-		$scope.user = DeliveryInfoService.getUserInfo();
 		$scope.deliveryFee = ShopService.info.deliveryFee;
 		$scope.editStatus = "Edit";
 
@@ -160,10 +158,6 @@
 				})
 
 		}
-
-		$scope.totalOrder = function () {
-			return parseFloat(CartService.showTotal()) + parseFloat($scope.deliveryFee);
-		};
 
 
 	});

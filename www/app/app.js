@@ -5,17 +5,9 @@
 											   'app.config',
 											   'Tapitoo.StartUpService',
 											   'Tapitoo.ShopService',
-											   'Tapitoo.GeocoderService',
-											   'Tapitoo.DeliveryInfoService',
-											   'Tapitoo.CartService',
-											   'Tapitoo.LocationServices',
-											   'Tapitoo.googleMap',
-											   'Tapitoo.filterModifiers',
 											   'Tapitoo.HomeViewController',
 											   'Tapitoo.ManufacturersController',
 											   'Tapitoo.WishlistCtrl',
-											   'HomeCtrl',
-											   'DeliveryCtrl',
 											   'CategoriesCtrl',
 											   'ProductsCtrl',
 											   'ProductsDetailsCtrl',
@@ -24,22 +16,16 @@
 											   'UserAccountCtrl',
 											   'DeliveryDetailsCtrl',
 											   'PaymentDetailsCtrl',
-											   'OrderHistoryCtrl',
-											   'DeliveryInformationCtrl',
-											   'AddressListCtrl',
 											   'AddressesCtrl',
 											   'PersonalInfoCtrl',
-											   'GoodbyeCtrl',
 											   'ngStorage',
 											   'ngCordova',
-											   'ion-google-place',
 											   'horizontalScroll',
 											   'starRating',
 											   'cordova',
 											   'tabSlideBox',
-											   'angular-inview',
 											   'ionic.ion.imageCacheFactory',
-											   'ionic.ion.headerShrink',
+											   'gavruk.card',
 											   'pascalprecht.translate']);
 
 	app.run(function (StartUpService, $http, OC_CONFIG ) {
@@ -69,12 +55,6 @@
 	});
 
 	app.controller('AppInitController', function ($scope, $rootScope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
-
-		$scope.$on('locationLoaded', function (event, loc) {
-			$timeout(function () {
-				$scope.loc = loc;
-			}, 0, false);
-		});
 		$scope.toggleDrawer = function () {
 			$ionicSideMenuDelegate.toggleLeft();
 		};

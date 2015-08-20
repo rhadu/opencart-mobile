@@ -6,10 +6,9 @@
 		$scope.account = account;
 
 		$scope.logOut = function () {
-			console.log("asadasdaobj");
+			console.log("log out user");
 			ShopService.userLogout();
-			$state.go('leftdrawer.home')
-
+			$state.go('leftdrawer.home');
 		}
 
 	})

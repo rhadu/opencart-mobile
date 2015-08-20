@@ -3,7 +3,7 @@
 	var app = angular.module('Tapitoo.ShopService', ['ui.router']);
 
 	//factory for HTTP requests
-	app.factory('ShopService', function (TAPITOO_CONFIG, OC_CONFIG, $http, $rootScope, $ionicLoading, $ionicPopup, $translate, $state, $cordovaGeolocation, DeliveryInfoService, CartService, push, $ImageCacheFactory) {
+	app.factory('ShopService', function (TAPITOO_CONFIG, OC_CONFIG, $http, $rootScope, $ionicLoading, $ionicPopup, $translate, $state, $cordovaGeolocation, push, $ImageCacheFactory) {
 		var service = {};
 		//var baseUrl = 'http://nodejs-geek12.rhcloud.com';
 		// server Url
@@ -1146,7 +1146,7 @@
 			//check if choosen address is in delivery area
 			console.log(service.info);
 			var locInfo = service.info.locationCoordinates;
-			var dist = getDistance(locInfo.latitude, locInfo.longitude, DeliveryInfoService.address.coordinates.lat, DeliveryInfoService.address.coordinates.lon, info);
+			var dist = getDistance(locInfo.latitude, locInfo.longitude, locInfo.address.coordinates.lat, locInfo.address.coordinates.lon, info);
 			console.log(DeliveryInfoService.address);
 			console.log(dist);
 			console.log(locInfo.deliveryArea);
@@ -1176,7 +1176,7 @@
 
 			//get products
 			var product = new Array;
-			var address = DeliveryInfoService.address;
+			var address = 1;
 			var item = CartService.products;
 			for (var i = 0; i < item.length; i++) {
 				product.push({
@@ -1186,7 +1186,7 @@
 			}
 			// get UserInfo from LocalStorage
 			var client = new Object;
-			var parsedInfo = DeliveryInfoService.getUserInfo();
+			var parsedInfo = client;
 			if (!parsedInfo.clientId)
 				client.clientId = null;
 			else
@@ -1233,9 +1233,8 @@
 				$ionicLoading.hide();
 				if (response.data.clientId) {
 					parsedInfo.clientId = response.data.clientId;
-					DeliveryInfoService.saveUserInfo(parsedInfo);
+
 				}
-				DeliveryInfoService.saveOrder(order, item, service.restaurantName);
 				CartService.products = [];
 			});
 		};

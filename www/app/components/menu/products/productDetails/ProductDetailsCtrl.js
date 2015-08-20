@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('ProductsDetailsCtrl', ['ui.router']);
 
-	app.controller('ProductDetailsController', function ($scope, product, reviews, $ionicHistory, $ionicModal,$timeout, $state, ShopService, CartService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
+	app.controller('ProductDetailsController', function ($scope, product, reviews, $ionicHistory, $ionicModal,$timeout, $state, ShopService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
 		//$scope.restaurantName = ShopService.restaurantName;
 		//$scope.menuProducts = ShopService.products;
 		//$scope.productInfo = ShopService.productInfo;

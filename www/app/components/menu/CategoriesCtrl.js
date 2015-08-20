@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('CategoriesCtrl', ['ui.router']);
 
-	app.controller('CategoriesController', function (categories, $scope, $timeout, $translate, $ionicPopup, $state, ShopService, CartService, $ImageCacheFactory, $rootScope) {
+	app.controller('CategoriesController', function (categories, $scope, $timeout, $translate, $ionicPopup, $state, ShopService, $ImageCacheFactory, $rootScope) {
 		$scope.categories = categories;
 		console.log($scope.categories);
 		$scope.subCategories = ShopService.subCategories;

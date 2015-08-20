@@ -7,9 +7,6 @@
 		var service = {};
 
 		service.initialization = function  () {
-
-			console.log('aaaaa');
-
 			//cache background image
 			$ImageCacheFactory.Cache(["../img/bg.jpg"]).then(function () {
 				console.log("done preloading!");

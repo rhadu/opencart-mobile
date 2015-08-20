@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('ProductsCtrl', ['ui.router']);
 
-	app.controller('ProductsController', function ($state, $scope, ShopService, CartService, $timeout, $window, $ionicHistory) {
+	app.controller('ProductsController', function ($state, $scope, ShopService, $timeout, $window, $ionicHistory) {
 		$scope.products = ShopService.categProducts;
 		$scope.$on('productsLoaded', function (event, loc) {
 			$timeout(function () {
@@ -26,7 +26,6 @@
 //		$scope.productInfo = ShopService.productInfo;
 //
 //		$scope.url = ShopService.url;
-//		$scope.badgeTest = CartService.showTotal();
 //		$scope.addedToCart = true;
 //
 //		ShopService.cacheImages();
