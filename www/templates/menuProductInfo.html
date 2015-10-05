@@ -1,14 +1,18 @@
-<ion-view title='<div class=" appLogo"></div>'>
+<ion-view>
+	<ion-nav-title ui-sref="leftdrawer.home">
+		<div class=" appLogo"></div>
+	</ion-nav-title>
 	<ion-nav-buttons side="left">
 		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
 		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
+		<span ng-if="cartBadge>0" class="badge badge-calm ">{{cartBadge}}</span>
 	</ion-nav-buttons>
 	<ion-content class="calm-bg product-page" scroll="false" >
 		<button translate="menu.add_to_cart"  id="cartButton" style="" class="button button-calm add-to-cart-button"  ng-click="addToCart(productDetails)">Add to cart</button>
-
+		<i class="fa fa-ellipsis-v fa-2x product-add-wishlist" ng-click="openPopover(product.product_id, $event)"></i>
 		<tab-slide-box tab="0">
 			<div class="tsb-icons header-color">
 				<div class="tsb-ic-wrp">
@@ -80,14 +84,29 @@
 								</div>
 							</div>
 						</div>
+						<!--
+<ionic-datepicker input-obj="datepickerObject">
+<button class="button button-block button-positive" id="datePicker"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+</ionic-datepicker>
+-->
 						<div class="panel" ng-repeat="option in productDetails.options">
 							<div class="panel-body product-options">
 								<div class="product-option-name">{{option.name}}</div>
-								<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)">Choose</div>
+								<div class="button button-outline button-small choice-button" ng-show="option.type==='radio' || option.type==='select' || option.type==='checkbox'" ng-click="openOptionModal(option); $event.stopPropagation();">Choose</div>
+								<div class="button button-outline button-small choice-button" ng-show="option.type==='text' || option.type==='textarea'" ng-click="openOptionModal(option); $event.stopPropagation();" style="width:50.25px">Edit</div>
+								<ionic-datepicker input-obj="datepickerObject" ng-show="option.type==='date' || option.type==='datetime'">
+									<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)" >Choose</div>
+								</ionic-datepicker>
+								<ionic-timepicker input-obj="timePickerObject" ng-show="option.type==='time'">
+									<div class="button button-outline button-small choice-button" ng-click="openOptionModal(option)" >Choose</div>
+								</ionic-timepicker>
 								<hr/>
-								<div class="selected-option" ng-show="!option.selectedOption || option.selectedOption.length === 0"> Please choose an option </div>
+								<div class="selected-option" ng-if="option.type==='radio' || option.type==='select' || option.type==='checkbox'" ng-show="!option.selectedOption || option.selectedOption.length === 0"> Please choose an option </div>
 								<div class="selected-option" ng-if="option.type==='radio' || option.type==='select'" ng-show="option.selectedOption"> {{option.selectedOption.name}} </div>
 								<div class="selected-option" ng-if="option.type==='checkbox'" ng-show="option.selectedOption"><span ng-repeat="option in option.selectedOption">{{option.name}}<span ng-if="!$last">, </span></span></div>
+								<div class="selected-option" ng-if="option.type==='date' || option.type==='time' || option.type==='datetime'"> {{option.value}} </div>
+								<div class="selected-option" ng-if="option.type==='text' || option.type==='textarea'"> {{option.value}} </div>
+
 							</div>
 						</div>
 						<div style="margin:5px;" ng-if="productDetails.related_products.length !==0">
@@ -184,6 +203,7 @@
 						</div>
 						<div ng-if="reviews.length === 0">
 							<h3>NO REVIEWS</h3>
+							<button class="button button-outline add-review-button" ng-click="openReviewModal()">Add review</button>
 						</div>
 						<div style="padding-top:140px"></div>
 					</ion-scroll>

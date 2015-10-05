@@ -67,7 +67,7 @@
 		};
 	}])
 
-	app.controller('CartController', function (cart,$log,$rootScope, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService) {
+	app.controller('CartController', function (cart,$log,$rootScope, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService, CartService, AccountService, CheckoutService) {
 		console.log(cart);
 		$rootScope.buttonsOpened = false;
 		$rootScope.canEditCart = false;
@@ -101,16 +101,17 @@
 		$scope.checkLogin = function(){
 			$state.go('leftdrawer.userLogin')
 			//			ShopService.userLogin(user1);
-			ShopService.userAccount();
+			AccountService.userAccount();
 		}
 
 		$scope.cartCheckout = function () {
-			var promise = ShopService.userAccount();
+
+			var promise = AccountService.userAccount();
 			promise.then(
 				//if user is logged in go to checkout
 				function(response) {
 					console.log(response.data);
-					$state.go("checkout")
+					$state.go("paymentAddress")
 				},
 				//is user is not logged in rediret to login
 				function(error) {
@@ -122,10 +123,10 @@
 		$scope.editQuantity = function (type, item) {
 			console.log(item);
 			if(type === "add"){
-				var promise = ShopService.postProductQuantity((item.quantity + 1), item.key)
+				var promise = CartService.postProductQuantity((item.quantity + 1), item.key)
 				}
 			if(type === "subtract"){
-				var promise = ShopService.postProductQuantity((item.quantity - 1), item.key)
+				var promise = CartService.postProductQuantity((item.quantity - 1), item.key)
 				}
 
 			promise.then(
@@ -145,7 +146,7 @@
 
 		$scope.deleteProduct = function (item) {
 			console.log(item);
-			var promise = ShopService.deleteProductFromCart(item.key);
+			var promise = CartService.deleteProductFromCart(item.key);
 			promise.then(
 				function (response) {
 					$timeout( function(){

@@ -5,6 +5,12 @@
 											   'app.config',
 											   'Tapitoo.StartUpService',
 											   'Tapitoo.ShopService',
+											   'Tapitoo.ProductService',
+											   'Tapitoo.CartService',
+											   'Tapitoo.CheckoutService',
+											   'Tapitoo.CheckoutProcessService',
+											   'Tapitoo.AccountService',
+											   'Tapitoo.CommonService',
 											   'Tapitoo.HomeViewController',
 											   'Tapitoo.ManufacturersController',
 											   'Tapitoo.WishlistCtrl',
@@ -13,33 +19,60 @@
 											   'ProductsDetailsCtrl',
 											   'CartCtrl',
 											   'CheckoutCtrl',
+											   'CreditCardCtrl',
 											   'UserAccountCtrl',
 											   'DeliveryDetailsCtrl',
 											   'PaymentDetailsCtrl',
 											   'AddressesCtrl',
 											   'PersonalInfoCtrl',
+											   'SettingsCtrl',
+											   'GeocoderService',
 											   'ngStorage',
 											   'ngCordova',
 											   'horizontalScroll',
 											   'starRating',
-											   'cordova',
 											   'tabSlideBox',
 											   'ionic.ion.imageCacheFactory',
-											   'gavruk.card',
+											   'ionic-datepicker',
+											   'ionic-timepicker',
+											   'ionic-toast',
+											   'angularPayments',
 											   'pascalprecht.translate']);
 
-	app.run(function (StartUpService, $http, OC_CONFIG ) {
+	app.run(function (StartUpService,$ionicPlatform,$localStorage, $http, OC_CONFIG, $state, $urlRouter) {
+//		$localStorage.ACCESS_TOKEN= 'X68AWVTSMNblJki5OzcSnYLtw3HxPWdgyGevyiE4';
+		$ionicPlatform.ready(function () {
+			console.log("local storage ACCESS TOKEN: " + $localStorage.ACCESS_TOKEN);
+			if($localStorage.ACCESS_TOKEN){
+				//console.log($localStorage.ACCESS_TOKEN);
+				OC_CONFIG.TOKEN = $localStorage.ACCESS_TOKEN;
+				StartUpService.initialization();
+			}
+			else {
+				var promise = StartUpService.generateToken();
+				promise.then(
+					function (response) {
+						StartUpService.initialization();
+					});
 
-		StartUpService.initialization();
+			}
+		});
+
+
 		//$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
 	});
 
 
-	app.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
+	app.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider, $localStorageProvider) {
 		//routes fallback
-		$urlRouterProvider.otherwise("/drawer/home");
+//		$urlRouterProvider.otherwise("/drawer/home");
 
-		$ionicConfigProvider.views.transition('ios');
+		if(ionic.Platform.isAndroid()===true){
+			$ionicConfigProvider.views.transition('none');
+		}
+		else
+			$ionicConfigProvider.views.transition('ios');
+
 		$ionicConfigProvider.navBar.alignTitle('center')
 		$ionicConfigProvider.views.swipeBackEnabled(false);
 
@@ -50,8 +83,6 @@
 		});
 		// load 'en' table on startup
 		$translateProvider.preferredLanguage('en');
-
-
 	});
 
 	app.controller('AppInitController', function ($scope, $rootScope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {

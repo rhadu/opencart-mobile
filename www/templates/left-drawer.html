@@ -8,7 +8,7 @@
 		<ion-content scroll="false">
 			<ul class="list inset drawer-left" style="margin-bottom: 0px">
 				<a ng-show="account" class="item item-avatar custom-style" ui-sref="userAccount" menu-close>
-					<img src="./img/Pizza-layer.png">
+					<img src="./img/user1.png">
 					{{account.firstname}} {{account.lastname}}
 				</a>
 				<a ng-show="!account" class="item item-avatar custom-style" >
@@ -21,8 +21,8 @@
 				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.categories" menu-close><i class="icon ion-ios-search-strong"></i>{{'drawer.products'| translate}}</a>
 				<a class="item item-icon-left custom-style" ui-sref="wishlist" menu-close><i class="icon ion-heart"></i>{{'drawer.favourites'| translate}}</a>
 				<a class="item item-icon-left custom-style" ui-sref="cart" menu-close><i class="icon ion-ios-cart"></i>{{'drawer.cart'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-email"></i>{{'drawer.messages'| translate}}</a>
-				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-gear-a"></i>{{'drawer.settings'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="messages" menu-close><i class="icon ion-email"></i>{{'drawer.messages'| translate}}</a>
+				<a class="item item-icon-left custom-style" ui-sref="settings" menu-close><i class="icon ion-gear-a"></i>{{'drawer.settings'| translate}}</a>
 			</ul>
 			<div class="drawer-fix"></div>
 		</ion-content>

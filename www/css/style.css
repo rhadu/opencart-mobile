@@ -281,7 +281,7 @@ box-shadow: 0px 0px 7px 0.1em #222;
 	//margin-left:5%;
 }
 
-.button-search{
+.button-custom{
 	width:94%;
 /*	margin-top: 20px;*/
 	margin-left: 3%;
@@ -713,10 +713,9 @@ box-shadow: 0px 0px 7px 0.1em #222;
 
 .badge{
 	position: absolute;
-	top:-7px !important;
-	right:-5px!important;
+	right:-2px!important;
 	font-size: 10px;
-	padding:2px 5px 1px 5px;
+	padding:0px 8px 2px 6px;
 
 }
 
@@ -1113,7 +1112,13 @@ hr{
 ****************************************
 */
 
+.popup{
+	background: #6b6b6b !important;
+	color: #fff;
+}
+
 .popup-title {
+	color: #fff;
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -1189,9 +1194,6 @@ input.ion-google-place[readonly]{
 	text-align: center;
 }
 
-.popup {
-	background-color: #ffd46d;
-}
 /*
 *********************
 *     Animations    *
@@ -1796,11 +1798,13 @@ modal
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+/*
 
 .media not all, (-webkit-min-device-pixel-ratio: 1.5), not all, (min-resolution: 144dpi), (min-resolution: 1.5dppx)
 .bar {
 	background-image: none
 }
+*/
 
 .account-panel{
 	border: 1px solid rgba(255,255,255,.2);
@@ -2045,3 +2049,76 @@ progress[value]::-webkit-progress-value {
 	display: block;
 	text-align: center;
 }
+
+.search-input{
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: 1px solid red;
+}
+
+.search-input input {
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	padding-right: 0;
+	padding-right: 0px !important;
+}
+.search-input .item-input{
+	 padding-left: 0px;
+}
+
+.search-button {
+	max-height: 47px;
+	padding: 0 6px;
+	width: 100%;
+}
+
+.sort-header{
+	padding:0;
+	background-color: #000000;
+}
+
+.sort-bar{
+	font-family: UnitedSans;
+	padding:0;
+	height: 44px;
+}
+
+.sort-button{
+	line-height: 44px !important;
+	font-size:16px !important;
+	background-color: #6b6b6b;
+	border: 1px solid rgba(255,255,255,.2);
+
+}
+
+.sort-dropdown {
+	height: 230px;
+}
+.delete-address {
+	width: 100%;
+	margin: auto;
+	vertical-align: text-top;
+	color: #fff;
+}
+.custom-input {
+	background: transparent;
+	color: #fff !important;
+}
+
+.selected_date_full{
+	color: #fff !important;
+}
+
+.product-add-wishlist{
+	top: 40px;
+	z-index: 1;
+	right: 8px;
+	position: absolute;
+	color: grey;
+	height: 25px;
+	width: 23px;
+	text-align: right;
+}
+

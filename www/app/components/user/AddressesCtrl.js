@@ -2,13 +2,33 @@
 (function () {
 	var app = angular.module('AddressesCtrl', ['ui.router']);
 
-	app.controller('AddressesController', function ($scope, $state,$timeout, $rootScope,$ionicHistory, $ionicModal, $translate, $ionicPopup, ShopService) {
+	app.controller('AddressesController', function ($scope, $state,$timeout, $rootScope,$ionicHistory, $ionicModal, $translate, $ionicPopup, ShopService, AccountService, CommonService) {
 		//save user info
 		$scope.address = {};
 
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
 		};
+
+		$scope.$on('addressLoaded', function (event) {
+			$timeout(function () {
+				$scope.address = CommonService.address;
+				$scope.selectedCountry = CommonService.selectedCountry;
+				if(!CommonService.address.zone_id){
+					$scope.address.zone_name = '';
+				}
+				if(!CommonService.address.country_id){
+					$scope.address.country_name = '';
+				}
+				$scope.$apply();
+			}, 0, false);
+		});
+
+		$scope.getUserLocation = function () {
+			CommonService.addAddressToForm().then(function (data) {
+				console.log(data);
+			});
+		}
 
 		$ionicModal.fromTemplateUrl('templates/modal-country.html', {
 			scope: $scope,
@@ -25,7 +45,7 @@
 		})
 
 		$scope.openModalCountry = function () {
-			var promise = ShopService.getCountries();
+			var promise = CommonService.getCountries();
 			promise.then(
 				function(response) {
 					console.log(response.data.countries);
@@ -49,7 +69,7 @@
 		$scope.openModalZoneID = function () {
 			console.log($scope.selectedCountry);
 			if($scope.selectedCountry){
-				var promise = ShopService.getZoneIds($scope.selectedCountry.country_id);
+				var promise = CommonService.getZoneIds($scope.selectedCountry.country_id);
 				promise.then(
 					function(response) {
 						console.log(response.data.country.zones);
@@ -78,7 +98,25 @@
 		$scope.addNewAddress = function () {
 			$scope.address.firstname = $rootScope.account.firstname;
 			$scope.address.lastname = $rootScope.account.lastname;
-			var promise = ShopService.addAddress($scope.address);
+
+			console.log($scope.address);
+
+
+			if(!$scope.address.address || !$scope.address.city || !$scope.address.postcode || !$scope.address.country_id || !$scope.address.zone_id){
+				$ionicPopup.alert({
+					title: 	"Error",			//translate['popup.info'],
+					template: "You have to fill in all fields",		//translate['popup.not_in_delivery_zone'],
+					buttons: [{
+						text: 'OK',
+						type: 'button-calm'
+					}]
+				});
+
+				return false;
+			}
+
+
+			var promise = AccountService.addAddress($scope.address);
 			promise.then(
 				function(response) {
 					console.log(response);
@@ -89,6 +127,8 @@
 				});
 
 		}
+
+
 
 	});
 

@@ -2,24 +2,24 @@
 (function () {
 	var app = angular.module('CategoriesCtrl', ['ui.router']);
 
-	app.controller('CategoriesController', function (categories, $scope, $timeout, $translate, $ionicPopup, $state, ShopService, $ImageCacheFactory, $rootScope) {
+	app.controller('CategoriesController', function (categories, $scope, $timeout, $translate, $ionicPopup, $state, ShopService, ProductService, $ImageCacheFactory, $rootScope) {
 		$scope.categories = categories;
 		console.log($scope.categories);
-		$scope.subCategories = ShopService.subCategories;
+		$scope.subCategories = ProductService.subCategories;
 
 		$scope.getCategory1 = function (categ) {
-			ShopService.categProducts.products = [];
+			ProductService.categProducts.products = [];
 			if(categ.categories.length>0){
-				ShopService.subCategories = [];
+				ProductService.subCategories = [];
 				for(var i=0 ; i<categ.categories.length; i++){
 					console.log(categ.categories[i]);
-					ShopService.subCategories.push(categ.categories[i])
+					ProductService.subCategories.push(categ.categories[i])
 				}
 				console.log($scope.subCategories);
 				$state.go("leftdrawer.subCategories")
 			}
 			else {
-				ShopService.getCategoryProducts(categ.category_id);
+				ProductService.getCategoryProducts(categ.category_id);
 				$state.go("leftdrawer.products")
 			}
 		}
@@ -30,24 +30,35 @@
 			if(categ.categories){
 				if(categ.categories.length>0){
 					console.log('subcateg');
-					ShopService.getSubcategories(categ.category_id);
-					ShopService.getCategoryProducts(categ.category_id);
+					ProductService.getSubcategories(categ.category_id);
+					ProductService.getCategoryProducts(categ.category_id);
 					$state.go("leftdrawer.subCategories")
 				}
 				else{
 					console.log('no subcateg');
-					ShopService.getCategoryProducts(categ.category_id);
+					ProductService.getCategoryProducts(categ.category_id);
 					$state.go("leftdrawer.products")
 				}
 			}
 			else{
-				ShopService.getCategoryProducts(categ.category_id);
+				ProductService.getCategoryProducts(categ.category_id);
 				$state.go("leftdrawer.products")
 			}
 		}
 
 		$scope.getProducts = function () {
-			ShopService.getCategoryProducts(ShopService.categoryID);
+			ProductService.getCategoryProducts(ProductService.categoryID);
+			$state.go("leftdrawer.products")
+		}
+
+		$scope.search = function (search, type) {
+			var searchQuery = {};
+			searchQuery.category_id = "";
+			searchQuery.search = search;
+			searchQuery.sort = "price";
+			searchQuery.order = "DESC";
+			ProductService.searchInCategory
+			ProductService.searchProducts(searchQuery, type);
 			$state.go("leftdrawer.products")
 		}
 

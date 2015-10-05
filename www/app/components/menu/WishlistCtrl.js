@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('Tapitoo.WishlistCtrl', ['ui.router']);
 	//factory for cart operations
-	app.controller('WishlistController', function (wishlist, $scope, $state, $ionicPopover, ShopService) {
+	app.controller('WishlistController', function (wishlist, $scope, $state, $ionicPopover, ShopService, AccountService) {
 		$scope.products = wishlist;
 
 		$scope.goToProduct = function(id, e) {
@@ -29,7 +29,7 @@
 
 		$scope.removeFromWishlist = function () {
 			console.log($scope.productID );
-			var promise = ShopService.deleteProductFromWishlist($scope.productID)
+			var promise = AccountService.deleteProductFromWishlist($scope.productID)
 			promise.then(
 				function(response) {
 					console.log(response.data);
