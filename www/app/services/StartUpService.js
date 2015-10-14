@@ -3,7 +3,7 @@
 	var app = angular.module('Tapitoo.StartUpService', ['ui.router']);
 
 	//factory for HTTP requests
-	app.factory('StartUpService', function (TAPITOO_CONFIG, OC_CONFIG, $http,$rootScope, $ionicPlatform, ShopService, AccountService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory, $localStorage) {
+	app.factory('StartUpService', function (TAPITOO_CONFIG, OC_CONFIG, $http,$rootScope, $ionicHistory,$ionicPlatform, ShopService, AccountService, $ionicPopup, $state, $cordovaGeolocation, $cordovaNetwork, $timeout, $ImageCacheFactory, $localStorage) {
 		var service = {};
 		var accessToken = '';
 
@@ -44,15 +44,12 @@
 		}
 
 		service.initialization = function  () {
-			console.log("INITIALIZATION access token: " + $localStorage.ACCESS_TOKEN);
 			$state.go("leftdrawer.home")
 			/* hide splashscreen*/
 			$timeout(function () {
 				navigator.splashscreen.hide();
 			}, 3500, false);
 
-
-			//			if(ionic.Platform.device()===true){
 			var notificationOpenedCallback = function(notification) {
 				console.log('=== === === didReceiveRemoteNotificationCallBack === === ===');
 				console.log(JSON.stringify(notification));
@@ -67,10 +64,12 @@
 						type: 'button-calm'
 					}]
 				});
+				var date = new Date();
+				date = date.getTime();
 				if(!$localStorage.notifications) {
 					$localStorage.notifications = []
 				}
-				$localStorage.notifications.push({title: title, message: message})
+				$localStorage.notifications.push({title: title, message: message, date:date})
 			};
 
 			window.plugins.OneSignal.init(OC_CONFIG.ONESIGNAL_ID,
@@ -97,8 +96,14 @@
 			//check if user is logged in
 			AccountService.userAccount();
 
+			$ionicHistory.nextViewOptions({
+				historyRoot: true
+			})
+			$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
+
 
 		}
+
 		return service;
 	});
 })();

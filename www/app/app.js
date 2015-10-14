@@ -58,8 +58,6 @@
 			}
 		});
 
-
-		//$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
 	});
 
 

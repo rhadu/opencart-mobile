@@ -230,7 +230,7 @@
 			})
 			.success(function (response) {
 				$ionicLoading.hide();
-				console.log(response);
+//				console.log(response);
 				return response.data;
 			})
 			.error(function (response) {
@@ -250,8 +250,8 @@
 			})
 			.success(function (response) {
 				$ionicLoading.hide();
-				console.log(response.selectedCategoryId);
-				return response.selectedCategoryId;
+//				console.log(response);
+				return response;
 			})
 			.error(function (response) {
 				$ionicLoading.hide();

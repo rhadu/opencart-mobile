@@ -205,22 +205,10 @@
 			return promise;
 		}
 
-		/**
-		 * @name $ionicModal#fromTemplateUrl
-		 * @param {string} search : Searches products containing this string in their name.
-		 * @param {string} tag : Search products with this tag.
-		 * @param {boolean} description : true if also needs to be searched in product description, false if not.
-		 * @param {integer} category_id : The category id to search in.
-		 * @param {boolean} sub_category : true if also needs to be searched in sub categories of the given category, false if not.
-		 * @param {string} sort : String ('price', 'name', 'rating', 'model', 'sort_order', 'quantity', 'date_added') Sort order of the returned products.
-		 * @param {string} order : String ('ASC', 'DESC') Order of the returned products.
-		 * @param {integer} page : Product page.
-		 * @param {integer} limit : Product limit per page.
-		 * @returns {promise} A promise that will be resolved with an instance of
-		 * an {@link ionic.controller:ionicModal} controller.
-		 */
+
 		service.searchProducts = function (query, type) {
 			console.log(query);
+			service.categProducts = {};
 			service.searchQuery = query;
 
 			if(type === "category"){
@@ -229,25 +217,31 @@
 			}
 			$rootScope.sortType = query.sort;
 
-			service.categProducts = {};
+
 			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
-			$http.get(OC_CONFIG.SEARCH, {params:{"search": query.search,
-												 "tag" : query.tag,
-												 "description" : query.description,
-												 "category_id" : query.category_id,
-												 "sub_category" : query.sub_category,
-												 "sort" : query.sort,
-												 "order" : query.order,
-												 "page" : query.page,
-												 "limit" : query.limit
-												}})
-				.then(function (response) {
+			var promise = $http({
+				url: OC_CONFIG.SEARCH,
+				method: "GET",
+				headers: {'Authorization': OC_CONFIG.TOKEN},
+				params: {"search": query.search,
+						 "tag" : query.tag,
+						 "description" : query.description,
+						 "category_id" : query.category_id,
+						 "sub_category" : query.sub_category,
+						 "sort" : query.sort,
+						 "order" : query.order,
+						 "page" : query.page,
+						 "limit" : query.limit
+						}
+			})
+			.then(function (response) {
 				$ionicLoading.hide();
 				service.categProducts = response.data;
 				$rootScope.$broadcast('productsLoaded');
 				$rootScope.sortOptions = "search";
 				console.log(response.data);
-			})
+			});
+			return promise;
 		}
 
 		return service;

@@ -369,6 +369,14 @@
 				return response;
 			})
 			.error(function (error) {
+				$ionicPopup.alert({
+					title: 	"Sorry",			//translate['popup.info'],
+					template: "You have to log in if you want to be able to add products to your wishlist",		//translate['popup.not_in_delivery_zone'],
+					buttons: [{
+						text: 'OK',
+						type: 'button-calm'
+					}]
+				});
 				return error;
 			});
 			return promise;

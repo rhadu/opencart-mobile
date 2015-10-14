@@ -1,6 +1,6 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus>
 
-	<ion-side-menu-content>
+	<ion-side-menu-content drag-content="false">
 		<ion-nav-view name="menuContent"></ion-nav-view>
 	</ion-side-menu-content>
 
@@ -11,11 +11,11 @@
 					<img src="./img/user1.png">
 					{{account.firstname}} {{account.lastname}}
 				</a>
-				<a ng-show="!account" class="item item-avatar custom-style" >
+				<span ng-show="!account" class="item item-avatar custom-style" >
 					<img src="./img/user1.png">
-					<span class="drawer-login" ng-click="userLogin()" menu-close>{{'drawer.login'| translate}}</span>
-					<span class="drawer-register" ng-click="userRegister()" menu-close>Register</span>
-				</a>
+					<span class="drawer-login"  ng-click="userLogin()" menu-close>{{'drawer.login'| translate}}</span>
+					<span class="drawer-register"  ui-sref="leftdrawer.userRegister" menu-close>Register</span>
+				</span>
 				<!--				<a class="item item-icon-left custom-style" ng-click="logOut()" menu-close>Log out</a>-->
 				<a class="item item-icon-left custom-style" menu-close><i class="icon ion-ios-home"></i>{{'drawer.home'| translate}}</a>
 				<a class="item item-icon-left custom-style" ui-sref="leftdrawer.categories" menu-close><i class="icon ion-ios-search-strong"></i>{{'drawer.products'| translate}}</a>

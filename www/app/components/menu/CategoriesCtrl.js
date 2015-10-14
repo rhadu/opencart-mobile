@@ -57,7 +57,6 @@
 			searchQuery.search = search;
 			searchQuery.sort = "price";
 			searchQuery.order = "DESC";
-			ProductService.searchInCategory
 			ProductService.searchProducts(searchQuery, type);
 			$state.go("leftdrawer.products")
 		}

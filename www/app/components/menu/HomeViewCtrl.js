@@ -2,10 +2,9 @@
 (function () {
 	var app = angular.module('Tapitoo.HomeViewController', ['ui.router']);
 	//factory for cart operations
-	app.controller('HomeViewController', function ($scope,$state,$localStorage,$ionicPopover, GeocoderService, banner, $rootScope, featuredProducts, $ionicSlideBoxDelegate, $ionicGesture, CommonService,$timeout,  ShopService, ProductService, AccountService, CartService) {
+	app.controller('HomeViewController', function ($scope,$state,$localStorage, featuredCategories, $ionicPopover, GeocoderService, banner, $rootScope, $ionicSlideBoxDelegate, $ionicGesture, CommonService,$timeout,  ShopService, ProductService, AccountService, CartService) {
 
-		$scope.featuredProducts = featuredProducts.products;
-		console.log(featuredProducts);
+		$scope.featuredCategories = featuredCategories.data;
 		$scope.slides = banner.data.banners;
 
 
@@ -31,38 +30,19 @@
 		$scope.goToProduct = function(id, e) {
 			console.log(e.target.localName);
 			if(e.target.localName !== "i"){
-//				var promise = ProductService.getProduct(id);
-//				promise.then(
-//					function(product) {
-////						console.log(product);
-////						if(product.options.length === 0){
-////							CartService.addProductToCart(product.data);
-////						}
-////						else{
-////							$state.go("leftdrawer.productInfo", {productId: id})
-////						}
-						$state.go("leftdrawer.productInfo", {productId: id})
-//
-//					},
-//					function(error) {
-//						console.log(error.data);
-//					});
+				$state.go("leftdrawer.productInfo", {productId: id})
 			}
 		}
 
 		$scope.getSpecial = function () {
-//			$localStorage.$reset();
-//			console.log($rootScope.account);
-//			return;
-//			AccountService.getWishlist();
-//			return;
-
-//			var wishlist = [40,41,46,44,43,29,33]
-//			console.log(wishlist);
-//			for(var i=0; i<wishlist.length; i++){
-//				console.log(wishlist[i]);
-//				AccountService.deleteProductFromWishlist(wishlist[i])
+//			var date = new Date();
+//			date = date.getTime();
+//			console.log(date);
+//			if(!$localStorage.notifications) {
+//				$localStorage.notifications = []
 //			}
+//			$localStorage.notifications.push({title: "test " + ($localStorage.notifications.length + 1), message: "message "+ ($localStorage.notifications.length + 1), date:date})
+//			console.log($localStorage.notifications);
 //			return;
 			ProductService.getSpecialOffers();
 			$state.go('leftdrawer.products');

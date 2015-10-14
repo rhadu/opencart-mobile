@@ -3,12 +3,12 @@
 		<div class=" appLogo"></div>
 	</ion-nav-title>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
+		<button class="button button-icon button-clear ion-ios-arrow-back button-tap-area" nav-direction="back" ng-click="goBack()"></button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
 		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
-		<span ng-if="cartBadge>0" class="badge badge-calm ">{{cartBadge}}</span>
+		<span ng-if="cartBadge>0" class="badge badge-calm " ui-sref="cart">{{cartBadge}}</span>
 	</ion-nav-buttons>
 	<ion-header-bar class="bar bar-subheader sort-header">
 		<div class="button-bar sort-bar">

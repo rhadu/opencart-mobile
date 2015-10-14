@@ -19,10 +19,11 @@
 			$scope.popover = popover;
 		});
 
-		$scope.addToWishlist = function () {
+		$scope.addToWishlist = function (id) {
+			console.log(id);
 			//AccountService.getWishlist();
-			AccountService.addProductToWishlist($scope.productID);
-			$scope.popover.hide();
+			AccountService.addProductToWishlist(id);
+//			$scope.popover.hide();
 		}
 
 		// Init product details and reviews
@@ -392,5 +393,24 @@
 				}
 			}
 		}
+
+		//disable bounce effect on tab slides
+//		$scope.myActiveSlide = 0;
+//
+//		$scope.$watch(function(scope) { return scope.myActiveSlide },
+//					  function(newValue, oldValue) {
+//			console.log("newValue: " + newValue);
+//			console.log("oldValue: " + oldValue);
+//			switch(newValue) {
+//				case 0:		 $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
+//				case 3:      $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
+//				break;
+//			}
+//		}
+//					 );
+//
+//		$scope.enableSlide = function() {   $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(true);
+//										}
+
 	});
 })();

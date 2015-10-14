@@ -30,6 +30,14 @@
 			CheckoutProcessService.checkout('pay');
 		}
 
+		$scope.exitCheckout = function () {
+			$localStorage.paymentAddress = null;
+			$localStorage.paymentMethod = null;
+			$localStorage.shippingAddress = null;
+			$localStorage.shippingMethod = null;
+			$state.go('cart');
+		}
+
 		$scope.savePayment = function (myform) {
 			console.log(myform.number.$card.type);
 

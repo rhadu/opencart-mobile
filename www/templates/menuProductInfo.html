@@ -3,16 +3,16 @@
 		<div class=" appLogo"></div>
 	</ion-nav-title>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon button-clear ion-ios-arrow-back" nav-direction="back" ng-click="goBack()"></button>
+		<button class="button button-icon button-clear ion-ios-arrow-back button-tap-area" nav-direction="back" ng-click="goBack()"></button>
 	</ion-nav-buttons>
 
 	<ion-nav-buttons side="right"  class="customAnim">
 		<button class=" button button-icon ion-ios-cart" nav-direction="forward" ui-sref="cart" ></button>
-		<span ng-if="cartBadge>0" class="badge badge-calm ">{{cartBadge}}</span>
+		<span ng-if="cartBadge>0" class="badge badge-calm " ui-sref="cart">{{cartBadge}}</span>
 	</ion-nav-buttons>
 	<ion-content class="calm-bg product-page" scroll="false" >
 		<button translate="menu.add_to_cart"  id="cartButton" style="" class="button button-calm add-to-cart-button"  ng-click="addToCart(productDetails)">Add to cart</button>
-		<i class="fa fa-ellipsis-v fa-2x product-add-wishlist" ng-click="openPopover(product.product_id, $event)"></i>
+<!--		<i class="fa fa-ellipsis-v fa-2x product-add-wishlist" ng-click="openPopover(product.product_id, $event)"></i>-->
 		<tab-slide-box tab="0">
 			<div class="tsb-icons header-color">
 				<div class="tsb-ic-wrp">
@@ -26,9 +26,12 @@
 			</div>
 			<ion-slide-box show-pager="false"
 						   on-slide-changed="slideHasChanged($index)"
-						   delegate-handle="subHeaderSlideBox">
-				<ion-slide class="product-slide" delegate-handle="productSlidePage">
+						   delegate-handle="subHeaderSlideBox"
+						   active-slide="myActiveSlide">
+				<ion-slide class="product-slide" delegate-handle="productSlidePage" on-drag-left="enableSlide()">
 					<ion-scroll style="height:100%" delegate-handle="slide1Scroll" on-scroll="getCurrentPosition()">
+						<i class=" button button-icon ion-heart product-add-wishlist" ng-click="addToWishlist(productDetails.product_id)"></i>
+
 						<ion-slide-box id="producPhotoSlideBox" class="product-photo-slider"
 									   show-pager="true"
 									   slide-interval="3000"
@@ -119,7 +122,7 @@
 										zooming="false"
 										style="width: 99%; height: 200px ;margin-left:0.5%; margin-right:0.5%;"
 										scrollbar-x="false" delegate-handle="prodScrollDelegate"
-										horizontal-scroll-fix="slide1Scroll">
+										horizontal-scroll-fix="productSlidePage">
 								<div style="width:{{(130 * productDetails.related_products.length)}}px; height:200px;">
 									<div class="container product-scroll-container" ng-repeat="product in productDetails.related_products" ng-click="goToProduct(product.product_id)">
 										<div class="row-photo" >
@@ -170,7 +173,7 @@
 						<div style="padding-top:140px"></div>
 					</ion-scroll>
 				</ion-slide>
-				<ion-slide class="review-slide">
+				<ion-slide class="review-slide" on-drag-right="enableSlide()">
 					<ion-scroll style="height:100%" direction="y">
 						<div style="padding-bottom:20px"></div>
 						<div ng-if="reviews.length>0">

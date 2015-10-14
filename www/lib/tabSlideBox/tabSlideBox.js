@@ -156,8 +156,9 @@ angular.module('tabSlideBox', [])
 										   $scope.slideHasChanged = function(index){
 											   var bottomPosition = window.innerHeight - 412;
 											   var cartButton = document.getElementById('cartButton');
-
+											   console.log(index);
 											   if(index === 0){
+//												   $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
 												   $ionicScrollDelegate.$getByHandle('slide1Scroll').scrollTop();
 												   move(cartButton)
 													   .ease('in-out')
@@ -165,9 +166,10 @@ angular.module('tabSlideBox', [])
 													   .duration('0.5s')
 													   .end();
 											   }
+//											   if(index === 3){
+//												   $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
+//											   }
 											   else{
-
-												   console.log(index);
 												   move(cartButton)
 													   .ease('in-out')
 													   .y(bottomPosition)

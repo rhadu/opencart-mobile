@@ -249,9 +249,6 @@
 			})
 			.success(function (response) {
 				console.log("step 9");
-				for(var i=0; i<$rootScope.cartProducts.length; i++){
-					AccountService.deleteProductFromWishlist($rootScope.cartProducts[i].product_id)
-				}
 				$localStorage.paymentAddress = null;
 				$localStorage.paymentMethod = null;
 				$localStorage.shippingAddress = null;
@@ -259,6 +256,9 @@
 				$rootScope.cartProducts = [];
 				$rootScope.cartBadge = 0;
 				console.log(response);
+				for(var i=0; i<response.length; i++){
+					AccountService.deleteProductFromWishlist(response[i].product_id)
+				}
 				return response;
 			})
 			.error(function (response) {

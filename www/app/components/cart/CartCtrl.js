@@ -67,10 +67,15 @@
 		};
 	}])
 
-	app.controller('CartController', function (cart,$log,$rootScope, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService, CartService, AccountService, CheckoutService) {
+	app.controller('CartController', function (cart,$log,$rootScope, $localStorage, $timeout,$scope,$ionicListDelegate, $ionicPopup, $state, $translate, ShopService, CartService, AccountService, CheckoutService) {
 		console.log(cart);
 		$rootScope.buttonsOpened = false;
 		$rootScope.canEditCart = false;
+
+		$localStorage.paymentAddress = null;
+		$localStorage.paymentMethod = null;
+		$localStorage.shippingAddress = null;
+		$localStorage.shippingMethod = null;
 
 		$scope.restaurantName = ShopService.restaurantName;
 		$scope.categoryName = ShopService.categoryName;

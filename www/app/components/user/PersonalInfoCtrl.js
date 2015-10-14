@@ -2,7 +2,7 @@
 (function () {
 	var app = angular.module('PersonalInfoCtrl', ['ui.router']);
 
-	app.controller('PersonalInfoController', function ($scope, $state,$timeout, $ionicModal,$ionicHistory, $translate, $ionicPopup, ShopService, AccountService, CommonService) {
+	app.controller('PersonalInfoController', function ($scope,$rootScope,$ionicSideMenuDelegate, $state,$timeout, $ionicModal,$ionicHistory, $translate, $ionicPopup, ShopService, AccountService, CommonService) {
 		//save user info
 		$scope.user = {};
 
@@ -184,16 +184,17 @@
 
 
 		$scope.logOut = function () {
-			console.log("asadasdaobj");
 			AccountService.userLogout();
 			$state.go('leftdrawer.home')
 		}
 
 		$scope.userLogin = function () {
-			$state.go("leftdrawer.userLogin")
+			$ionicSideMenuDelegate.toggleLeft();
+			$state.go("leftdrawer.userLogin");
 		}
 		$scope.userRegister = function () {
-			$state.go("leftdrawer.userRegister")
+			$ionicSideMenuDelegate.toggleLeft();
+			$state.go("leftdrawer.userRegister");
 		}
 
 		function validateEmail(email) {

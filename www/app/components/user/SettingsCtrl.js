@@ -4,9 +4,11 @@
 
 	app.controller('SettingsController', function ($scope, notifications, $localStorage, CommonService){
 
-		if(notifications){
-			$scope.notifications = notifications.reverse();
-		}
+//		if(notifications){
+//			$scope.notifications = notifications.reverse();
+//		}
+		$scope.notifications = notifications;
+		console.log(notifications);
 
 		if(typeof $localStorage.notificationsEnabled !== "undefined"){
 			console.log($localStorage.notificationsEnabled);
