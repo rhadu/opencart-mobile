@@ -27,13 +27,11 @@
 				data: user
 			})
 			.success(function (response) {
-				$ionicLoading.hide();
 				//				$rootScope.account = response.account;
 				console.log(response);
 				return response;
 			})
 			.error(function (response) {
-				$ionicLoading.hide();
 				console.log(response);
 			});
 			return promise;
@@ -66,9 +64,9 @@
 				$ionicLoading.hide();
 				console.log(response);
 				$rootScope.account = response.account;
-				window.plugins.OneSignal.getIds(function(ids) {
-					service.postOneSignalID(response.account.customer_id, ids.userId);
-				});
+//				window.plugins.OneSignal.getIds(function(ids) {
+//					service.postOneSignalID(response.account.customer_id, ids.userId);
+//				});
 				return response.account;
 			})
 			.error(function (response) {

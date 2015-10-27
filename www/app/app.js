@@ -19,7 +19,6 @@
 											   'ProductsDetailsCtrl',
 											   'CartCtrl',
 											   'CheckoutCtrl',
-											   'CreditCardCtrl',
 											   'UserAccountCtrl',
 											   'DeliveryDetailsCtrl',
 											   'PaymentDetailsCtrl',
@@ -40,14 +39,21 @@
 											   'pascalprecht.translate']);
 
 	app.run(function (StartUpService,$ionicPlatform,$localStorage, $http, OC_CONFIG, $state, $urlRouter) {
-//		$localStorage.ACCESS_TOKEN= 'X68AWVTSMNblJki5OzcSnYLtw3HxPWdgyGevyiE4';
+		//		$localStorage.ACCESS_TOKEN= 'X68AWVTSMNblJki5OzcSnYLtw3HxPWdgyGevyiE4';
 		$ionicPlatform.ready(function () {
-			console.log("local storage ACCESS TOKEN: " + $localStorage.ACCESS_TOKEN);
+			// hide iOS status bar
+			if(window.StatusBar) {
+				StatusBar.hide();
+				ionic.Platform.fullScreen();
+			}
+
+			//set access token if it's not the first time the app is open
 			if($localStorage.ACCESS_TOKEN){
 				//console.log($localStorage.ACCESS_TOKEN);
 				OC_CONFIG.TOKEN = $localStorage.ACCESS_TOKEN;
 				StartUpService.initialization();
 			}
+			// generate access token if the app is opened for the first time
 			else {
 				var promise = StartUpService.generateToken();
 				promise.then(
@@ -62,16 +68,18 @@
 
 
 	app.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider, $localStorageProvider) {
-		//routes fallback
-//		$urlRouterProvider.otherwise("/drawer/home");
 
+		// disable views transition animation on android
 		if(ionic.Platform.isAndroid()===true){
 			$ionicConfigProvider.views.transition('none');
 		}
 		else
 			$ionicConfigProvider.views.transition('ios');
 
+		// center Header Logo
 		$ionicConfigProvider.navBar.alignTitle('center')
+
+		// disable swipe back on iOS
 		$ionicConfigProvider.views.swipeBackEnabled(false);
 
 		// configures staticFilesLoader
@@ -83,11 +91,27 @@
 		$translateProvider.preferredLanguage('en');
 	});
 
-	app.controller('AppInitController', function ($scope, $rootScope, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
+	app.controller('AppInitController', function ($scope, $rootScope,$ionicLoading, $state,ShopService, $ionicScrollDelegate, $timeout, $ionicSideMenuDelegate) {
 		$scope.toggleDrawer = function () {
 			$ionicSideMenuDelegate.toggleLeft();
 		};
 		$rootScope.noShadow = "header-shadow";
+
+		// show loading template after 100ms
+		$scope.$on('$stateChangeStart',
+				   function(event, toState, toParams, fromState, fromParams){
+			$timeout(function(){
+				$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+			},100);
+		});
+
+		// hide loading template after 200ms
+		$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+			$timeout(function(){
+				$ionicLoading.hide()
+			},200);
+		});
+
 	});
 })();
 

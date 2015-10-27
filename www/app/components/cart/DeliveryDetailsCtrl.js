@@ -12,7 +12,6 @@
 		};
 
 		$scope.chooseAddress = function (address) {
-			console.log(address);
 			for(var i=0 ; i < $scope.deliveryData.length ;i++){
 				if($scope.deliveryData[i].address_id === address.address_id){
 					$scope.deliveryData[i].checked = true;
@@ -21,13 +20,11 @@
 					$scope.deliveryData[i].checked = false;
 				}
 			}
-			console.log($scope.deliveryData);
 		}
 
+		// set payment address previously selected and saved in $localstorage
 		if($state.current.name === "paymentAddress"){
 			if($localStorage.paymentAddress  && $localStorage.paymentAddress !== null){
-				console.log("payment :" + $localStorage.paymentAddress.address_id);
-				console.log($localStorage.paymentAddress);
 				for(var i=0; i<$scope.deliveryData.length; i++){
 					if($scope.deliveryData[i].address_id === $localStorage.paymentAddress.address_id){
 						$scope.deliveryData[i].checked = true;
@@ -60,13 +57,18 @@
 				return false;
 			}
 			$localStorage.paymentAddress = $scope.address;
-			console.log($scope.address);
 
 			CheckoutService.postPaymentAddress($scope.address).finally(function () {
-				$state.go('shippingAddress');
+				if($rootScope.shipping_status === true){
+					$state.go('shippingAddress');
+				}
+				else{
+					$state.go('paymentDetails');
+				}
 			});
 		}
 
+		// set shipping address previously selected and saved in $localstorage
 		if($state.current.name === "shippingAddress"){
 			if($localStorage.shippingAddress && $localStorage.shippingAddress !== null){
 				console.log("shippin : " + $localStorage.shippingAddress.address_id);
@@ -81,11 +83,10 @@
 			}
 		}
 
-
+		// set shipping address
 		$scope.setShippingAddress = function () {
 			for(var i=0 ; i < $scope.deliveryData.length ;i++) {
 				if($scope.deliveryData[i].checked === true) {
-					console.log($scope.deliveryData[i]);
 					$scope.address = $scope.deliveryData[i];
 					$scope.address.existing = true;
 				}
@@ -110,6 +111,7 @@
 			}
 		}
 
+		// set shipping method previously selected and saved in $localstorage
 		if($state.current.name === "shippingMethod"){
 			if($localStorage.shippingMethod && $localStorage.shippingMethod !== null){
 				for(var i=0; i<$scope.deliveryData.shipping_methods.length; i++){
@@ -123,14 +125,11 @@
 						}
 					}
 				}
-				console.log($scope.deliveryData.shipping_methods);
 			}
 		}
 
+		// check in list shipping method
 		$scope.chooseShippingMethod = function (code) {
-			console.log(code);
-//			$scope.shippingMethod = method;
-
 			for(var i=0 ; i < $scope.deliveryData.shipping_methods.length ;i++){
 				for(var j=0; j<$scope.deliveryData.shipping_methods[i].quote.length; j++){
 					var method = $scope.deliveryData.shipping_methods[i].quote[j];
@@ -146,6 +145,7 @@
 			console.log($scope.deliveryData);
 		}
 
+		// set shipping method
 		$scope.setShippingMethod = function () {
 			for(var i=0 ; i < $scope.deliveryData.shipping_methods.length ;i++){
 				for(var j=0; j<$scope.deliveryData.shipping_methods[i].quote.length; j++){

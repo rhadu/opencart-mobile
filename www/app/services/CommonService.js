@@ -241,7 +241,7 @@
 		}
 
 		service.getFeaturedCategory = function () {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 
 			var promise = $http({
 				url: OC_CONFIG.MODULE + 'featuredcategory',

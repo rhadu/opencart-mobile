@@ -6,29 +6,24 @@
 		<button  class="button button-icon ion-ios-arrow-back button-clear  button-tap-area" nav-direction="back" ui-sref="leftdrawer.home"></button>
 
 	</ion-nav-buttons>
-	<ion-nav-buttons side="right">
-		<button  class="button button-clear button-dark" ng-if="cart.products" ng-click="editCart()">{{editStatus}}</button>
-	</ion-nav-buttons>
+
 	<ion-content click-for-options-wrapper class="calm-bg cart-view">
 		<div class="header-space"></div>
 		<div  ng-if="cart.products">
 			<h3>Your Order</h3>
 			<ion-list   can-swipe="false" class="panel" ng-repeat="item in cartItems track by $index" >
 				<ion-item id="deleteAnimation" class="panel-body cart-panel-body deleteAnimation">
-					<ion-option-button class="delete-option-button" ng-click="deleteProduct(item)">Delete</ion-option-button>
-					<!--				<ion-reorder-button class="ion-minus-circled"></ion-reorder-button>-->
 					<div class="row">
 						<div class="col col-20">
-							<img ng-show="!canEditCart" class="cart-thumb" ng-src="{{item.thumb_image}}" alt="">
-							<a ng-show="canEditCart" class="button button-icon icon ion-ios-trash cart-button" click-for-options></a>
+							<img class="cart-thumb" ng-src="{{item.thumb_image}}" alt="">
 						</div>
 						<div class="col col-50 ">
-							<span class="item-name">{{item.name}}</span>
+							<span class="item-name">{{item.name}}</span><br>
+							<span ng-if="item.in_stock===false" class="item-name" style="font-size:10px; color:red">not in stock</span>
 						</div>
 						<div class="col col-30">
 							<div class="item-row">{{item.price}}</div><hr/>
-							<div ng-show="!canEditCart" class="item-row">{{item.quantity}} <span>pieces</span></div>
-							<div ng-show="canEditCart" class="row cart-edit-row">
+							<div class="row cart-edit-row">
 								<div class="col col-30"><button class="button-edit-cart" ng-click="editQuantity('add' ,item)">+</button></div>
 								<div class="col col-30 quantity-col">{{item.quantity}}</div>
 								<div class="col col-30"><button class="button-edit-cart" ng-click="editQuantity('subtract', item)">-</button></div>

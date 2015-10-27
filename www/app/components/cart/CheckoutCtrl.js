@@ -25,8 +25,7 @@
 		}
 
 		$scope.checkout = function() {
-			console.log($localStorage);
-			//if($localStorage.paymentAddress)
+			// checkout user
 			CheckoutProcessService.checkout('pay');
 		}
 
@@ -38,13 +37,14 @@
 			$state.go('cart');
 		}
 
+		// Pay with Credit Card
 		$scope.savePayment = function (myform) {
 			console.log(myform.number.$card.type);
 
 			if(!$scope.card.cc_number){
 				$ionicPopup.alert({
-					title: 	"Error",			//translate['popup.info'],
-					template: "You entered an invalid credid card number",		//translate['popup.not_in_delivery_zone'],
+					title: 	"Error",
+					template: "You entered an invalid credid card number",
 					buttons: [{
 						text: 'OK',
 						type: 'button-calm'
@@ -54,8 +54,8 @@
 			};
 			if(!$scope.card.expiry){
 				$ionicPopup.alert({
-					title: 	"Error",			//translate['popup.info'],
-					template: "You entered an invalid date",		//translate['popup.not_in_delivery_zone'],
+					title: 	"Error",
+					template: "You entered an invalid date",
 					buttons: [{
 						text: 'OK',
 						type: 'button-calm'
@@ -65,8 +65,8 @@
 			};
 			if(!$scope.card.name){
 				$ionicPopup.alert({
-					title: 	"Error",			//translate['popup.info'],
-					template: "Please enter your name",		//translate['popup.not_in_delivery_zone'],
+					title: 	"Error",
+					template: "Please enter your name",
 					buttons: [{
 						text: 'OK',
 						type: 'button-calm'
@@ -76,8 +76,8 @@
 			};
 			if(!$scope.card.cc_cvv2){
 				$ionicPopup.alert({
-					title: 	"Error",			//translate['popup.info'],
-					template: "You entered an invalid CVC/CVV code",		//translate['popup.not_in_delivery_zone'],
+					title: 	"Error",
+					template: "You entered an invalid CVC/CVV code",
 					buttons: [{
 						text: 'OK',
 						type: 'button-calm'
@@ -86,11 +86,10 @@
 				return false;
 			};
 
-			var str = $scope.card.expiry
+			var str = $scope.card.expiry;
 			$scope.card.cc_expire_date_month =  str.substring(0,2)
 			$scope.card.cc_expire_date_year = str.substring(str.indexOf("/")+1);
 
-			console.log($scope.card);
 
 			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = 	CheckoutService.payNow($localStorage.paymentMethod.code, $scope.card);

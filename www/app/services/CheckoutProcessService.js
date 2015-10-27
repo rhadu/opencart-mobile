@@ -62,40 +62,52 @@
 
 			// call all checkout steps in sequence
 			postPaymentAddress()
-				.then( postShippingAddress )
-				.then( getShippingMethod )
-				.then( postShippingMethod )
+				.then(function () {
+				if($rootScope.shipping_status === true){
+					postShippingAddress
+				}
+			})
+				.then(function () {
+				if($rootScope.shipping_status === true){
+					getShippingMethod
+				}
+			})
+				.then(function () {
+				if($rootScope.shipping_status === true){
+					postShippingMethod
+				}
+			})
 				.then( getPaymentMethod )
 				.then( postPaymentMethod )
 				.then( getCheckoutConfirm )
 				.then(function (response) {
-					if(checkoutType === "confirm"){
-						$state.go('checkout');
+				if(checkoutType === "confirm"){
+					$state.go('checkout');
+				}
+				else{
+					if(response.order.needs_payment_now === false){
+						CheckoutService.getCheckoutPay().then(function (response) {
+							var promise = CheckoutService.getCheckoutSuccess();
+							promise.then(
+								function(response) {
+									console.log(response);
+									$ionicLoading.hide();
+									$state.go('goodbye');
+								},
+								function(error) {
+									console.log(error);
+								});
+						})
 					}
-					else{
-						if(response.order.needs_payment_now === false){
-							CheckoutService.getCheckoutPay().then(function (response) {
-								var promise = CheckoutService.getCheckoutSuccess();
-								promise.then(
-									function(response) {
-										console.log(response);
-										$ionicLoading.hide();
-										$state.go('goodbye');
-									},
-									function(error) {
-										console.log(error);
-									});
-							})
-						}
-						else {
-							CheckoutService.getCheckoutPay().then(function (response) {
-								$state.go('addCard');
-								console.log(response);
-								$ionicLoading.hide();
-							})
-						}
+					else {
+						CheckoutService.getCheckoutPay().then(function (response) {
+							$state.go('addCard');
+							console.log(response);
+							$ionicLoading.hide();
+						})
 					}
-				})
+				}
+			})
 			;
 		};
 

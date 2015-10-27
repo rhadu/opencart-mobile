@@ -92,14 +92,14 @@
 		}
 
 		service.getCart = function () {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.GET_CART,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				console.log("cart");
 //				console.log(JSON.stringify(response.data.cart));
 				updateCartQuantity(response.data.cart.products);

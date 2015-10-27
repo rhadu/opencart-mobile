@@ -9,7 +9,7 @@
 		service.searchQuery = {};
 
 		service.getAllCategories = function () {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.CATEGORIES,
 				method: "GET",
@@ -17,7 +17,7 @@
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				console.log('toate categoriile');
 				console.log(response.data.categories);
 				return response.data.categories;
@@ -34,7 +34,7 @@
 			}
 			$rootScope.sortType = query.sort;
 
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.CATEGORIES + id,
 				method: "GET",
@@ -42,7 +42,7 @@
 				params: {sort : query.sort , order: query.order}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				$rootScope.categoryID = response.data.category.category_id;
 				$rootScope.searchName = '';
 				service.categProducts = response.data.category;
@@ -54,14 +54,14 @@
 		};
 
 		service.getSubcategories = function (id) {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.CATEGORIES + id +'/subcategory',
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				service.subCategories = response.data.categories;
 				service.categoryID = id;
 				console.log(response.data.categories);
@@ -71,14 +71,14 @@
 		};
 
 		service.getProduct = function (id) {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.PRODUCT + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				console.log('produs: ' +response.data.product.title);
 				console.log(response.data.product);
 				return response.data.product;
@@ -87,14 +87,14 @@
 		};
 
 		service.getProductReviews = function (id) {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.REVIEWS + id,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				console.log(response.data.product_reviews);
 				return response.data.product_reviews;
 			});
@@ -145,7 +145,7 @@
 			}
 			$rootScope.sortType = query.sort;
 
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.SPECIAL,
 				method: "GET",
@@ -157,21 +157,21 @@
 				service.categProducts = response.data;
 				$rootScope.$broadcast('productsLoaded');
 				$rootScope.sortOptions = "special";
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				return response.data;
 			});
 			return promise;
 		};
 
 		service.getManufacturers = function () {
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.MANUFACTURER,
 				method: "GET",
 				headers: {'Authorization': OC_CONFIG.TOKEN}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				console.log(response.data.manufacturers);
 				return response.data.manufacturers;
 			});
@@ -188,7 +188,7 @@
 			}
 			$rootScope.sortType = query.sort;
 
-			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
+//			$ionicLoading.show({templateUrl: 'templates/loading.html', noBackdrop: false});
 			var promise = $http({
 				url: OC_CONFIG.MANUFACTURER +id,
 				method: "GET",
@@ -196,7 +196,7 @@
 				params: {sort : query.sort , order: query.order}
 			})
 			.then(function (response) {
-				$ionicLoading.hide();
+//				$ionicLoading.hide();
 				service.categProducts = response.data.manufacturer;
 				$rootScope.$broadcast('productsLoaded');
 				$rootScope.sortOptions = "manufacturer";

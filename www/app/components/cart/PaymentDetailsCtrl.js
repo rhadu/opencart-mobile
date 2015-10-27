@@ -7,11 +7,18 @@
 		$scope.paymentMethods = paymentMethods;
 
 		$scope.goBack = function() {
-			console.log("go back!");
+			console.log('goback');
+			console.log($rootScope.shipping_status);
 			if($localStorage.shippingMethod && $localStorage.shippingMethod !== null){
-				$ionicHistory.goBack();
+				console.log('shipping back');
+				$state.go('checkout');
+			}
+			if($rootScope.shipping_status === false){
+				console.log('shipping false');
+				$state.go('checkout');
 			}
 			else {
+				console.log('aiurea');
 				$ionicHistory.goBack();
 			}
 		};
@@ -27,6 +34,7 @@
 			}
 		}
 
+		// set payment method previously selected and saved in $localstorage
 		if($localStorage.paymentMethod  && $localStorage.paymentMethod !== null){
 			console.log( $localStorage.paymentMethod);
 			console.log($scope.paymentMethods);
@@ -40,6 +48,7 @@
 			}
 		}
 
+		// set payment method
 		$scope.savePayment = function () {
 			for(var i=0 ; i < $scope.paymentMethods.length ;i++){
 				if($scope.paymentMethods[i].checked === true){
@@ -62,7 +71,6 @@
 			$localStorage.paymentMethod = $scope.method;
 			CheckoutService.currentPayment = $scope.method;
 			CheckoutProcessService.checkout('confirm');
-			//			$state.go('checkout');
 		}
 	});
 })();

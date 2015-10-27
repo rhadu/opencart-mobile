@@ -11,27 +11,27 @@
 		<div class="panel">
 			<div class="panel-body account-panel">
 				<div class="list">
-					<div class="item item-icon-left item-icon-right" ui-sref="accountDetails">
+					<div class="item item-icon-left item-icon-right" nav-direction="forward" ui-sref="accountDetails">
 						<i class="icon ion-person"></i>
 						<h2>Contact Details</h2>
 						<p>{{account.firstname}} {{account.lastname}}</p>
 						<i class="icon ion-ios-arrow-right"></i>
 					</div>
-					<div class="item item-icon-left item-icon-right" ui-sref="paymentAddress">
+					<div class="item item-icon-left item-icon-right" nav-direction="forward" ui-sref="paymentAddress">
 						<i class="icon icon-truck fa-flip-horizontal fa-lg"></i>
 						<h2>Delivery Information</h2>
 						<p ng-if="!address">Select delivery address</p>
 						<p ng-if="address">{{address.address_1}}</p>
 						<i class="icon ion-ios-arrow-right"></i>
 					</div>
-					<div class="item item-icon-left item-icon-right" ui-sref="shippingMethod">
+					<div ng-if="$rootScope.shipping_status === true" nav-direction="forward" class="item item-icon-left item-icon-right" ui-sref="shippingMethod">
 						<i class="icon icon-truck fa-flip-horizontal fa-lg"></i>
 						<h2>Delivery Method</h2>
 						<p ng-if="!shipping">Select delivery address</p>
 						<p ng-if="shipping">{{shipping.title}}</p>
 						<i class="icon ion-ios-arrow-right"></i>
 					</div>
-					<div class="item item-icon-left item-icon-right" ui-sref="paymentDetails">
+					<div class="item item-icon-left item-icon-right" nav-direction="forward" ui-sref="paymentDetails">
 						<i class="icon ion-card"></i>
 						<h2>Payment Method</h2>
 						<p ng-if="!payment">Select payment type</p>

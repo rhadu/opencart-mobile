@@ -44,6 +44,9 @@
 		}
 
 		service.initialization = function  () {
+			//check if user is logged in
+			AccountService.userAccount();
+
 			$state.go("leftdrawer.home")
 			/* hide splashscreen*/
 			$timeout(function () {
@@ -51,8 +54,6 @@
 			}, 3500, false);
 
 			var notificationOpenedCallback = function(notification) {
-				console.log('=== === === didReceiveRemoteNotificationCallBack === === ===');
-				console.log(JSON.stringify(notification));
 				var title = notification.additionalData.title;
 				var message = notification.message;
 
@@ -81,8 +82,6 @@
 				console.log("done preloading!");
 			});
 
-
-//
 //			//check for internet connection
 			//var isOffline = $cordovaNetwork.isOffline();
 //			if (isOffline === true) {
@@ -91,19 +90,12 @@
 //			}
 			//			}
 
-			$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
-
-			//check if user is logged in
-			AccountService.userAccount();
-
 			$ionicHistory.nextViewOptions({
 				historyRoot: true
 			})
+
 			$http.defaults.headers.common.Authorization = OC_CONFIG.TOKEN;
-
-
 		}
-
 		return service;
 	});
 })();

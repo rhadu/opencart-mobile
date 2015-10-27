@@ -8,7 +8,7 @@
 			.state('leftdrawer', {
 			url: "/drawer",
 			cache: false,
-//			abstract: true,
+			//			abstract: true,
 			templateUrl: "templates/left-drawer.html",
 			controller: "PersonalInfoController"
 		})
@@ -227,15 +227,15 @@
 			}
 		})
 			.state('changePassword', {
-				url: '/changePassword',
-				cache: false,
-				templateUrl: 'templates/changePassword.html',
-				controller: 'UserAccountController',
-				resolve: {
-					account: function (AccountService) {
-						return AccountService.userAccount();
-					}
+			url: '/changePassword',
+			cache: false,
+			templateUrl: 'templates/changePassword.html',
+			controller: 'UserAccountController',
+			resolve: {
+				account: function (AccountService) {
+					return AccountService.userAccount();
 				}
+			}
 		})
 			.state('leftdrawer.userLogin', {
 			url: '/login',
