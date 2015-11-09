@@ -18,7 +18,6 @@
 				$state.go('checkout');
 			}
 			else {
-				console.log('aiurea');
 				$ionicHistory.goBack();
 			}
 		};

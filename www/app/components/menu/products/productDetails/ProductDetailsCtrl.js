@@ -21,9 +21,7 @@
 
 		$scope.addToWishlist = function (id) {
 			console.log(id);
-			//AccountService.getWishlist();
 			AccountService.addProductToWishlist(id);
-//			$scope.popover.hide();
 		}
 
 		// Init product details and reviews
@@ -40,20 +38,6 @@
 			{rating: 5, value: 0},
 		];
 
-		// init reviews tab
-		if(reviews){
-			for(var i=0; i<reviews.length; i++){
-				for(var j=0; j<$scope.stars.length; j++){
-					if(parseInt(reviews[i].rating) === $scope.stars[j].rating){
-						$scope.stars[j].value++;
-						if($scope.maxRatingValue < $scope.stars[j].value)
-							$scope.maxRatingValue = $scope.stars[j].value;
-					}
-				}
-			}
-			console.log($scope.maxRatingValue);
-		}
-
 		//open review modal
 		$scope.openReviewModal = function () {
 			console.log($scope.productDetails.product_id);
@@ -64,47 +48,6 @@
 			$scope.reviewModal.hide();
 		}
 
-		$scope.sendReview = function (review) {
-			console.log(review);
-
-			if(!review || !review.name || !review.text || !review.rating){
-				$ionicPopup.alert({
-					title: 	"Sorry",			//translate['popup.info'],
-					template: "Your review is incomplete",		//translate['popup.not_in_delivery_zone'],
-					buttons: [{
-						text: 'OK',
-						type: 'button-calm'
-					}]
-				});
-				return false;
-			}
-
-			if(review.text.length<25 || review.text.length>1000){
-				$ionicPopup.alert({
-					title: 	"Sorry",			//translate['popup.info'],
-					template: "Review Text must be between 25 and 1000 characters",		//translate['popup.not_in_delivery_zone'],
-					buttons: [{
-						text: 'OK',
-						type: 'button-calm'
-					}]
-				});
-				return false;
-			}
-
-			var promise = ProductService.postReview(review, $scope.productDetails.product_id);
-			promise.then(
-				//if user is logged in go to checkout
-				function(response) {
-					console.log(response.data);
-					$scope.reviewModal.hide();
-				},
-				//is user is not logged in rediret to login
-				function(error) {
-					console.log(error.data);
-					//					$state.go("leftdrawer.userLogin")
-				});
-
-		}
 
 		$ionicSlideBoxDelegate.update();
 		$ionicScrollDelegate.resize();
@@ -225,13 +168,6 @@
 			$scope.modalModifier = modal;
 		})
 
-		$ionicModal.fromTemplateUrl('templates/modal-add-review.html', {
-			scope: $scope,
-			animation: 'modal-fade'
-		}).then(function(modal) {
-			$scope.reviewModal = modal;
-		})
-
 		$ionicModal.fromTemplateUrl('templates/modal-text-modifier.html', {
 			scope: $scope,
 			animation: 'modal-fade'
@@ -332,49 +268,14 @@
 		}
 
 
-		//get photo slider element
-		$timeout( function(){
-			$ionicSlideBoxDelegate.$getByHandle('productSlideBoxOne').enableSlide(false);
-		},5);
 
-		// check if photo in product photos slides is last and go to next slide
-		$scope.dragLastSlide = function () {
-			var tabSlides = $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox');
-			var photoSlides = $ionicSlideBoxDelegate.$getByHandle('productSlideBox');
-			if(photoSlides.currentIndex() === photoSlides.slidesCount()-1){
-				tabSlides.slide(1);
-			}
-		}
-
-		//go to next slide
-		$scope.goNextTabSlide = function () {
-			var tabSlides = $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox');
-			tabSlides.slide(1);
-		}
-
-		//disable tab slide box when user slides photos
-		$scope.disableTabSlide = function () {
-			$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
-		}
-
-
-		$scope.disableProductScoller = function () {
-			if($scope.productDetails.related_products.length * 130 > window.innerWidth){
-				$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
-			}
-		}
-
-		//enable tab slide box
-		$scope.enableTabSlide = function () {
-			$ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(true);
-		}
 
 		//change position of Cart Button
 		$scope.getCurrentPosition = function () {
 			var cartButton = document.getElementById('cartButton');
 			var scrollPosition = $ionicScrollDelegate.$getByHandle('slide1Scroll').getScrollPosition().top;
 			var bottomPosition = window.innerHeight - 412;
-			if($ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').currentIndex()===0){
+
 
 				if(scrollPosition <254){
 					move(cartButton)
@@ -391,26 +292,7 @@
 						.duration('0.5s')
 						.end();
 				}
-			}
+
 		}
-
-		//disable bounce effect on tab slides
-//		$scope.myActiveSlide = 0;
-//
-//		$scope.$watch(function(scope) { return scope.myActiveSlide },
-//					  function(newValue, oldValue) {
-//			console.log("newValue: " + newValue);
-//			console.log("oldValue: " + oldValue);
-//			switch(newValue) {
-//				case 0:		 $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
-//				case 3:      $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(false);
-//				break;
-//			}
-//		}
-//					 );
-//
-//		$scope.enableSlide = function() {   $ionicSlideBoxDelegate.$getByHandle('subHeaderSlideBox').enableSlide(true);
-//										}
-
 	});
 })();
