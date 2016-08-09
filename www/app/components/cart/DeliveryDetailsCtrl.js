@@ -8,6 +8,7 @@
 		$scope.canEdit = false;
 
 		$scope.goBack = function() {
+			console.log($rootScope.shipping_status);
 			$ionicHistory.goBack();
 		};
 

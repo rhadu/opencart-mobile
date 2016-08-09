@@ -18,25 +18,34 @@
 				});
 			},
 				postShippingAddress = function() {
-					return CheckoutService.postShippingAddress($localStorage.paymentAddress).then( function( response )  {            // Step #2
-						console.log("step 2")
-						console.log(response);         // Response Handler #2
-						return response;
-					});
+					if ($rootScope.shipping_status === false)
+						return false;
+					else
+						return CheckoutService.postShippingAddress($localStorage.paymentAddress).then( function( response )  {            // Step #2
+							console.log("step 2")
+							console.log(response);         // Response Handler #2
+							return response;
+						});
 				},
 				getShippingMethod = function() {
-					return CheckoutService.getShippingMethod().then( function( response )  {               							  // Step #3
-						console.log("step 3");
-						console.log(response);         // Response Handler #3
-						return response;
-					});
+					if ($rootScope.shipping_status === false)
+						return false;
+					else
+						return CheckoutService.getShippingMethod().then( function( response )  {               							  // Step #3
+							console.log("step 3");
+							console.log(response);         // Response Handler #3
+							return response;
+						});
 				},
 				postShippingMethod = function() {
-					return CheckoutService.postShippingMethod($localStorage.shippingMethod).then( function( response )  {               // Step #4
-						console.log("step 4");
-						console.log(response);         // Response Handler #4
-						return response;
-					});
+					if ($rootScope.shipping_status === false)
+						return false;
+					else
+						return CheckoutService.postShippingMethod($localStorage.shippingMethod).then( function( response )  {               // Step #4
+							console.log("step 4");
+							console.log(response);         // Response Handler #4
+							return response;
+						});
 				},
 				getPaymentMethod = function() {
 					return CheckoutService.getPaymentMethod().then( function( response )  {                 							// Step #5
@@ -62,21 +71,9 @@
 
 			// call all checkout steps in sequence
 			postPaymentAddress()
-				.then(function () {
-				if($rootScope.shipping_status === true){
-					postShippingAddress
-				}
-			})
-				.then(function () {
-				if($rootScope.shipping_status === true){
-					getShippingMethod
-				}
-			})
-				.then(function () {
-				if($rootScope.shipping_status === true){
-					postShippingMethod
-				}
-			})
+				.then( postShippingAddress )
+				.then( getShippingMethod )
+				.then( postShippingMethod )
 				.then( getPaymentMethod )
 				.then( postPaymentMethod )
 				.then( getCheckoutConfirm )

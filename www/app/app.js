@@ -17,6 +17,7 @@
 											   'CategoriesCtrl',
 											   'ProductsCtrl',
 											   'ProductsDetailsCtrl',
+											   'ProductsReviewsCtrl',
 											   'CartCtrl',
 											   'CheckoutCtrl',
 											   'UserAccountCtrl',
@@ -38,7 +39,7 @@
 											   'angularPayments',
 											   'pascalprecht.translate']);
 
-	app.run(function (StartUpService,$ionicPlatform,$localStorage, $http, OC_CONFIG, $state, $urlRouter) {
+	app.run(function (StartUpService,$ionicPlatform,$rootScope,$localStorage, $http, OC_CONFIG, $state,$stateParams, $urlRouter) {
 		//		$localStorage.ACCESS_TOKEN= 'X68AWVTSMNblJki5OzcSnYLtw3HxPWdgyGevyiE4';
 		$ionicPlatform.ready(function () {
 			// hide iOS status bar
@@ -51,6 +52,7 @@
 			if($localStorage.ACCESS_TOKEN){
 				//console.log($localStorage.ACCESS_TOKEN);
 				OC_CONFIG.TOKEN = $localStorage.ACCESS_TOKEN;
+				console.log(OC_CONFIG.TOKEN);
 				StartUpService.initialization();
 			}
 			// generate access token if the app is opened for the first time
@@ -63,6 +65,29 @@
 
 			}
 		});
+
+
+		$rootScope.$state = $state;
+		$rootScope.$stateParams = $stateParams;
+		$rootScope.$on("$stateChangeSuccess",  function(event, toState, toParams, fromState, fromParams) {
+			// to be used for back button //won't work when page is reloaded.
+//			console.log(toState.name);
+//			console.log(toParams);
+//			console.log(fromState.name);
+//			console.log(fromParams);
+			if(toState.name === 'leftdrawer.productInfo' &&  fromState.name !== 'productDescription' && fromState.name !== 'productSpecifications' && fromState.name !== 'productReviews'){
+				$rootScope.stateBeforeProduct_name = fromState.name;
+				$rootScope.stateBeforeProduct_params = fromParams;
+				console.log("state: " + $rootScope.stateBeforeProduct_name);
+			}
+
+			$rootScope.previousState_name = fromState.name;
+			$rootScope.previousState_params = fromParams;
+		});
+		//back button function called from back button's ng-click="back()"
+		$rootScope.back = function() {
+			$state.go($rootScope.stateBeforeProduct_name,$rootScope.stateBeforeProduct_params);
+		};
 
 	});
 

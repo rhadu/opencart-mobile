@@ -12,6 +12,8 @@
 		$localStorage.paymentMethod = null;
 		$localStorage.shippingAddress = null;
 		$localStorage.shippingMethod = null;
+//		$rootScope.shipping_status = null;
+
 
 		$scope.restaurantName = ShopService.restaurantName;
 		$scope.categoryName = ShopService.categoryName;

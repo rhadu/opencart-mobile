@@ -73,7 +73,9 @@
 	<gap:plugin name="com.ionic.keyboard" version="1.0.3" />
 	<gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
 	<gap:plugin name="org.apache.cordova.console" version="0.2.11" />
-	<gap:plugin name="com.onesignal.plugins.onesignal" />
+	<gap:plugin name="onesignal-cordova-plugin-pgb-compat" source="npm" />
+	<gap:plugin name="cordova-plugin-googleplayservices" source="npm" />
+	<gap:plugin name="cordova-plugin-android-support-v4" source="npm" />
 
 	<!--	<gap:plugin name="com.ionic.keyboard" version="1.0.1" />
 <gap:plugin name="com.onesignal.plugins.onesignal" version="1.9.0" />

@@ -2,9 +2,7 @@
 (function () {
 	var app = angular.module('ProductsDetailsCtrl', ['ui.router']);
 
-	app.controller('ProductDetailsController', function ($scope, $ionicPopover, product,$translate,$ionicPopup, AccountService, reviews, $ionicHistory, $ionicModal,$timeout, $state, ShopService,ProductService, CartService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
-
-
+	app.controller('ProductDetailsController', function ($scope, $ionicPopover, product,$translate,$ionicPopup, AccountService, $ionicHistory, $ionicModal,$timeout, $state, ShopService,ProductService, CartService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $ionicGesture) {
 		$scope.openPopover = function (id, $event) {
 			$scope.productID = id;
 			document.body.classList.remove('platform-ios');
@@ -24,40 +22,11 @@
 			AccountService.addProductToWishlist(id);
 		}
 
-		// Init product details and reviews
+		// Init product details
 		$scope.productDetails = product;
-		$scope.reviews = reviews;
-
-		$scope.maxRatingValue = 0;
-		$scope.initRating = 0;
-		$scope.stars = [
-			{rating: 1, value: 0},
-			{rating: 2, value: 0},
-			{rating: 3, value: 0},
-			{rating: 4, value: 0},
-			{rating: 5, value: 0},
-		];
-
-		//open review modal
-		$scope.openReviewModal = function () {
-			console.log($scope.productDetails.product_id);
-			$scope.reviewModal.show();
-		}
-
-		$scope.closeReviewModal = function () {
-			$scope.reviewModal.hide();
-		}
-
-
-		$ionicSlideBoxDelegate.update();
-		$ionicScrollDelegate.resize();
 
 
 		$scope.productRating = Math.round($scope.productDetails.rating);
-
-		$scope.rateFunction = function(rating) {
-			console.log("Rating selected: " + rating);
-		};
 
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
@@ -80,7 +49,7 @@
 			//			weekDaysList: weekDaysList,   //Optional
 			//			monthList: monthList, //Optional
 			templateType: 'popup', //Optional
-			from: new Date(),   //Optional
+			from: $scope.datepickerObject.inputDate,   //Optional
 			to: new Date(2018, 8, 25),    //Optional
 			callback: function (val) {    //Mandatory
 				datePickerCallback(val);
@@ -270,29 +239,28 @@
 
 
 
-		//change position of Cart Button
-		$scope.getCurrentPosition = function () {
-			var cartButton = document.getElementById('cartButton');
-			var scrollPosition = $ionicScrollDelegate.$getByHandle('slide1Scroll').getScrollPosition().top;
-			var bottomPosition = window.innerHeight - 412;
-
-
-				if(scrollPosition <254){
-					move(cartButton)
-						.ease('in-out')
-						.y(-scrollPosition)
-						.duration('0s')
-						.end();
-				}
-
-				if(scrollPosition > 254){
-					move(cartButton)
-						.ease('in-out')
-						.y(bottomPosition)
-						.duration('0.5s')
-						.end();
-				}
-
-		}
+//		//change position of Cart Button
+//		$scope.getCurrentPosition = function () {
+//
+//			var cartButton = document.getElementById('cartButton');
+//			var scrollPosition = $ionicScrollDelegate.$getByHandle('slide1Scroll').getScrollPosition().top;
+//			var bottomPosition = window.innerHeight - 352;
+//				if(scrollPosition <254){
+//					move(cartButton)
+//						.ease('in-out')
+//						.y(-scrollPosition)
+//						.duration('0s')
+//						.end();
+//				}
+//
+//				if(scrollPosition > 254){
+//					move(cartButton)
+//						.ease('in-out')
+//						.y(bottomPosition)
+//						.duration('0.5s')
+//						.end();
+//				}
+//
+//		}
 	});
 })();

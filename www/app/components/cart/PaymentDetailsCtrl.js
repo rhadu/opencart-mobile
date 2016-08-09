@@ -7,7 +7,6 @@
 		$scope.paymentMethods = paymentMethods;
 
 		$scope.goBack = function() {
-			console.log('goback');
 			console.log($rootScope.shipping_status);
 			if($localStorage.shippingMethod && $localStorage.shippingMethod !== null){
 				console.log('shipping back');

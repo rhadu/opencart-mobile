@@ -153,11 +153,11 @@ ion-content.calm-bg.scroll-content.ionic-scroll.has-header{
 
 .appLogo{
 	margin:auto;
-	margin-top: 5px;
+	margin-top: 2px;
 	display:block;
 	width:190px;
 	height:40px;
-	background:url(../img/opencart.png) no-repeat center ;
+	background:url(../img/tapitoo_white.png) no-repeat center ;
 	background-size: contain;
 }
 
@@ -443,10 +443,11 @@ box-shadow: 0px 0px 7px 0.1em #222;
 	height: 160px !important;
 }
 .slide-photo{
+	z-index: -10;
 	display:block;
 	margin:auto;
 	max-width:100%;
-	max-height:100%;
+	max-height:260px;
 }
 
 .photo-slider .slider-pager{
@@ -1406,10 +1407,9 @@ Product Scroller
 /*************************************
 Products Page
 *************************************/
-.product-page
 
 .product-photo-slider{
-	max-height: 280px;
+	height: 280px;
 	background-color: #ffffff;
 }
 
@@ -1593,6 +1593,10 @@ modal
 .description-slide p{
 	margin: 10px 0px 10px;
 }
+.description-slide h3{
+	color: #fff;
+}
+
 .panel-attributes{
 	color: #fff;
 }
@@ -1629,18 +1633,33 @@ modal
 
 
 
+/*
 .add-to-cart-button{
 	right: 0;
 	z-index: 100;
 	border-radius: 50px;
-	margin-top: 294px;
+	margin-top: 254px;
 	position: absolute;
 	font-size: 18px!important;
 	font-family: UnitedSans !important;
 	background-color: #e72d23 !important;
 	color: #fff !important;
 	border-color: #e72d23 !important;
-/*	transition:  all 0.5s ease-in-out;*/
+	transition:  all 0.5s ease-in-out;
+}
+*/
+
+.add-to-cart-button {
+	right: 0;
+	z-index: 100;
+	border-radius: 50px;
+	margin-top: -25px;
+	position: fixed;
+	font-size: 18px!important;
+	font-family: UnitedSans !important;
+	background-color: #e72d23 !important;
+	color: #fff !important;
+	border-color: #e72d23 !important;
 }
 
 .fixed-button{
@@ -2013,6 +2032,20 @@ progress[value]::-webkit-progress-value {
 	padding-top: 8px;
 }
 
+.review-slide h3{
+	text-align: center;
+	color: #fff;
+	font-family: UnitedSans;
+}
+
+.review-slide .center-button{
+	padding:0 4px;
+	min-height: 32px;
+	min-width: 67px;
+	line-height: 17px;
+	font-size: 14px;
+}
+
 .add-rating .rating li{
 	font-size: 31px;
 	text-align: center;
@@ -2134,4 +2167,18 @@ i.product-add-wishlist.ion-heart {
 	padding-right: 30px !important;
 	position: absolute;
 }
+
+.modifier-icon{
+	font-size: 100% !important;
+}
+
+.modifier-item, .details-item{
+	width: 94%;
+	margin: auto;
+}
+
+.details-item{
+	font-family: UnitedSans;
+}
+
 

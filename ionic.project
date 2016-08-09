@@ -1,6 +1,6 @@
 {
 	"name": "phd",
-	"app_id": "",
+	"app_id": "opencart",
 	"proxies": [
 		{
 			"path": "/v1",
